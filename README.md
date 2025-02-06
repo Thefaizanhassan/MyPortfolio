@@ -25,7 +25,7 @@ To run this project locally, follow these steps:
    ```
 2. Navigate to the project directory:
    ```bash
-   cd your-repo-name
+   cd MyPortfolio
    ```
 3. Open `index.html` in your web browser.
 
