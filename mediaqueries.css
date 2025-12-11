@@ -6,10 +6,6 @@
   .about-containers {
     flex-wrap: wrap;
   }
-  #contact,
-  #projects {
-    height: fit-content;
-  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -99,5 +95,57 @@
   }
   .text-container {
     text-align: justify;
+  }
+  
+  /* Adjust dark mode toggle for mobile */
+  .theme-toggle {
+    width: 50px;
+    height: 50px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+  }
+  
+  /* Adjust scroll containers for mobile */
+  .scroll-container {
+    margin: 1rem -5% 1rem -5%;
+    padding: 1rem 5%;
+  }
+  
+  .color-container {
+    min-width: 250px;
+  }
+  
+  /* Adjust watchlist details for mobile */
+  .watchlist-item:hover .watchlist-details {
+    width: 200px;
+    padding: 1rem;
+  }
+  
+  .watchlist-details h3 {
+    font-size: 1.1rem;
+  }
+  
+  .watchlist-details p,
+  .watchlist-details li {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .theme-toggle {
+    width: 45px;
+    height: 45px;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.3rem;
+  }
+  
+  .scroll-content {
+    gap: 1rem;
+  }
+  
+  .color-container {
+    min-width: 220px;
   }
 }

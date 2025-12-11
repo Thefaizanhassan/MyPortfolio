@@ -213,6 +213,40 @@ section {
   height: 2rem;
 }
 
+/* Icon visibility for light/dark mode */
+.icon-light {
+  display: inline-block;
+}
+
+.icon-dark {
+  display: none;
+}
+
+body.dark-mode .icon-light {
+  display: none;
+}
+
+body.dark-mode .icon-dark {
+  display: inline-block;
+}
+
+/* Arrow visibility for light/dark mode */
+.arrow-light {
+  display: block;
+}
+
+.arrow-dark {
+  display: none;
+}
+
+body.dark-mode .arrow-light {
+  display: none;
+}
+
+body.dark-mode .arrow-dark {
+  display: block;
+}
+
 /* BUTTONS */
 
 .btn-container {
@@ -262,6 +296,12 @@ section {
 }
 
 /* ABOUT SECTION */
+
+#about .text-container p {
+  text-align: justify;
+  line-height: 1.6;
+  word-spacing: 1px;
+}
 
 #about {
   position: relative;
@@ -353,7 +393,7 @@ article .icon {
   cursor: default;
 }
 
-/* PROJECTS SECTION */
+/* PROJECTS SECTION - WITH HORIZONTAL SCROLL */
 
 #projects {
   position: relative;
@@ -362,6 +402,39 @@ article .icon {
 .color-container {
   border-color: rgb(163, 163, 163);
   background: rgb(250, 250, 250);
+  min-width: 300px;
+  flex-shrink: 0;
+}
+
+.scroll-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+
+.scroll-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.scroll-content {
+  display: flex;
+  gap: 2rem;
+  padding: 0 1rem;
 }
 
 .project-img {
@@ -378,6 +451,170 @@ article .icon {
 .project-btn {
   color: black;
   border-color: rgb(163, 163, 163);
+}
+
+/* WATCHLIST SECTION */
+
+#watchlist {
+  position: relative;
+}
+
+.watchlist-item {
+  position: relative;
+  transition: all 0.5s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.watchlist-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.watchlist-thumbnail {
+  position: relative;
+}
+
+.watchlist-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.watchlist-link:hover {
+  text-decoration: none;
+}
+
+.watchlist-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 2rem;
+}
+
+.watchlist-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  transition: background 0.3s ease;
+  pointer-events: none;
+}
+
+.watchlist-item:hover .watchlist-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.play-icon {
+  font-size: 3rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.watchlist-item:hover .play-icon {
+  opacity: 1;
+}
+
+.watchlist-info {
+  padding: 1rem;
+}
+
+.watchlist-description {
+  font-size: 0.9rem;
+  color: rgb(100, 100, 100);
+  text-align: center;
+  margin: 0;
+}
+
+.watchlist-details {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: white;
+  border-left: 2px solid rgb(163, 163, 163);
+  border-radius: 0 2rem 2rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+  padding: 0;
+  z-index: 10;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+.watchlist-item:hover .watchlist-details {
+  width: 280px;
+  opacity: 1;
+  padding: 1.5rem;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  pointer-events: auto;
+}
+
+.watchlist-details h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: rgb(53, 53, 53);
+  font-size: 1.3rem;
+  border-bottom: 2px solid rgb(163, 163, 163);
+  padding-bottom: 0.5rem;
+}
+
+.watchlist-details p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.watchlist-details strong {
+  color: rgb(53, 53, 53);
+  font-weight: 600;
+}
+
+.watchlist-details ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.watchlist-details li {
+  margin: 0.3rem 0;
+  font-size: 0.85rem;
+  color: rgb(85, 85, 85);
+}
+
+.course-description {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgb(200, 200, 200);
+  font-style: italic;
+}
+
+.watchlist-details::-webkit-scrollbar {
+  width: 6px;
+}
+
+.watchlist-details::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.watchlist-details::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.watchlist-details::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 /* CONTACT */
@@ -429,4 +666,169 @@ footer {
 
 footer p {
   text-align: center;
+}
+
+/* DARK MODE TOGGLE BUTTON */
+
+.theme-toggle {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid rgb(163, 163, 163);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+/* DARK MODE STYLES */
+
+body.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+body.dark-mode p {
+  color: rgb(200, 200, 200);
+}
+
+body.dark-mode nav {
+  background-color: #000000;
+}
+
+body.dark-mode a {
+  color: #ffffff;
+}
+
+body.dark-mode a:hover {
+  color: #cccccc;
+  text-decoration-color: rgb(150, 150, 150);
+}
+
+body.dark-mode .theme-toggle {
+  background: #1a1a1a;
+  border-color: #333333;
+}
+
+body.dark-mode .details-container {
+  background: #1a1a1a;
+  border-color: #333333;
+}
+
+body.dark-mode .color-container {
+  background: #0d0d0d;
+  border-color: #333333;
+}
+
+body.dark-mode .btn-color-1 {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+}
+
+body.dark-mode .btn-color-1:hover {
+  background: #cccccc;
+  border-color: #cccccc;
+}
+
+body.dark-mode .btn-color-2 {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+body.dark-mode .btn-color-2:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+body.dark-mode .project-title,
+body.dark-mode .experience-sub-title,
+body.dark-mode .title {
+  color: #ffffff;
+}
+
+body.dark-mode .contact-info-upper-container {
+  background: #1a1a1a;
+  border-color: #333333;
+}
+
+body.dark-mode .menu-links {
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+}
+
+body.dark-mode .hamburger-icon span {
+  background-color: white;
+}
+
+body.dark-mode .scroll-container::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+body.dark-mode .scroll-container::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+body.dark-mode .scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+body.dark-mode footer {
+  background-color: #000000;
+}
+
+body.dark-mode .watchlist-description {
+  color: rgb(180, 180, 180);
+}
+
+body.dark-mode .watchlist-details {
+  background: #1a1a1a;
+  border-left-color: #333333;
+}
+
+body.dark-mode .watchlist-details h3 {
+  color: #ffffff;
+  border-bottom-color: #333333;
+}
+
+body.dark-mode .watchlist-details strong {
+  color: #ffffff;
+}
+
+body.dark-mode .watchlist-details li {
+  color: rgb(200, 200, 200);
+}
+
+body.dark-mode .course-description {
+  border-top-color: #333333;
+}
+
+body.dark-mode .watchlist-details::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+body.dark-mode .watchlist-details::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+body.dark-mode .watchlist-details::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }
