@@ -46,7 +46,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-![Portfolio Banner](./assets/profile-pic.png)
+<!--![Portfolio Banner](./assets/profile-pic.png)-->
+<img src="./assets/profile-pic.png" alt="Portfolio Banner" width="250" />
 
 **A modern, responsive portfolio showcasing my journey as a Software Developer Intern | AI/ML Enthusiast | Problem Solver & Aspiring Data Scientist**
 
