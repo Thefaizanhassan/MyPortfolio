@@ -569,6 +569,21 @@ article .icon {
   border-bottom: 2px solid rgb(163, 163, 163);
   padding-bottom: 0.5rem;
 }
+.details-play-btn {
+  font-size: 1rem;
+  margin-left: 8px;
+  text-decoration: none;
+  color: #000000;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 5px;
+  transition: 0.2s ease;
+}
+
+.details-play-btn:hover {
+  background: rgba(255, 0, 0, 0.2);
+}
+
 
 .watchlist-details p {
   margin: 0.5rem 0;
@@ -587,12 +602,14 @@ article .icon {
 }
 
 .watchlist-details li {
+  text-align: left;
   margin: 0.3rem 0;
   font-size: 0.85rem;
   color: rgb(85, 85, 85);
 }
 
 .course-description {
+  text-align: justify;
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgb(200, 200, 200);
