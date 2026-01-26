@@ -80,7 +80,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 This is my personal portfolio website, meticulously crafted to showcase my skills, projects, and professional journey. Built with clean code and modern design principles, it serves as a comprehensive representation of my expertise in software development and data science.
 
-**Live Demo:** [https://thefaizanhassan.vercel.app]
+**Live Demo:** [https://thefaizanportfolio.vercel.app/]
 
 ---
 
