@@ -455,6 +455,15 @@ article .icon {
 
 /* WATCHLIST SECTION */
 
+.details-play-btn i {
+  font-size: 22px;
+  color: #0db7ed; /* Docker blue */
+}
+
+.details-play-btn:hover i {
+  color: #2496ed;
+}
+
 #watchlist {
   position: relative;
 }
