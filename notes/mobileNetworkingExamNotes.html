@@ -1,0 +1,4540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireless Networks & Mobile Computing — Topper Exam Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,600;0,700;1,300&family=JetBrains+Mono:wght@400;600&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0f1525;
+  --bg3: #141c30;
+  --card: #161d30;
+  --border: #1e2a45;
+  --border2: #243355;
+  --cyan: #00d4ff;
+  --cyan2: #00a8cc;
+  --gold: #ffc107;
+  --green: #00e676;
+  --red: #ff5252;
+  --purple: #b47cff;
+  --pink: #ff4d8d;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --code-bg: #0d1117;
+  --tip-bg: #1a2a0a;
+  --tip-border: #4caf50;
+  --warn-bg: #2a1a0a;
+  --warn-border: #ff9800;
+  --info-bg: #0a1a2a;
+  --info-border: #00d4ff;
+  --formula-bg: #0f0f2a;
+  --formula-border: #b47cff;
+}
+
+/* ============ LIGHT THEME ============ */
+[data-theme="light"] {
+  --bg: #f0f2f8;
+  --bg2: #e8eaf2;
+  --bg3: #dde0ef;
+  --card: #ffffff;
+  --border: #cbd5e1;
+  --border2: #94a3b8;
+  --cyan: #0284c7;
+  --cyan2: #0369a1;
+  --gold: #b45309;
+  --green: #16a34a;
+  --red: #dc2626;
+  --purple: #7c3aed;
+  --pink: #db2777;
+  --text: #1e293b;
+  --text2: #475569;
+  --text3: #94a3b8;
+  --code-bg: #1e293b;
+  --tip-bg: #f0fdf4;
+  --tip-border: #16a34a;
+  --warn-bg: #fffbeb;
+  --warn-border: #d97706;
+  --info-bg: #eff6ff;
+  --info-border: #0284c7;
+  --formula-bg: #f5f3ff;
+  --formula-border: #7c3aed;
+}
+
+[data-theme="light"] .tip-box p { color: #166534; }
+[data-theme="light"] .warn-box p { color: #92400e; }
+[data-theme="light"] .info-box p { color: #1e40af; }
+[data-theme="light"] .diagram-box pre { color: #1e3a5f; }
+[data-theme="light"] .code-block pre { color: #a8d8b0; }
+[data-theme="light"] .formula-box .formula { color: #5b21b6; }
+[data-theme="light"] .formula-box .formula-note { color: #6d28d9; }
+[data-theme="light"] .page-header { background: linear-gradient(135deg, #e0e8f8 0%, #c8d8f0 40%, #d0e0f4 100%); border-bottom: 1px solid var(--border); }
+[data-theme="light"] .page-header::before { background: radial-gradient(circle, rgba(2,132,199,0.08) 0%, transparent 70%); }
+[data-theme="light"] .unit-divider { background: linear-gradient(90deg, rgba(180,83,9,0.08), transparent); }
+[data-theme="light"] .part-divider { background: rgba(2,132,199,0.06); }
+[data-theme="light"] #sidebar { background: var(--bg2); border-right: 1px solid var(--border); }
+[data-theme="light"] .sidebar-header { background: linear-gradient(135deg, #dde4f2, #c8d4ec); }
+[data-theme="light"] .nav-item:hover { background: rgba(2,132,199,0.08); }
+[data-theme="light"] .compare-card { background: #f8fafc; }
+[data-theme="light"] .quick-ref { background: linear-gradient(135deg, #f0f4ff, #e8f0fc); border: 1px solid #cbd5e1; }
+[data-theme="light"] .qr-item { background: rgba(0,0,0,0.03); border: 1px solid var(--border); }
+[data-theme="light"] .gen-line { background: var(--border); }
+[data-theme="light"] .diagram-box { background: #f8fafc; border: 1px solid var(--border2); }
+[data-theme="light"] .diagram-box .diag-label { border-bottom: 1px solid var(--border); }
+[data-theme="light"] .col-box { background: #f8fafc; }
+[data-theme="light"] .header-badge { background: rgba(2,132,199,0.1); border: 1px solid rgba(2,132,199,0.3); }
+[data-theme="light"] tbody tr:hover { background: rgba(2,132,199,0.04); }
+[data-theme="light"] thead tr { background: linear-gradient(90deg, #e8eef8, #dde6f4); }
+
+/* ============ THEME TOGGLE ============ */
+#theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 24px;
+  padding: 6px 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text2);
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+#theme-toggle:hover {
+  color: var(--cyan);
+  border-color: var(--cyan);
+  background: var(--bg2);
+}
+
+#theme-toggle .icon { font-size: 14px; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  display: flex;
+}
+
+/* ============ SIDEBAR ============ */
+#sidebar {
+  width: 260px;
+  min-width: 260px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border2) transparent;
+}
+
+#sidebar::-webkit-scrollbar { width: 4px; }
+#sidebar::-webkit-scrollbar-track { background: transparent; }
+#sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+.sidebar-header {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(135deg, #0d1525, #111e38);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.sidebar-header .subject {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.sidebar-header h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.nav-unit {
+  padding: 10px 18px 4px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.nav-part {
+  padding: 6px 18px 2px;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text3);
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  text-decoration: none;
+  color: var(--text2);
+  font-size: 12.5px;
+  transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+
+.nav-item:hover {
+  color: var(--cyan);
+  background: rgba(0,212,255,0.05);
+  border-left-color: var(--cyan);
+}
+
+.nav-item .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  min-width: 18px;
+}
+
+/* ============ MAIN ============ */
+#main {
+  flex: 1;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: calc(100vw - 260px);
+}
+
+/* ============ PAGE HEADER ============ */
+.page-header {
+  background: linear-gradient(135deg, #080d1a 0%, #0d1a35 40%, #091528 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 50px 60px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%);
+}
+
+.page-header::after {
+  content: 'IEEE 802.11 · 802.16 · CDMA · LTE · 5G · OFDM · SIP · Mobile IP';
+  position: absolute;
+  bottom: 14px;
+  right: 40px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 1.5px;
+}
+
+.header-badge {
+  display: inline-block;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid rgba(0,212,255,0.3);
+  color: var(--cyan);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.page-header h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+  margin-bottom: 10px;
+}
+
+.page-header h1 span { color: var(--cyan); }
+
+.page-header .subtitle {
+  color: var(--text2);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.header-stats {
+  display: flex;
+  gap: 30px;
+  margin-top: 24px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cyan);
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ============ CONTENT SECTIONS ============ */
+.content-wrap {
+  padding: 40px 60px;
+  max-width: 1100px;
+}
+
+/* ============ SECTION HEADERS ============ */
+.unit-divider {
+  margin: 40px 0 30px;
+  padding: 20px 24px;
+  background: linear-gradient(90deg, rgba(255,193,7,0.08), transparent);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+}
+
+.unit-divider .unit-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.unit-divider h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.part-divider {
+  margin: 32px 0 24px;
+  padding: 14px 20px;
+  background: rgba(0,212,255,0.04);
+  border-left: 2px solid var(--cyan2);
+  border-radius: 0 4px 4px 0;
+}
+
+.part-divider .part-label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--cyan2);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.part-divider h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.section {
+  margin-bottom: 40px;
+  scroll-margin-top: 20px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  background: rgba(0,212,255,0.1);
+  color: var(--cyan);
+  padding: 3px 8px;
+  border-radius: 3px;
+  border: 1px solid rgba(0,212,255,0.2);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.section-title h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.subsection {
+  margin-bottom: 28px;
+}
+
+.subsection h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subsection h3::before {
+  content: '▸';
+  color: var(--cyan2);
+  font-size: 12px;
+}
+
+.subsection h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gold);
+  margin: 14px 0 8px;
+}
+
+p {
+  color: var(--text2);
+  margin-bottom: 10px;
+  line-height: 1.75;
+}
+
+/* ============ TABLES ============ */
+.table-wrap {
+  overflow-x: auto;
+  margin: 14px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+thead tr {
+  background: linear-gradient(90deg, #0d1a30, #111e38);
+}
+
+thead th {
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border-bottom: 1px solid var(--border2);
+  white-space: nowrap;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.1s;
+}
+
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(0,212,255,0.03); }
+
+tbody td {
+  padding: 9px 14px;
+  color: var(--text2);
+  vertical-align: top;
+}
+
+tbody td:first-child {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ============ CODE BLOCKS ============ */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  margin: 14px 0;
+  overflow: hidden;
+}
+
+.code-block .code-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+}
+
+.code-block .code-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text3);
+  text-transform: uppercase;
+}
+
+.code-block .dots {
+  display: flex;
+  gap: 5px;
+  margin-left: auto;
+}
+
+.code-block .dots span {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+
+.code-block .dots span:nth-child(1) { background: #ff5f57; }
+.code-block .dots span:nth-child(2) { background: #febc2e; }
+.code-block .dots span:nth-child(3) { background: #28c840; }
+
+.code-block pre {
+  padding: 16px 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #a8d8b0;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block pre .comment { color: var(--text3); font-style: italic; }
+.code-block pre .highlight { color: var(--cyan); font-weight: 600; }
+.code-block pre .gold { color: var(--gold); }
+.code-block pre .purple { color: var(--purple); }
+.code-block pre .pink { color: var(--pink); }
+
+/* ============ FORMULA BOX ============ */
+.formula-box {
+  background: var(--formula-bg);
+  border: 1px solid var(--formula-border);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  text-align: center;
+}
+
+.formula-box .formula-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.formula-box .formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  color: #d4bbff;
+  font-weight: 600;
+}
+
+.formula-box .formula-note {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 8px;
+}
+
+/* ============ BOXES ============ */
+.tip-box {
+  background: var(--tip-bg);
+  border-left: 3px solid var(--tip-border);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.tip-box .box-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tip-box p { color: #b0e0b0; margin-bottom: 4px; font-size: 13.5px; }
+.tip-box p:last-child { margin-bottom: 0; }
+
+.warn-box {
+  background: var(--warn-bg);
+  border-left: 3px solid var(--warn-border);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.warn-box .box-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.warn-box p { color: #e0d0a0; margin-bottom: 4px; font-size: 13.5px; }
+.warn-box p:last-child { margin-bottom: 0; }
+
+.info-box {
+  background: var(--info-bg);
+  border-left: 3px solid var(--info-border);
+  border-radius: 0 6px 6px 0;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.info-box .box-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.info-box p { color: #a0c8d8; margin-bottom: 4px; font-size: 13.5px; }
+.info-box p:last-child { margin-bottom: 0; }
+
+/* ============ COMPARISON CARDS ============ */
+.compare-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.compare-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.compare-card .card-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.compare-card .card-item {
+  font-size: 12.5px;
+  color: var(--text2);
+  padding: 3px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.compare-card .card-item .label { color: var(--text3); font-size: 11.5px; }
+.compare-card .card-item .val { font-weight: 600; text-align: right; }
+
+/* ============ LIST STYLES ============ */
+ul.styled, ol.styled {
+  padding-left: 0;
+  list-style: none;
+  margin: 8px 0;
+}
+
+ul.styled li {
+  padding: 4px 0 4px 20px;
+  position: relative;
+  color: var(--text2);
+  font-size: 13.5px;
+}
+
+ul.styled li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--cyan2);
+  font-size: 7px;
+  top: 8px;
+}
+
+ol.styled { counter-reset: list; }
+ol.styled li {
+  padding: 5px 0 5px 28px;
+  position: relative;
+  color: var(--text2);
+  font-size: 13.5px;
+  counter-increment: list;
+}
+
+ol.styled li::before {
+  content: counter(list);
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: rgba(0,212,255,0.1);
+  color: var(--cyan);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 7px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============ HIGHLIGHT SPANS ============ */
+.hl-cyan { color: var(--cyan); font-weight: 600; }
+.hl-gold { color: var(--gold); font-weight: 600; }
+.hl-green { color: var(--green); font-weight: 600; }
+.hl-red { color: var(--red); font-weight: 600; }
+.hl-purple { color: var(--purple); font-weight: 600; }
+.hl-pink { color: var(--pink); font-weight: 600; }
+
+/* ============ GENERATION TIMELINE ============ */
+.gen-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 14px 0;
+}
+
+.gen-item {
+  display: flex;
+  gap: 0;
+}
+
+.gen-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+  min-width: 50px;
+}
+
+.gen-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.gen-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: var(--border);
+  margin: 0 auto;
+}
+
+.gen-content {
+  padding: 6px 0 18px 16px;
+  flex: 1;
+}
+
+.gen-content .gen-name {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 3px;
+}
+
+.gen-content .gen-detail {
+  font-size: 12.5px;
+  color: var(--text2);
+}
+
+/* ============ QUICK REFERENCE BOX ============ */
+.quick-ref {
+  background: linear-gradient(135deg, #0a1020, #0d1628);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin: 20px 0;
+}
+
+.quick-ref .qr-title {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 700;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qr-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.qr-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px;
+}
+
+.qr-item .qr-key {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--cyan);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.qr-item .qr-val {
+  font-size: 12px;
+  color: var(--text2);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #main { max-width: 100vw; }
+  .content-wrap { padding: 20px 20px; }
+  .page-header { padding: 30px 24px; }
+  .page-header h1 { font-size: 28px; }
+}
+
+/* ============ SCROLL BAR ============ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+/* ============ SELECTION ============ */
+::selection { background: rgba(0,212,255,0.2); }
+
+/* ============ DIAGRAM BOX ============ */
+.diagram-box {
+  background: #080d18;
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  overflow-x: auto;
+}
+
+.diagram-box .diag-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--purple);
+  font-weight: 700;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+
+.diagram-box pre {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #9ecfed;
+  white-space: pre;
+}
+
+/* ============ BADGE ============ */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.badge-cyan { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
+.badge-gold { background: rgba(255,193,7,0.12); color: var(--gold); border: 1px solid rgba(255,193,7,0.25); }
+.badge-green { background: rgba(0,230,118,0.12); color: var(--green); border: 1px solid rgba(0,230,118,0.25); }
+.badge-red { background: rgba(255,82,82,0.12); color: var(--red); border: 1px solid rgba(255,82,82,0.25); }
+.badge-purple { background: rgba(180,124,255,0.12); color: var(--purple); border: 1px solid rgba(180,124,255,0.25); }
+
+/* ============ TWO COL ============ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 14px 0;
+}
+
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+.col-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.col-box .col-title {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.col-box ul { list-style: none; padding: 0; }
+.col-box li {
+  font-size: 12.5px;
+  color: var(--text2);
+  padding: 3px 0 3px 16px;
+  position: relative;
+}
+.col-box li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 10px; top: 5px; }
+.col-box.dis li::before { content: '✗'; color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- THEME TOGGLE -->
+<button id="theme-toggle" onclick="toggleTheme()">
+  <span class="icon" id="theme-icon">☀️</span>
+  <span id="theme-label">Light Mode</span>
+</button>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = !html.hasAttribute('data-theme') || html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.setAttribute('data-theme', 'light');
+    document.getElementById('theme-icon').textContent = '🌙';
+    document.getElementById('theme-label').textContent = 'Dark Mode';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    document.getElementById('theme-icon').textContent = '☀️';
+    document.getElementById('theme-label').textContent = 'Light Mode';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+// Load saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('theme-icon').textContent = '🌙';
+      document.getElementById('theme-label').textContent = 'Dark Mode';
+    });
+  }
+})();
+</script>
+
+<!-- ============ SIDEBAR ============ -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="subject">Exam Notes · 2024</div>
+    <h2>Wireless Networks &amp; Mobile Computing</h2>
+  </div>
+
+  <div class="nav-unit">Unit 1 · Wireless Networks</div>
+  <div class="nav-part">Part A · WLAN Technologies</div>
+  <a class="nav-item" href="#s1"><span class="num">01</span>Wireless Networks Intro</a>
+  <a class="nav-item" href="#s2"><span class="num">02</span>Wireless Transmission</a>
+  <a class="nav-item" href="#s3"><span class="num">03</span>Signals</a>
+  <a class="nav-item" href="#s4"><span class="num">04</span>Antennas</a>
+  <a class="nav-item" href="#s5"><span class="num">05</span>Signal Propagation</a>
+  <a class="nav-item" href="#s6"><span class="num">06</span>Infrared Transmission</a>
+  <a class="nav-item" href="#s7"><span class="num">07</span>UHF Narrowband</a>
+  <a class="nav-item" href="#s8"><span class="num">08</span>Spread Spectrum</a>
+  <a class="nav-item" href="#s9"><span class="num">09</span>IEEE 802.11 Architecture</a>
+
+  <div class="nav-part">Part B · Multiple Access</div>
+  <a class="nav-item" href="#s10"><span class="num">10</span>SDMA</a>
+  <a class="nav-item" href="#s11"><span class="num">11</span>FDMA</a>
+  <a class="nav-item" href="#s12"><span class="num">12</span>TDMA</a>
+  <a class="nav-item" href="#s13"><span class="num">13</span>CDMA ⭐</a>
+  <a class="nav-item" href="#s14"><span class="num">14</span>Cellular Networks</a>
+
+  <div class="nav-part">Part C · WiMAX</div>
+  <a class="nav-item" href="#s15"><span class="num">15</span>WiMAX Introduction</a>
+  <a class="nav-item" href="#s16"><span class="num">16</span>WiMAX PHY Layer</a>
+  <a class="nav-item" href="#s17"><span class="num">17</span>WiMAX MAC Layer</a>
+  <a class="nav-item" href="#s18"><span class="num">18</span>WiMAX Spectrum</a>
+
+  <div class="nav-unit">Unit 2 · Mobile Network</div>
+  <div class="nav-part">Part A · Mobile IP</div>
+  <a class="nav-item" href="#s19"><span class="num">19</span>Mobile IP Intro</a>
+  <a class="nav-item" href="#s20"><span class="num">20</span>IP Packet Delivery</a>
+  <a class="nav-item" href="#s21"><span class="num">21</span>Agent Discovery</a>
+  <a class="nav-item" href="#s22"><span class="num">22</span>Tunneling &amp; Encap.</a>
+
+  <div class="nav-part">Part B · IPv6 &amp; SIP</div>
+  <a class="nav-item" href="#s23"><span class="num">23</span>IPv6</a>
+  <a class="nav-item" href="#s24"><span class="num">24</span>Mobile IPv6</a>
+  <a class="nav-item" href="#s25"><span class="num">25</span>SIP Protocol</a>
+  <a class="nav-item" href="#s26"><span class="num">26</span>SIP Call Flow &amp; Mobility</a>
+  <a class="nav-item" href="#s27"><span class="num">27</span>MANETs</a>
+  <a class="nav-item" href="#s28"><span class="num">28</span>DSDV — Proactive Routing</a>
+  <a class="nav-item" href="#s29"><span class="num">29</span>DSR — Reactive Routing</a>
+
+  <div class="nav-part">Part C · TCP Enhancements</div>
+  <a class="nav-item" href="#s30"><span class="num">30</span>TCP Congestion Control</a>
+  <a class="nav-item" href="#s31"><span class="num">31</span>TCP in Wireless</a>
+  <a class="nav-item" href="#s32"><span class="num">32</span>I-TCP &amp; Snooping TCP</a>
+  <a class="nav-item" href="#s33"><span class="num">33</span>M-TCP &amp; Freeze TCP</a>
+  <a class="nav-item" href="#s34"><span class="num">34</span>Master Comparison</a>
+</nav>
+
+<!-- ============ MAIN CONTENT ============ -->
+<div id="main">
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-badge">📡 Complete Exam Preparation Notes</div>
+  <h1>Wireless Networks &amp; <span>Mobile Computing</span></h1>
+  <p class="subtitle">IEEE 802.11 · IEEE 802.16 · Cellular · CDMA · Mobile IP · IPv6 · SIP</p>
+  <div class="header-stats">
+    <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Units</span></div>
+    <div class="stat-item"><span class="stat-num">34</span><span class="stat-label">Topics</span></div>
+    <div class="stat-item"><span class="stat-num">100+</span><span class="stat-label">Diagrams &amp; Tables</span></div>
+    <div class="stat-item"><span class="stat-num">★</span><span class="stat-label">Topper Format</span></div>
+  </div>
+</div>
+
+<div class="content-wrap">
+
+<!-- ===================== UNIT 1 ===================== -->
+<div class="unit-divider">
+  <div class="unit-label">Unit 1</div>
+  <h2>Introduction to Wireless Networks and Mobile Computing</h2>
+</div>
+
+<div class="part-divider">
+  <div class="part-label">Part A</div>
+  <h3>WLAN Technologies</h3>
+</div>
+
+<!-- ===== SECTION 1 ===== -->
+<div class="section" id="s1">
+  <div class="section-title">
+    <span class="section-num">01</span>
+    <h2>Introduction to Wireless Networks &amp; Mobile Computing</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>What is a Wireless Network?</h3>
+    <p>A wireless network uses <span class="hl-cyan">electromagnetic waves</span> (radio, microwave, infrared) to transmit data between devices — no physical cables required.</p>
+
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--green)">✅ Advantages</div>
+        <ul>
+          <li>Mobility — stay connected while moving</li>
+          <li>Flexibility — no physical cable constraints</li>
+          <li>Reduced cost — no wiring infrastructure</li>
+          <li>Scalability — easy to add new devices</li>
+          <li>Quick deployment — faster than wired</li>
+          <li>Reach — covers areas where cabling is impossible</li>
+        </ul>
+      </div>
+      <div class="col-box dis">
+        <div class="col-title" style="color:var(--red)">❌ Limitations</div>
+        <ul>
+          <li>Security — open medium, prone to eavesdropping</li>
+          <li>Interference — other signals degrade performance</li>
+          <li>Lower bandwidth — less than wired equivalents</li>
+          <li>Reliability — affected by weather &amp; obstacles</li>
+          <li>Higher latency — more variable than wired</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Types of Wireless Networks</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Type</th><th>Full Form</th><th>Range</th><th>Standard</th><th>Examples</th></tr></thead>
+        <tbody>
+          <tr><td>WPAN</td><td>Wireless Personal Area Network</td><td>~10 m</td><td>IEEE 802.15</td><td>Bluetooth, Zigbee</td></tr>
+          <tr><td>WLAN</td><td>Wireless Local Area Network</td><td>~100 m</td><td>IEEE 802.11</td><td>WiFi</td></tr>
+          <tr><td>WMAN</td><td>Wireless Metropolitan Area Network</td><td>~50 km</td><td>IEEE 802.16</td><td>WiMAX</td></tr>
+          <tr><td>WWAN</td><td>Wireless Wide Area Network</td><td>Country-wide</td><td>Cellular</td><td>3G, 4G LTE, 5G</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Exam Tip — WPAN/WLAN/WMAN/WWAN</div>
+      <p>Remember the range progression: 10m → 100m → 50km → Country. Also remember the IEEE standard for each: 802.15 → 802.11 → 802.16 → Cellular (no IEEE standard).</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Mobile Computing — Three Pillars</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Architecture Diagram</div>
+      <pre>
+              ╔══════════════════════════════════╗
+              ║         MOBILE COMPUTING         ║
+              ╠══════════╦══════════╦════════════╣
+              ║  Mobile  ║  Mobile  ║   Mobile   ║
+              ║ Hardware ║ Software ║Communication║
+              ║──────────║──────────║────────────║
+              ║ Laptops, ║ Android, ║ WiFi, 4G,  ║
+              ║ Tablets, ║ iOS,     ║ Bluetooth  ║
+              ║ Phones   ║ Apps     ║            ║
+              ╚══════════╩══════════╩════════════╝</pre>
+    </div>
+    <p><strong>Key Characteristics:</strong> Portability · Connectivity · Interactivity · Individuality</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 2 ===== -->
+<div class="section" id="s2">
+  <div class="section-title">
+    <span class="section-num">02</span>
+    <h2>Wireless Transmission</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Frequency</th><th>Direction</th><th>Penetration</th><th>LOS?</th><th>Applications</th></tr></thead>
+      <tbody>
+        <tr><td>Radio Wave</td><td>3 KHz – 300 GHz</td><td>Omnidirectional</td><td>Yes (walls)</td><td>No</td><td>AM/FM, TV, WiFi, Cellular</td></tr>
+        <tr><td>Microwave</td><td>1 GHz – 300 GHz</td><td>Unidirectional</td><td>No</td><td>Yes</td><td>Long-distance telephony, Satellite</td></tr>
+        <tr><td>Infrared</td><td>300 GHz – 400 THz</td><td>Very short range</td><td>No</td><td>Yes</td><td>TV remotes, IrDA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Microwave Sub-types</h4>
+  <ul class="styled">
+    <li><span class="hl-cyan">Terrestrial Microwave</span> — tower-to-tower communication on Earth's surface (LOS required)</li>
+    <li><span class="hl-cyan">Satellite Microwave</span> — Earth station → satellite → Earth station (global coverage)</li>
+  </ul>
+
+  <h4>Factors Affecting Wireless Transmission</h4>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Attenuation</td><td>Signal strength decreases with distance</td></tr>
+        <tr><td>Interference</td><td>Other electromagnetic signals cause disturbance</td></tr>
+        <tr><td>Noise</td><td>Unwanted signals corrupt the original signal</td></tr>
+        <tr><td>Multipath Propagation</td><td>Signal arrives via multiple paths causing distortion</td></tr>
+        <tr><td>Diffraction</td><td>Signal bends around obstacles</td></tr>
+        <tr><td>Reflection</td><td>Signal bounces off large surfaces</td></tr>
+        <tr><td>Scattering</td><td>Signal disperses when hitting small objects</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-label">⚠️ Common Exam Confusion</div>
+    <p><strong>Diffraction vs Scattering:</strong> Diffraction = bending around large obstacles (buildings). Scattering = dispersal when hitting small objects (leaves, rain drops, signs).</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 3 ===== -->
+<div class="section" id="s3">
+  <div class="section-title">
+    <span class="section-num">03</span>
+    <h2>Signals</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Property</th><th>Analog Signal</th><th>Digital Signal</th></tr></thead>
+      <tbody>
+        <tr><td>Nature</td><td>Continuous waveform</td><td>Discrete values (0s and 1s)</td></tr>
+        <tr><td>Representation</td><td>Sine wave</td><td>Square wave</td></tr>
+        <tr><td>Noise Immunity</td><td>Low (easily degraded)</td><td>High (regenerated)</td></tr>
+        <tr><td>Bandwidth</td><td>Low requirement</td><td>High requirement</td></tr>
+        <tr><td>Example</td><td>Human voice, analog radio</td><td>Computer data, digital TV</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fundamental Signal Parameters</h3>
+
+  <div class="quick-ref">
+    <div class="qr-title">📐 Key Parameters &amp; Formulas</div>
+    <div class="qr-grid">
+      <div class="qr-item">
+        <div class="qr-key">Amplitude (A)</div>
+        <div class="qr-val">Signal strength/power · Unit: Volts</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Frequency (f)</div>
+        <div class="qr-val">Cycles/second · Unit: Hz · f = 1/T</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Phase (φ)</div>
+        <div class="qr-val">Position of waveform · 0° to 360°</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Wavelength (λ)</div>
+        <div class="qr-val">λ = c/f · c = 3×10⁸ m/s</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Sinusoidal Signal Equation</div>
+    <div class="formula">s(t) = A × sin(2πft + φ)</div>
+    <div class="formula-note">A = Amplitude · f = Frequency · φ = Phase · t = Time</div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Bandwidth Formula</div>
+    <div class="formula">Bandwidth = f_max − f_min</div>
+    <div class="formula-note">Greater bandwidth → more data can be carried</div>
+  </div>
+
+  <h3>Signal Encoding Techniques</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Technique</th><th>Full Form</th><th>What Varies</th></tr></thead>
+      <tbody>
+        <tr><td>ASK</td><td>Amplitude Shift Keying</td><td>Amplitude varies to represent 0s and 1s</td></tr>
+        <tr><td>FSK</td><td>Frequency Shift Keying</td><td>Frequency varies to represent data</td></tr>
+        <tr><td>PSK</td><td>Phase Shift Keying</td><td>Phase changes to encode data</td></tr>
+        <tr><td>QAM</td><td>Quadrature Amplitude Modulation</td><td>Combines ASK + PSK for higher data rates</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <div class="box-label">🎯 Exam Tip — Modulation Relations</div>
+    <p><strong>QAM = ASK + PSK combined.</strong> This is a frequently asked fact. QAM (used in cable TV, WiFi, WiMAX) achieves high data rates by varying BOTH amplitude and phase simultaneously.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 4 ===== -->
+<div class="section" id="s4">
+  <div class="section-title">
+    <span class="section-num">04</span>
+    <h2>Antennas</h2>
+  </div>
+
+  <p>An antenna converts electrical signals to electromagnetic waves (TX) and vice versa (RX).</p>
+
+  <h3>Key Parameters</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Parameter</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Gain (G)</td><td>Focuses energy in a direction · measured in dBi</td></tr>
+        <tr><td>Radiation Pattern</td><td>Graphical representation of signal strength in all directions</td></tr>
+        <tr><td>Beamwidth</td><td>Angular width of the main lobe</td></tr>
+        <tr><td>Polarization</td><td>Orientation of EM wave (H / V / Circular)</td></tr>
+        <tr><td>EIRP</td><td>Effective Isotropic Radiated Power = Tx Power × Antenna Gain</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Antenna Gain Formula</div>
+    <div class="formula">G = (4π × Ae) / λ²</div>
+    <div class="formula-note">Ae = Effective aperture area · λ = Wavelength</div>
+  </div>
+
+  <h3>Types of Antennas — Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Omnidirectional</th><th>Directional</th><th>Sectorized</th></tr></thead>
+      <tbody>
+        <tr><td>Coverage</td><td>360°</td><td>Narrow beam</td><td>Sector (60°–120°)</td></tr>
+        <tr><td>Gain</td><td class="hl-red">Low (2–9 dBi)</td><td class="hl-green">High (10–30+ dBi)</td><td>Medium</td></tr>
+        <tr><td>Range</td><td>Short–Medium</td><td>Long</td><td>Medium</td></tr>
+        <tr><td>Use Case</td><td>WiFi AP, Broadcasting</td><td>Point-to-Point, Satellite</td><td>Cell Towers</td></tr>
+        <tr><td>Interference</td><td>More susceptible</td><td>Less susceptible</td><td>Moderate</td></tr>
+        <tr><td>Examples</td><td>Dipole, Monopole</td><td>Yagi, Parabolic dish</td><td>120° sector panels</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">ℹ️ Isotropic Antenna</div>
+    <p>Theoretical reference antenna that radiates equally in all directions (perfect sphere). Gain = 0 dBi. Does NOT physically exist. All real antenna gains are measured relative to it (expressed in dBi = decibels relative to isotropic).</p>
+  </div>
+
+  <div class="tip-box">
+    <div class="box-label">🎯 Exam Tip — Sectorized Cells</div>
+    <p>Three 120° sector antennas → cover 360°. This is used in cellular base stations. Remember: sectorization reduces co-channel interference (from 6 to 2 interferers for 120° sectors).</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 5 ===== -->
+<div class="section" id="s5">
+  <div class="section-title">
+    <span class="section-num">05</span>
+    <h2>Signal Propagation</h2>
+  </div>
+
+  <h3>Three Primary Propagation Mechanisms</h3>
+
+  <div class="subsection">
+    <h4>(a) Ground Wave Propagation</h4>
+    <div class="diagram-box">
+      <div class="diag-label">Diagram</div>
+      <pre>
+Transmitter ~~~~~~~~~~~~~~~~~~~→ Receiver
+         ←──── Earth's Curved Surface ────→
+Signal follows Earth's curvature (diffraction)</pre>
+    </div>
+    <div class="quick-ref">
+      <div class="qr-grid">
+        <div class="qr-item"><div class="qr-key">Frequency</div><div class="qr-val">Below 2 MHz (LF)</div></div>
+        <div class="qr-item"><div class="qr-key">Range</div><div class="qr-val">Up to hundreds of km</div></div>
+        <div class="qr-item"><div class="qr-key">LOS</div><div class="qr-val">Not required</div></div>
+        <div class="qr-item"><div class="qr-key">Application</div><div class="qr-val">AM Radio (530–1710 KHz)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h4>(b) Sky Wave Propagation (Ionospheric)</h4>
+    <div class="diagram-box">
+      <div class="diag-label">Diagram</div>
+      <pre>
+Transmitter ──→  ╱╲ IONOSPHERE (80–400 km)   ╱╲  ──→ Receiver
+                ╱  ╲                        ╱  ╲
+               ╱    ╲ (Reflection/Refract) ╱    ╲
+              ╱      ╲____________________╱      ╲
+Earth Surface ─────────────────────────────────────
+
+Multiple hops possible → Range of THOUSANDS of km!</pre>
+    </div>
+    <div class="quick-ref">
+      <div class="qr-grid">
+        <div class="qr-item"><div class="qr-key">Frequency</div><div class="qr-val">2 – 30 MHz (HF)</div></div>
+        <div class="qr-item"><div class="qr-key">Range</div><div class="qr-val">Thousands of km</div></div>
+        <div class="qr-item"><div class="qr-key">Skip Distance</div><div class="qr-val">Min distance to receive skywave</div></div>
+        <div class="qr-item"><div class="qr-key">Application</div><div class="qr-val">Shortwave radio, HAM</div></div>
+      </div>
+    </div>
+    <div class="warn-box">
+      <div class="box-label">⚠️ Key Note</div>
+      <p>Night propagation is generally better — the ionosphere becomes denser at night. Performance varies with time of day, season, and solar activity. NOT reliable for commercial use.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h4>(c) Line-of-Sight (LOS) Propagation</h4>
+    <div class="diagram-box">
+      <div class="diag-label">Diagram + Formulas</div>
+      <pre>
+Antenna_1                                    Antenna_2
+   │                                                 │
+   │ (height h₁)    Straight line path   (height h₂) │
+   │─────────────────────────────────────────────────│
+───┴─────────────────────────────────────────────────┴───
+                   Earth Surface
+
+  Distance from one antenna:  d₁ = √(2Rh₁)
+  Total LOS distance:  d = √(2Rh₁) + √(2Rh₂)
+  R = 6371 km (Earth radius), h = antenna height</pre>
+    </div>
+    <div class="quick-ref">
+      <div class="qr-grid">
+        <div class="qr-item"><div class="qr-key">Frequency</div><div class="qr-val">Above 30 MHz (VHF+)</div></div>
+        <div class="qr-item"><div class="qr-key">LOS</div><div class="qr-val">Required (clear path)</div></div>
+        <div class="qr-item"><div class="qr-key">Range</div><div class="qr-val">Limited by Earth curvature</div></div>
+        <div class="qr-item"><div class="qr-key">Application</div><div class="qr-val">WiFi, Cellular, Satellite, TV</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Propagation Effects Summary</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Effect</th><th>Description</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>Free Space Path Loss</td><td>Signal weakens as it spreads · Loss = (4πd/λ)²</td><td>Weaker with distance</td></tr>
+        <tr><td>Reflection</td><td>Bounces off large smooth surfaces</td><td>Multipath fading</td></tr>
+        <tr><td>Diffraction</td><td>Bends around sharp edges</td><td>Reaches shadow zones</td></tr>
+        <tr><td>Scattering</td><td>Disperses on small objects</td><td>Unpredictable spread</td></tr>
+        <tr><td>Absorption</td><td>Energy absorbed by medium (rain, walls)</td><td>Signal attenuation</td></tr>
+        <tr><td>Multipath</td><td>Arrives via multiple paths with different delays</td><td>Constructive/destructive interference</td></tr>
+        <tr><td>Doppler Effect</td><td>Frequency shift when transmitter/receiver is moving</td><td>Frequency distortion</td></tr>
+        <tr><td>Shadowing</td><td>Large obstacles block signal completely</td><td>Coverage dead zones</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Types of Fading</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Also Known As</th><th>Cause</th></tr></thead>
+      <tbody>
+        <tr><td>Fast Fading</td><td>Small-scale fading</td><td>Rapid fluctuations over small distances due to multipath</td></tr>
+        <tr><td>Slow Fading</td><td>Large-scale / Shadow fading</td><td>Gradual variation due to terrain and obstacles</td></tr>
+        <tr><td>Flat Fading</td><td>—</td><td>All frequency components affected equally</td></tr>
+        <tr><td>Frequency-Selective</td><td>—</td><td>Different frequency components affected differently</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 6 ===== -->
+<div class="section" id="s6">
+  <div class="section-title">
+    <span class="section-num">06</span>
+    <h2>Infrared Transmission</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Wavelength</td><td>850 nm – 900 nm (typical)</td></tr>
+        <tr><td>Range</td><td>1–2 meters</td></tr>
+        <tr><td>Wall Penetration</td><td>❌ Cannot penetrate walls</td></tr>
+        <tr><td>LOS Required</td><td>Yes — direct line-of-sight</td></tr>
+        <tr><td>Standard</td><td>IrDA (Infrared Data Association)</td></tr>
+        <tr><td>Data Rate</td><td>Up to 4 Mbps (IrDA 1.1) · 16 Mbps (IrDA 1.4)</td></tr>
+        <tr><td>License</td><td>✅ No spectrum license required</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ Advantages</div>
+      <ul>
+        <li>Free — no spectrum license needed</li>
+        <li>Inherently secure — signal stays in the room</li>
+        <li>No RF interference to other devices</li>
+        <li>Simple and cheap hardware</li>
+        <li>Low power consumption</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ Disadvantages</div>
+      <ul>
+        <li>Very short range (1–2 meters)</li>
+        <li>Requires direct LOS alignment</li>
+        <li>Susceptible to sunlight interference</li>
+        <li>Low data rate vs modern standards</li>
+        <li>Cannot penetrate barriers</li>
+      </ul>
+    </div>
+  </div>
+
+  <p><strong>Applications:</strong> TV/AC remotes · Old mobile phone file transfer (IrDA) · Some printers and medical devices</p>
+</div>
+
+<!-- ===== SECTION 7 ===== -->
+<div class="section" id="s7">
+  <div class="section-title">
+    <span class="section-num">07</span>
+    <h2>UHF Narrowband</h2>
+  </div>
+
+  <p><span class="hl-cyan">UHF (Ultra High Frequency)</span>: 300 MHz – 3 GHz. Used for TV broadcasting, cellular, satellite, WiFi, Bluetooth.</p>
+  <p><span class="hl-gold">Narrowband</span>: Uses a very small, single narrow channel of the available spectrum for data transmission.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Narrowband</th><th>Wideband/Broadband</th></tr></thead>
+      <tbody>
+        <tr><td>Bandwidth</td><td>Very small</td><td>Large</td></tr>
+        <tr><td>Data Rate</td><td>Low</td><td>High</td></tr>
+        <tr><td>Range</td><td>Longer</td><td>Shorter</td></tr>
+        <tr><td>Power</td><td>Less</td><td>More</td></tr>
+        <tr><td>Interference</td><td>Vulnerable</td><td>Resistant (spread spectrum)</td></tr>
+        <tr><td>Application</td><td>IoT, paging, walkie-talkies</td><td>WiFi, cellular data</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 8 ===== -->
+<div class="section" id="s8">
+  <div class="section-title">
+    <span class="section-num">08</span>
+    <h2>Spread Spectrum</h2>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">📘 Core Concept</div>
+    <p>Spread spectrum deliberately spreads a signal over a much wider bandwidth than the minimum required, using a <strong>pseudo-random noise (PN) code</strong> known to both TX and RX. To an unauthorized receiver, the signal appears as low-level noise.</p>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Shannon's Capacity Theorem (Foundation)</div>
+    <div class="formula">C = B × log₂(1 + S/N)</div>
+    <div class="formula-note">Increasing B (bandwidth) allows reliable communication even at very low S/N — the theoretical basis for spread spectrum</div>
+  </div>
+
+  <h3>Benefits of Spread Spectrum</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Benefit</th><th>Explanation</th></tr></thead>
+      <tbody>
+        <tr><td>Interference Resistance</td><td>Spread signal resists narrowband interference</td></tr>
+        <tr><td>Anti-Jamming</td><td>Very difficult for adversary to jam</td></tr>
+        <tr><td>Security/Privacy</td><td>Signal appears as noise — hard to detect/intercept</td></tr>
+        <tr><td>Multiple Access</td><td>Multiple users can share same frequency band</td></tr>
+        <tr><td>Multipath Resistance</td><td>Reduces effects of multipath fading</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3>Type 1: FHSS — Frequency Hopping Spread Spectrum</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Frequency Hopping Pattern</div>
+      <pre>
+Frequency
+↑
+f7 │        ███                    
+f6 │   ███              ███       
+f5 │                         ███  
+f4 │              ███             
+f3 │ ███                          
+f2 │                    ███       
+f1 │           ███                
+   └──┬──┬──┬──┬──┬──┬──┬──┬──→ Time
+     t1 t2 t3 t4 t5 t6 t7 t8
+     
+Each block = one "dwell time" on that frequency
+Pattern appears RANDOM to anyone without the PN code</pre>
+    </div>
+
+    <h4>Working Process</h4>
+    <ol class="styled">
+      <li>Available bandwidth divided into N narrowband channels</li>
+      <li>TX and RX share same pseudo-random hopping pattern</li>
+      <li>TX sends on one frequency for a fixed dwell time</li>
+      <li>After dwell time, both hop to next frequency per the pattern</li>
+      <li>Process continues throughout communication</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Slow FHSS</th><th>Fast FHSS</th></tr></thead>
+        <tbody>
+          <tr><td>Dwell time vs Symbol</td><td>Dwell time &gt; symbol time (multiple symbols per hop)</td><td>Dwell time &lt; symbol time (multiple hops per symbol)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Exam Tip — FHSS Real Example</div>
+      <p><strong>Bluetooth</strong> uses FHSS in the 2.4 GHz ISM band with <strong>79 channels</strong>, hopping <strong>1600 times per second</strong> (dwell time ≈ 625 μs). This is the classic exam example!</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Type 2: DSSS — Direct Sequence Spread Spectrum</h3>
+    <div class="diagram-box">
+      <div class="diag-label">DSSS Working Diagram</div>
+      <pre>
+Original Data:     1              0              1
+                ┌──────┐      ┌──────┐      ┌──────┐
+                │  +1  │      │  -1  │      │  +1  │
+                └──────┘      └──────┘      └──────┘
+
+Chipping Code:  +1-1+1+1-1+1+1-1+1+1-1  (11 chips per bit — Barker code)
+
+Spread Signal:  +1-1+1+1-1+1  -1+1-1-1+1-1  +1-1+1+1-1+1
+               (Data × Code)  (Data × Code)  (Data × Code)
+                
+Bandwidth becomes:  Original BW × 11 = 11x WIDER!</pre>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">Processing Gain (Spreading Factor)</div>
+      <div class="formula">Gp = Chip Rate / Data Rate = BW_spread / BW_original</div>
+      <div class="formula-note">Higher processing gain = better interference rejection and security</div>
+    </div>
+
+    <div class="warn-box">
+      <div class="box-label">⚠️ Near-Far Problem in DSSS/CDMA</div>
+      <p>A <strong>nearby transmitter's strong signal can overwhelm a distant transmitter's weak signal</strong>. Solution: <strong>Precise Power Control</strong> — the BS instructs each mobile to adjust transmit power so all signals arrive at equal power levels.</p>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Exam Tip — DSSS Real Example</div>
+      <p><strong>GPS</strong> uses DSSS. Original <strong>802.11b WiFi</strong> used DSSS/HR-DSSS. CDMA cellular systems are based on DSSS principles.</p>
+    </div>
+  </div>
+
+  <h3>FHSS vs DSSS Comprehensive Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>FHSS</th><th>DSSS</th></tr></thead>
+      <tbody>
+        <tr><td>Technique</td><td>Carrier hops across channels</td><td>Data multiplied by high-rate code</td></tr>
+        <tr><td>Bandwidth Usage</td><td>Hops across narrow channels</td><td>Continuously spreads across wide band</td></tr>
+        <tr><td>Complexity</td><td>Simpler</td><td>More complex</td></tr>
+        <tr><td>Interference</td><td>Avoids by hopping away</td><td>Spreads during de-spreading</td></tr>
+        <tr><td>Security</td><td>Good</td><td>Better</td></tr>
+        <tr><td>Near-Far Problem</td><td>Less affected</td><td>Significantly affected</td></tr>
+        <tr><td>Processing Gain</td><td>Moderate</td><td>High</td></tr>
+        <tr><td>Example</td><td>Bluetooth</td><td>GPS, CDMA, 802.11b</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 9 ===== -->
+<div class="section" id="s9">
+  <div class="section-title">
+    <span class="section-num">09</span>
+    <h2>IEEE 802.11 (WiFi) — System Architecture</h2>
+  </div>
+
+  <h3>IEEE 802.11 Standards Evolution</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Standard</th><th>Year</th><th>Frequency</th><th>Max Rate</th><th>Modulation</th><th>Range</th></tr></thead>
+      <tbody>
+        <tr><td>802.11 (original)</td><td>1997</td><td>2.4 GHz</td><td>2 Mbps</td><td>FHSS/DSSS</td><td>~20 m</td></tr>
+        <tr><td>802.11a</td><td>1999</td><td>5 GHz</td><td>54 Mbps</td><td>OFDM</td><td>~35 m</td></tr>
+        <tr><td>802.11b</td><td>1999</td><td>2.4 GHz</td><td>11 Mbps</td><td>HR-DSSS</td><td>~38 m</td></tr>
+        <tr><td>802.11g</td><td>2003</td><td>2.4 GHz</td><td>54 Mbps</td><td>OFDM</td><td>~38 m</td></tr>
+        <tr><td>802.11n (WiFi 4)</td><td>2009</td><td>2.4/5 GHz</td><td>600 Mbps</td><td>OFDM+MIMO</td><td>~70 m</td></tr>
+        <tr><td>802.11ac (WiFi 5)</td><td>2013</td><td>5 GHz</td><td>6.77 Gbps</td><td>OFDM+MU-MIMO</td><td>~35 m</td></tr>
+        <tr><td>802.11ax (WiFi 6)</td><td>2020</td><td>2.4/5/6 GHz</td><td>9.6 Gbps</td><td>OFDMA</td><td>~30 m</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3>System Architecture Components</h3>
+
+    <div class="diagram-box">
+      <div class="diag-label">Extended Service Set (ESS) Architecture</div>
+      <pre>
+┌───────────────────────────────────────────────────────────────┐
+│                   ESS (Same SSID: "MyWiFi")                   │
+│                                                               │
+│  ┌──────────────────┐    Distribution    ┌──────────────────┐ │
+│  │      BSS 1       │    System (DS)     │      BSS 2       │ │
+│  │                  │←══════════════════→│                  │ │
+│  │  ┌────┐          │   (Wired LAN)      │      ┌────┐      │ │
+│  │  │ AP1│          │                    │      │ AP2│      │ │
+│  │  └──┬─┘          │                    │      └──┬─┘      │ │
+│  │    / \           │                    │        / \       │ │
+│  │  STA STA         │                    │      STA STA     │ │
+│  └──────────────────┘                    └──────────────────┘ │
+│                                Portal                         │
+└───────────────────────────────────────────────────────────────┘
+                         │
+              ┌──────────┴──────────┐
+              │   Wired LAN/Internet│
+              └─────────────────────┘</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>STA (Station)</td><td>Any device with a wireless NIC · has unique MAC address</td></tr>
+          <tr><td>AP (Access Point)</td><td>Central hub · bridges wireless and wired network · sends beacon frames</td></tr>
+          <tr><td>BSS (Basic Service Set)</td><td>Fundamental building block · has unique BSSID</td></tr>
+          <tr><td>IBSS (Ad-hoc)</td><td>No AP · STAs communicate directly peer-to-peer</td></tr>
+          <tr><td>DS (Distribution System)</td><td>Backbone (usually wired LAN) interconnecting multiple APs</td></tr>
+          <tr><td>ESS (Extended Service Set)</td><td>Multiple BSSs via DS · same SSID · enables roaming</td></tr>
+          <tr><td>Portal</td><td>Logical bridge between 802.11 and non-802.11 (Ethernet) networks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Key Distinctions</div>
+      <p><strong>BSSID</strong> = MAC address of the AP (identifies a BSS). <strong>SSID</strong> = Human-readable WiFi network name (same across all BSS in an ESS). <strong>Portal</strong> = translates 802.11 frames to 802.3 (Ethernet) frames.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>IEEE 802.11 Protocol Architecture</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Protocol Stack</div>
+      <pre>
+┌─────────────────────────────────────────────────┐
+│  Upper Layers (Network, Transport, etc.)        │
+├─────────────────────────────────────────────────┤
+│  LLC (Logical Link Control) — IEEE 802.2        │
+├─────────────────────────────────────────────────┤
+│  MAC Sublayer — IEEE 802.11                     │
+│   ┌──────────────────────────────────────────┐  │
+│   │ DCF (Distributed Coordination Function)  │  │  ← MANDATORY
+│   │ PCF (Point Coordination Function)        │  │  ← OPTIONAL
+│   └──────────────────────────────────────────┘  │
+├─────────────────────────────────────────────────┤
+│  PHY Layer                                      │
+│  ┌────────────────────┬───────────────────────┐ │
+│  │  PLCP Sublayer     │  PMD Sublayer         │ │
+│  │(Convergence Proc.) │(Physical Medium Dep.) │ │
+│  └────────────────────┴───────────────────────┘ │
+└─────────────────────────────────────────────────┘</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>MAC Layer: DCF — Distributed Coordination Function</h3>
+    <p><span class="badge badge-gold">MANDATORY</span> Contention-based using <span class="hl-cyan">CSMA/CA</span> (Collision Avoidance — NOT Collision Detection).</p>
+
+    <div class="warn-box">
+      <div class="box-label">⚠️ Why CSMA/CA and NOT CSMA/CD?</div>
+      <p><strong>1. Hidden Node Problem</strong> — Station A and C can't hear each other but both transmit to B → collision at B. Station A cannot detect this.</p>
+      <p><strong>2. Cannot TX and RX simultaneously</strong> — The transmitted signal is thousands of times more powerful than received signals. Full-duplex collision detection is physically impossible in wireless.</p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">CSMA/CA Step-by-Step Flow</div>
+      <pre>
+Station wants to transmit
+        │
+        ▼
+Sense channel (Physical + Virtual/NAV carrier sensing)
+        │
+   ┌────┴─────┐
+  BUSY      IDLE
+   │          │
+   ▼          ▼
+Wait      Wait for DIFS
+until idle      │
+   │            ▼
+   └──→  Random Backoff Timer (random × slot time)
+              │
+          Count down ONLY when channel is IDLE
+          FREEZE when channel goes BUSY
+          Resume after IDLE + DIFS
+              │
+          Timer = 0?
+              │
+              ▼
+         TRANSMIT Frame
+              │
+         Wait for ACK (SIFS)
+         ┌────┴──────┐
+        ACK        No ACK
+        received  (collision assumed)
+         │          │
+         ▼          ▼
+       SUCCESS   Double CW, Retry</pre>
+    </div>
+
+    <h4>RTS/CTS Mechanism — Solving Hidden Node Problem</h4>
+    <div class="diagram-box">
+      <div class="diag-label">RTS/CTS Exchange</div>
+      <pre>
+Hidden Node Problem:
+   A ←──→ B ←──→ C
+   A and C cannot hear each other → both transmit to B → COLLISION!
+
+RTS/CTS Solution:
+Sender(A)         Receiver(B)      Hidden Node(C)
+   │                   │                 │
+   │─── RTS ──────────→│                 │
+   │   (NAV=duration)  │                 │
+   │                   │─── CTS ────────→│
+   │←── CTS ───────────│     (C hears CTS, sets NAV, defers!)
+   │                   │                 │
+   │─── DATA ─────────→│                 │
+   │                   │                 │
+   │←── ACK ───────────│                 │
+   │                   │                 │
+
+NAV (Network Allocation Vector) = Virtual carrier sensing timer</pre>
+    </div>
+
+    <h4>Inter-Frame Spaces (IFS) — Priority System</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>IFS</th><th>Full Form</th><th>Duration</th><th>Purpose</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--green)">SIFS</td><td>Short IFS</td><td>Shortest</td><td>ACK, CTS, Poll Response</td><td>🥇 Highest</td></tr>
+          <tr><td style="color:var(--cyan)">PIFS</td><td>PCF IFS</td><td>SIFS + 1 slot</td><td>PCF traffic</td><td>🥈 High</td></tr>
+          <tr><td style="color:var(--gold)">DIFS</td><td>DCF IFS</td><td>SIFS + 2 slots</td><td>Normal data (DCF)</td><td>🥉 Medium</td></tr>
+          <tr><td style="color:var(--red)">EIFS</td><td>Extended IFS</td><td>Longest</td><td>Error recovery</td><td>Lowest</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip-box">
+      <div class="box-label">🎯 Exam Tip — IFS Priority Rule</div>
+      <p><strong>Shorter IFS = Higher Priority.</strong> ACKs use SIFS → always get access first before new data. This ensures ACKs never get lost due to contention. Mnemonic: <strong>S</strong>hort = <strong>S</strong>peedy delivery.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>MAC Layer: PCF — Point Coordination Function</h3>
+    <p><span class="badge badge-red">OPTIONAL</span> Contention-free, polling-based access controlled by the AP (Point Coordinator).</p>
+    <div class="diagram-box">
+      <div class="diag-label">PCF Superframe Structure</div>
+      <pre>
+Time →
+┌────────────────────────────────────┬────────────────┐
+│  Contention-Free Period (CFP)      │ Contention     │
+│  AP polls STAs in round-robin      │ Period (CP)    │
+│  NAV set → all others defer        │ Normal CSMA/CA │
+└────────────────────────────────────┴────────────────┘
+←─────────────── Superframe (Beacon to Beacon) ──────────────→</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>DCF</th><th>PCF</th></tr></thead>
+        <tbody>
+          <tr><td>Access Method</td><td>Contention-based (CSMA/CA)</td><td>Contention-free (Polling)</td></tr>
+          <tr><td>Coordinator</td><td>Distributed (all STAs equal)</td><td>Centralized (AP = PC)</td></tr>
+          <tr><td>Requirement</td><td>MANDATORY</td><td>OPTIONAL</td></tr>
+          <tr><td>Real-time Support</td><td>Poor (variable delay)</td><td>Better (predictable)</td></tr>
+          <tr><td>Usage</td><td>Best effort data</td><td>Voice/video (time-sensitive)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>802.11 MAC Frame Format</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Frame Structure</div>
+      <pre>
+┌─────────┬──────────┬──────┬──────┬──────┬──────┬──────┬─────────────┬──────┐
+│  Frame  │Duration/ │Addr1 │Addr2 │Addr3 │ Seq  │Addr4 │  Frame Body │ FCS  │
+│ Control │    ID    │(6 B) │(6 B) │(6 B) │ Ctrl │(6 B) │ (0-2312 B)  │(4 B) │
+│ (2 B)   │  (2 B)   │      │      │      │(2 B) │      │             │      │
+└─────────┴──────────┴──────┴──────┴──────┴──────┴──────┴─────────────┴──────┘
+
+4 Address Fields — Usage based on To DS / From DS bits:
+To DS  From DS │ Addr1  │ Addr2  │ Addr3  │ Addr4
+───────────────┼────────┼────────┼────────┼────────
+   0      0    │ DA     │ SA     │ BSSID  │ N/A    ← IBSS (Ad-hoc)
+   0      1    │ DA     │ BSSID  │ SA     │ N/A    ← AP → STA
+   1      0    │ BSSID  │ SA     │ DA     │ N/A    ← STA → AP
+   1      1    │ RA     │ TA     │ DA     │ SA     ← WDS (AP to AP)</pre>
+    </div>
+
+    <p><strong>Three Frame Types:</strong></p>
+    <ul class="styled">
+      <li><span class="hl-cyan">Management Frames</span> — Beacon, Probe, Association, Authentication, Deauthentication</li>
+      <li><span class="hl-gold">Control Frames</span> — RTS, CTS, ACK, PS-Poll</li>
+      <li><span class="hl-purple">Data Frames</span> — Carry actual user data payload</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ PART B ============ -->
+<div class="part-divider">
+  <div class="part-label">Part B</div>
+  <h3>Multiple Access Techniques &amp; Cellular Networks</h3>
+</div>
+
+<!-- ===== SECTION 10 ===== -->
+<div class="section" id="s10">
+  <div class="section-title">
+    <span class="section-num">10</span>
+    <h2>SDMA — Space Division Multiple Access</h2>
+  </div>
+
+  <p>Separates users based on their <span class="hl-cyan">physical location in space</span>. Same frequency reused in different spatial locations simultaneously using directional/smart antennas.</p>
+
+  <div class="diagram-box">
+    <div class="diag-label">SDMA Concept</div>
+    <pre>
+         Narrow Beam 1 ────────→ User A
+        /
+BS ────── Narrow Beam 2 ────────→ User B
+        \
+         Narrow Beam 3 ────────→ User C
+
+All beams use the SAME FREQUENCY — spatial isolation separates users!</pre>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Antenna System</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Sectorized Antennas</td><td>Fixed sectors (e.g., 3 × 120°) — static SDMA</td></tr>
+        <tr><td>Switched Beam</td><td>Multiple fixed beams; selects best beam per user</td></tr>
+        <tr><td>Adaptive Array</td><td>Dynamically steers beams toward users, nulls toward interferers</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip-box">
+    <div class="box-label">🎯 Exam Tip — SDMA and 5G</div>
+    <p>The cellular concept itself is SDMA — same frequencies reused in geographically separated cells. <strong>Massive MIMO in 5G</strong> is advanced SDMA with hundreds of antennas creating many spatial beams simultaneously.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 11 ===== -->
+<div class="section" id="s11">
+  <div class="section-title">
+    <span class="section-num">11</span>
+    <h2>FDMA — Frequency Division Multiple Access</h2>
+  </div>
+
+  <p>Total bandwidth divided into multiple <span class="hl-cyan">non-overlapping frequency bands</span>. Each user gets a dedicated channel for the entire call duration.</p>
+
+  <div class="diagram-box">
+    <div class="diag-label">FDMA Frequency-Time Diagram</div>
+    <pre>
+Frequency ↑
+          │ ┌────────┐
+          │ │ User N │ ← Channel N (fN)
+          │ ├────────┤
+          │ │ Guard  │ (prevents adjacent channel interference)
+          │ ├────────┤
+          │ │ User 2 │ ← Channel 2 (f2)
+          │ ├────────┤
+          │ │ Guard  │
+          │ ├────────┤
+          │ │ User 1 │ ← Channel 1 (f1)
+          │ └────────┘
+          └──────────────────────────────→ Time
+          (Each user occupies channel ALL the time)</pre>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ Advantages</div>
+      <ul>
+        <li>Simple, well-understood technology</li>
+        <li>No synchronization overhead</li>
+        <li>Continuous channel → low latency</li>
+        <li>Suitable for analog signals (1G)</li>
+        <li>No near-far problem</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ Disadvantages</div>
+      <ul>
+        <li>Wasted bandwidth when user is silent</li>
+        <li>Guard bands waste spectrum</li>
+        <li>Limited users (limited channels)</li>
+        <li>Inflexible bandwidth allocation</li>
+        <li>Inefficient for bursty data</li>
+      </ul>
+    </div>
+  </div>
+
+  <p><strong>Example:</strong> <span class="hl-gold">1G AMPS</span> — each call got a 30 KHz channel. <span class="hl-gold">FM Radio</span> — each station has a dedicated frequency.</p>
+</div>
+
+<!-- ===== SECTION 12 ===== -->
+<div class="section" id="s12">
+  <div class="section-title">
+    <span class="section-num">12</span>
+    <h2>TDMA — Time Division Multiple Access</h2>
+  </div>
+
+  <p>Multiple users share the <span class="hl-cyan">same frequency channel</span> but at different time slots in a recurring frame structure.</p>
+
+  <div class="diagram-box">
+    <div class="diag-label">TDMA Time Slot Structure</div>
+    <pre>
+Frequency (SAME for all users)
+↑
+│  ┌──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┬──────┐
+│  │User 1│User 2│User 3│User 1│User 2│User 3│User 1│User 2│User 3│
+│  │Slot 1│Slot 2│Slot 3│Slot 1│Slot 2│Slot 3│Slot 1│Slot 2│Slot 3│
+│  └──────┴──────┴──────┴──────┴──────┴──────┴──────┴──────┴──────┘
+└──────────────────────────────────────────────────────────────────→ Time
+   ←──── Frame 1 ────→←──── Frame 2 ────→←──── Frame 3 ────→
+   
+   Guard times between slots prevent overlap (propagation delay)</pre>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ Advantages</div>
+      <ul>
+        <li>More users per bandwidth than FDMA</li>
+        <li>No frequency guard bands</li>
+        <li>Flexible bandwidth (multiple slots)</li>
+        <li>Battery conservation (device sleeps)</li>
+        <li>Handles varying data rates</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ Disadvantages</div>
+      <ul>
+        <li>Strict synchronization required</li>
+        <li>Guard times waste capacity</li>
+        <li>Burst TX requires higher peak power</li>
+        <li>Multipath challenging (high data rate)</li>
+      </ul>
+    </div>
+  </div>
+
+  <p><strong>Example:</strong> <span class="hl-gold">2G GSM</span> — 8 time slots per 200 KHz frequency channel. Frame duration = 4.615 ms.</p>
+</div>
+
+<!-- ===== SECTION 13 ===== -->
+<div class="section" id="s13">
+  <div class="section-title">
+    <span class="section-num">13</span>
+    <h2>CDMA — Code Division Multiple Access ⭐</h2>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">📘 Core Concept</div>
+    <p>All users transmit on the <strong>same frequency at the same time</strong>, but each user has a unique <strong>orthogonal spreading code</strong>. Receiver uses the code to extract only the desired user's signal; all others appear as noise.</p>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diag-label">Orthogonal Codes Example</div>
+    <pre>
+User A's code: [+1, -1, +1, -1]
+User B's code: [+1, +1, -1, -1]
+
+Orthogonality check: A · B = (+1)(+1) + (-1)(+1) + (+1)(-1) + (-1)(-1)
+                           = +1 - 1 - 1 + 1 = 0  ✓  (Orthogonal!)
+
+If User A sends bit '1':   Transmit code A = [+1, -1, +1, -1]
+If User A sends bit '0':   Transmit -code A = [-1, +1, -1, +1]
+
+At Receiver for User A:
+  Received signal · Code A → recovers User A's data
+  Received signal · Code B → gets 0 (User B filtered out)</pre>
+  </div>
+
+  <div class="tip-box">
+    <div class="box-label">🎯 Most Important Exam Point — CDMA</div>
+    <p><strong>Near-Far Problem</strong>: A nearby mobile's strong signal drowns out a distant mobile's weak signal. <strong>Solution: Power Control</strong> — BS continuously instructs each mobile to adjust power so ALL signals arrive at the BS at equal power levels. This is CRITICAL to CDMA operation.</p>
+  </div>
+
+  <h3>FDMA vs TDMA vs CDMA — Master Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>FDMA</th><th>TDMA</th><th>CDMA</th></tr></thead>
+      <tbody>
+        <tr><td>Sharing Dimension</td><td>Frequency</td><td>Time</td><td>Code</td></tr>
+        <tr><td>Simultaneous Use</td><td>Different frequencies</td><td>Same freq, diff times</td><td>Same freq, same time</td></tr>
+        <tr><td>Guard Requirements</td><td>Guard bands</td><td>Guard times</td><td>None needed</td></tr>
+        <tr><td>Synchronization</td><td>Not required</td><td>Required (strict)</td><td>Code sync required</td></tr>
+        <tr><td>Handoff Type</td><td>Hard</td><td>Hard</td><td>Soft handoff ✅</td></tr>
+        <tr><td>Capacity</td><td>Low</td><td>Medium</td><td>High</td></tr>
+        <tr><td>Power Control</td><td>Not critical</td><td>Not critical</td><td>Very critical ⚠️</td></tr>
+        <tr><td>Near-Far Problem</td><td>No</td><td>No</td><td>Yes (major)</td></tr>
+        <tr><td>Security</td><td>Low</td><td>Medium</td><td>High (code needed)</td></tr>
+        <tr><td>Generation</td><td>1G (AMPS)</td><td>2G (GSM)</td><td>3G (UMTS)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ CDMA Advantages</div>
+      <ul>
+        <li>Highest capacity of all three</li>
+        <li>Soft handoff (no service interruption)</li>
+        <li>Inherent security (code required)</li>
+        <li>Soft capacity (graceful degradation)</li>
+        <li>Multipath resistance (RAKE receiver)</li>
+        <li>Frequency diversity</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ CDMA Disadvantages</div>
+      <ul>
+        <li>Near-far problem (complex power control)</li>
+        <li>Complex implementation</li>
+        <li>Self-interference (MAI)</li>
+        <li>Capacity is interference-limited</li>
+        <li>Complex RAKE receivers needed</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 14 ===== -->
+<div class="section" id="s14">
+  <div class="section-title">
+    <span class="section-num">14</span>
+    <h2>Cellular Wireless Networks</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>Why Hexagonal Cells?</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Hexagonal Frequency Reuse Pattern (N=7)</div>
+      <pre>
+    ╱──╲  ╱──╲  ╱──╲
+   ╱ 1  ╲╱ 2  ╲╱ 3  ╲
+   ╲    ╱╲    ╱╲    ╱
+    ╲  ╱ 4╲  ╱ 5╲  ╱
+    ╱──╲  ╱──╲  ╱──╲
+   ╱ 6  ╲╱ 7  ╲╱ 1  ╲  ← Same freq group as cell 1!
+   ╲    ╱╲    ╱╲    ╱
+    ╲  ╱  ╲  ╱  ╲  ╱
+    ╱──╲  ╱──╲  ╱──╲
+
+Hexagons chosen: Best approximation to circular coverage
+                 Tiles without gaps or overlaps (most efficient)</pre>
+    </div>
+
+    <h3>Key Cellular Formulas</h3>
+    <div class="quick-ref">
+      <div class="qr-title">📐 Essential Cellular Formulas</div>
+      <div class="qr-grid">
+        <div class="qr-item">
+          <div class="qr-key">Reuse Distance</div>
+          <div class="qr-val">D = R × √(3N)</div>
+        </div>
+        <div class="qr-item">
+          <div class="qr-key">Valid Cluster Sizes</div>
+          <div class="qr-val">N = i² + ij + j²<br>Common: 1,3,4,7,12,21</div>
+        </div>
+        <div class="qr-item">
+          <div class="qr-key">Freq. Reuse Factor</div>
+          <div class="qr-val">= 1/N</div>
+        </div>
+        <div class="qr-item">
+          <div class="qr-key">Channels per Cell</div>
+          <div class="qr-val">k = S/N (S = total channels)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="formula-label">Signal-to-Interference Ratio (SIR)</div>
+      <div class="formula">SIR ≈ (√(3N))ⁿ / 6</div>
+      <div class="formula-note">n = path loss exponent (2–4, typically 4 for urban) · 6 = first-tier co-channel interferers</div>
+    </div>
+
+    <div class="code-block">
+      <div class="code-header"><span class="code-label">Example Calculation — N=7, n=4</span><div class="dots"><span></span><span></span><span></span></div></div>
+      <pre>SIR = (√(3×7))⁴ / 6
+    = (√21)⁴ / 6
+    = (21)² / 6
+    = 441 / 6
+    = 73.5  ≈  18.66 dB
+
+GSM requirement: 12 dB → 18.66 dB >> 12 dB → Acceptable! ✓</pre>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Critical Trade-off to Remember</div>
+      <p><strong>Smaller N</strong> = More aggressive reuse = Higher capacity = More co-channel interference.</p>
+      <p><strong>Larger N</strong> = Less reuse = Lower capacity = Less interference. This is the fundamental cellular network design trade-off!</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Co-channel vs Adjacent Channel Interference</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Co-channel Interference</th><th>Adjacent Channel Interference</th></tr></thead>
+        <tbody>
+          <tr><td>Source</td><td>Same frequency, distant cells</td><td>Neighboring frequencies, any cell</td></tr>
+          <tr><td>Cause</td><td>Frequency reuse</td><td>Imperfect filters, signal leakage</td></tr>
+          <tr><td>Depends on</td><td>D/R ratio (cluster size)</td><td>Filter quality, frequency assignment</td></tr>
+          <tr><td>Solution</td><td>Increase cluster size N</td><td>Better filters, careful freq. assignment</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warn-box">
+      <div class="box-label">⚠️ Key Co-channel Interference Fact</div>
+      <p>Co-channel interference is <strong>independent of transmit power</strong>. Increasing power increases BOTH signal and interference equally. It depends ONLY on the ratio D/R (cluster size N).</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Cell Splitting</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Cell Splitting: Before and After</div>
+      <pre>
+BEFORE:                          AFTER:
+┌─────────────────┐              ┌────────┬────────┐
+│                 │              │ Mini   │ Mini   │
+│   Large Cell    │    →         │ Cell   │ Cell   │
+│   radius = R    │              ├────────┼────────┤
+│                 │              │ Mini   │ Mini   │
+└─────────────────┘              │ Cell   │ Cell   │
+                                 └────────┴────────┘
+                                   radius = R/2
+
+New area = π(R/2)² = Original area / 4
+Number of cells × 4  →  Capacity × 4
+Power reduction: New power = Old power × (1/2)ⁿ = Old power/16 (for n=4)</pre>
+    </div>
+    <p><strong>Cell types:</strong> Macrocell (R &gt; 1 km) · Microcell (200m–1km) · Picocell (&lt; 200m) · Femtocell (&lt; 50m)</p>
+  </div>
+
+  <div class="subsection">
+    <h3>Cell Sectoring</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Sectoring Impact</div>
+      <pre>
+Omnidirectional: 360°, 6 co-channel interferers
+Sectorized (120°): 3 sectors, only 2 co-channel interferers per sector
+Sectorized (60°):  6 sectors, only 1 co-channel interferer per sector
+
+SIR improvement (120°) = 6/2 = 3× better ≈ 4.77 dB
+SIR improvement (60°)  = 6/1 = 6× better ≈ 7.78 dB</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Aspect</th><th>Advantage</th><th>Disadvantage</th></tr></thead>
+        <tbody>
+          <tr><td>Sectoring</td><td>Reduced interference, no new sites needed</td><td>More handoffs, reduced trunking efficiency</td></tr>
+          <tr><td>Cell Splitting</td><td>Massive capacity increase</td><td>Infrastructure cost, increased handoffs</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Handoff Types</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Hard vs Soft Handoff</div>
+      <pre>
+HARD HANDOFF (Break-Before-Make — FDMA/TDMA):
+  BS_A connection: ════════════════╗
+                                   ╳ (brief break)
+  BS_B connection:                 ╚════════════════
+  
+SOFT HANDOFF (Make-Before-Break — CDMA):
+  BS_A connection: ═════════════════╗
+                               ╔════╩══════
+  BS_B connection:             ╚══════════════
+                         (both connections exist simultaneously)
+                              
+SOFTER HANDOFF: Between sectors of the SAME cell (same BS)</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Hard Handoff</th><th>Soft Handoff</th></tr></thead>
+        <tbody>
+          <tr><td>Connection</td><td>Break old, then make new</td><td>Make new, then break old</td></tr>
+          <tr><td>Simultaneous BSs</td><td>Never (1 at a time)</td><td>Yes (during transition)</td></tr>
+          <tr><td>Service interruption</td><td>Brief gap possible</td><td>Seamless</td></tr>
+          <tr><td>Used in</td><td>1G FDMA, 2G TDMA (GSM)</td><td>3G CDMA (UMTS)</td></tr>
+          <tr><td>Complexity</td><td>Simpler</td><td>More complex</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Cellular Network Architecture</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Architecture Diagram</div>
+      <pre>
+Mobile                Base               Base Station        Mobile
+Station  ───Radio───▶ Transceiver ───▶  Controller  ───▶  Switching
+ (MS)       Link       Station (BTS)       (BSC)          Center (MSC)
+                                                              │
+                                        ┌─────────────────────┤
+                                        │                     │
+                                   ┌────┴────┐           ┌────┴────┐
+                                   │   HLR   │           │   VLR   │
+                                   │ (Home   │           │(Visitor │
+                                   │ Location│           │Location │
+                                   │Register)│           │Register)│
+                                   └─────────┘           └─────────┘</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Full Form</th><th>Function</th></tr></thead>
+        <tbody>
+          <tr><td>MS</td><td>Mobile Station</td><td>User's mobile device</td></tr>
+          <tr><td>BTS</td><td>Base Transceiver Station</td><td>Cell tower — radio TX/RX</td></tr>
+          <tr><td>BSC</td><td>Base Station Controller</td><td>Manages multiple BTS, handles intra-BSC handoffs</td></tr>
+          <tr><td>MSC</td><td>Mobile Switching Center</td><td>Routes calls, manages handoffs, billing, authentication</td></tr>
+          <tr><td>HLR</td><td>Home Location Register</td><td>Permanent subscriber database (home network)</td></tr>
+          <tr><td>VLR</td><td>Visitor Location Register</td><td>Temporary database for roaming subscribers</td></tr>
+          <tr><td>AuC</td><td>Authentication Center</td><td>Stores auth keys, validates subscriber identity</td></tr>
+          <tr><td>EIR</td><td>Equipment Identity Register</td><td>Tracks IMEI, identifies stolen phones</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Generations of Cellular Networks</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Gen</th><th>Technology</th><th>Access</th><th>Key Features</th><th>Data Rate</th></tr></thead>
+        <tbody>
+          <tr><td>1G</td><td>AMPS, TACS</td><td>FDMA</td><td>Analog voice only, no encryption</td><td>2.4 Kbps</td></tr>
+          <tr><td>2G</td><td>GSM</td><td>TDMA</td><td>Digital voice, SMS, encryption</td><td>14.4–64 Kbps</td></tr>
+          <tr><td>2G</td><td>IS-95 (cdmaOne)</td><td>CDMA</td><td>Digital voice, soft handoff</td><td>14.4 Kbps</td></tr>
+          <tr><td>2.5G</td><td>GPRS</td><td>Packet-switched</td><td>Always-on data, MMS</td><td>56–114 Kbps</td></tr>
+          <tr><td>2.75G</td><td>EDGE</td><td>Enhanced GPRS</td><td>Higher data rates</td><td>384 Kbps</td></tr>
+          <tr><td>3G</td><td>UMTS (WCDMA)</td><td>WCDMA</td><td>Mobile internet, video calls</td><td>384K – 2 Mbps</td></tr>
+          <tr><td>3.5G</td><td>HSPA/HSPA+</td><td>Enhanced WCDMA</td><td>Faster data, lower latency</td><td>14–42 Mbps</td></tr>
+          <tr><td>4G</td><td>LTE</td><td>OFDMA</td><td>All-IP, broadband, low latency</td><td>100M – 1 Gbps</td></tr>
+          <tr><td>5G</td><td>NR (New Radio)</td><td>OFDMA + mMIMO</td><td>IoT, URLLC, eMBB, slicing</td><td>1–20 Gbps</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART C ============ -->
+<div class="part-divider">
+  <div class="part-label">Part C</div>
+  <h3>IEEE 802.16 — WiMAX</h3>
+</div>
+
+<!-- ===== SECTION 15 ===== -->
+<div class="section" id="s15">
+  <div class="section-title">
+    <span class="section-num">15</span>
+    <h2>WiMAX — Introduction</h2>
+  </div>
+
+  <p><span class="hl-cyan">WiMAX</span> = <strong>W</strong>orldwide <strong>I</strong>nteroperability for <strong>M</strong>icrowave <strong>A</strong>ccess. Commercial name for IEEE 802.16. A WMAN technology for broadband wireless access over long distances — the "last mile" wireless solution.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Version</th><th>Standard</th><th>Type</th><th>Year</th><th>Frequency</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Fixed WiMAX</td><td>IEEE 802.16d</td><td>Fixed</td><td>2004</td><td>2–11 GHz (NLOS), 10–66 GHz (LOS)</td><td>Fixed broadband, point-to-multipoint</td></tr>
+        <tr><td>Mobile WiMAX</td><td>IEEE 802.16e</td><td>Mobile</td><td>2005</td><td>2–6 GHz</td><td>Adds mobility, handoff, NLOS support</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>WiFi vs WiMAX Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>WiFi (802.11)</th><th>WiMAX (802.16)</th></tr></thead>
+      <tbody>
+        <tr><td>Network Type</td><td>WLAN (Local)</td><td>WMAN (Metropolitan)</td></tr>
+        <tr><td>Range</td><td>30–100 meters</td><td>Up to 50 km (LOS), 5–15 km (NLOS)</td></tr>
+        <tr><td>Data Rate</td><td>Up to 600 Mbps (802.11n)</td><td>Up to 70 Mbps</td></tr>
+        <tr><td>Users</td><td>Tens</td><td>Hundreds to thousands</td></tr>
+        <tr><td>QoS</td><td>Limited (added in 802.11e)</td><td>Built-in, robust ✅</td></tr>
+        <tr><td>MAC</td><td>Contention-based (CSMA/CA)</td><td>Connection-oriented, scheduled</td></tr>
+        <tr><td>Spectrum</td><td>Unlicensed (2.4/5 GHz)</td><td>Licensed &amp; unlicensed</td></tr>
+        <tr><td>Security</td><td>WPA2/WPA3</td><td>PKMv2, AES-CCM, X.509 certs</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 16 ===== -->
+<div class="section" id="s16">
+  <div class="section-title">
+    <span class="section-num">16</span>
+    <h2>WiMAX Physical Layer</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>OFDM — Core PHY Technology</h3>
+    <div class="info-box">
+      <div class="box-label">📘 OFDM Concept</div>
+      <p>Divides a wideband channel into many <strong>narrow subcarriers</strong>. Subcarriers are <strong>mathematically orthogonal</strong> — they can overlap in frequency without mutual interference. Each subcarrier carries lower-rate data but in parallel.</p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">Single Carrier vs OFDM</div>
+      <pre>
+Traditional Single Carrier:
+┌──────────────────────────────────────────┐
+│         One wide channel (fast)          │  ← Susceptible to ISI
+│         One signal, high data rate       │     Frequency-selective fading
+└──────────────────────────────────────────┘
+
+OFDM Multi-Carrier:
+┌────┐┌────┐┌────┐┌────┐┌────┐┌────┐┌────┐┌────┐
+│ f1 ││ f2 ││ f3 ││ f4 ││ f5 ││ f6 ││ f7 ││ f8 │  ← Many parallel slow streams
+└────┘└────┘└────┘└────┘└────┘└────┘└────┘└────┘    Flat fading per subcarrier
+  (Orthogonal subcarriers — can overlap!)             Resistant to ISI</pre>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">OFDM TX/RX Processing Chain</div>
+      <pre>
+TRANSMITTER:
+Data → Serial/Parallel → Modulate (BPSK/QAM) → IFFT → Add Cyclic Prefix → D/A → TX
+
+RECEIVER:
+RX → A/D → Remove CP → FFT → Demodulate → Parallel/Serial → Data
+
+Cyclic Prefix (Guard Interval):
+  Original Symbol:   [──────────── Data ────────────]
+  With CP:           [copy of end] [──────── Data ──────]
+                      ↑
+                 Protects against ISI from multipath
+                 As long as delay spread &lt; CP duration</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>OFDM Advantage</th><th>Explanation</th></tr></thead>
+        <tbody>
+          <tr><td>Multipath Resistance</td><td>Each narrow subcarrier experiences flat (not freq-selective) fading</td></tr>
+          <tr><td>ISI Elimination</td><td>Cyclic prefix absorbs multipath delay spread</td></tr>
+          <tr><td>Spectral Efficiency</td><td>Orthogonal subcarriers overlap — no wasted guard bands between them</td></tr>
+          <tr><td>Simple Equalization</td><td>One-tap per subcarrier (vs complex wideband equalizer)</td></tr>
+          <tr><td>Adaptive Modulation</td><td>Different modulation per subcarrier based on channel quality</td></tr>
+          <tr><td>Efficient Implementation</td><td>FFT/IFFT algorithms are computationally efficient</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Subcarrier Types</h4>
+    <ul class="styled">
+      <li><span class="hl-cyan">Data Subcarriers</span> — carry actual user data</li>
+      <li><span class="hl-gold">Pilot Subcarriers</span> — known reference symbols for channel estimation and synchronization</li>
+      <li><span class="hl-purple">Null Subcarriers</span> — DC subcarrier and guard bands at band edges (no power)</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3>OFDM vs OFDMA</h3>
+    <div class="diagram-box">
+      <div class="diag-label">OFDM (Single User) vs OFDMA (Multi-User)</div>
+      <pre>
+OFDM — Fixed WiMAX (802.16d) — 256 subcarriers:
+Frequency ↑
+  ┌─────────────────────────────────────┐
+  │             User A only             │ ← Time Slot 1 (all subcarriers)
+  ├─────────────────────────────────────┤
+  │             User B only             │ ← Time Slot 2
+  └─────────────────────────────────────┘
+  └────────────────────────────────────→ Time
+
+OFDMA — Mobile WiMAX (802.16e) — scalable FFT:
+Frequency ↑
+  ┌───────────┬───────────┬───────────┐
+  │  User A   │  User B   │  User C   │ ← Time Slot 1 (diff subchannels)
+  │(Subchan.1)│(Subchan.2)│(Subchan.3)│
+  ├───────────┼───────────┼───────────┤
+  │  User B   │  User C   │  User A   │ ← Time Slot 2 (reassigned)
+  └───────────┴───────────┴───────────┘
+  └───────────────────────────────────→ Time
+  Multiple users served SIMULTANEOUSLY in time AND frequency!</pre>
+    </div>
+
+    <h4>Scalable OFDMA (SOFDMA) — Mobile WiMAX</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Channel BW</th><th>FFT Size</th><th>Subcarrier Spacing</th></tr></thead>
+        <tbody>
+          <tr><td>1.25 MHz</td><td>128</td><td>10.94 KHz</td></tr>
+          <tr><td>5 MHz</td><td>512</td><td>10.94 KHz</td></tr>
+          <tr><td>10 MHz</td><td>1024</td><td>10.94 KHz</td></tr>
+          <tr><td>20 MHz</td><td>2048</td><td>10.94 KHz</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tip-box">
+      <div class="box-label">🎯 Key Design Insight — SOFDMA</div>
+      <p>Subcarrier spacing is <strong>always constant at 10.94 KHz</strong> regardless of bandwidth. Only the number of subcarriers changes. This keeps OFDM symbol duration and CP constant — greatly simplifying implementation.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Adaptive Modulation and Coding (AMC)</h3>
+    <div class="diagram-box">
+      <div class="diag-label">AMC: Modulation vs Distance</div>
+      <pre>
+Base Station
+     │←── Close ─────────── Medium ────────── Far ──────────────→
+     │
+     │  64-QAM      16-QAM         QPSK           BPSK
+     │  (6 bits/sym) (4 bits/sym) (2 bits/sym)  (1 bit/sym)
+     │  ↑Highest     ↑              ↑              ↑Lowest speed
+     │  ↓Least robust↓              ↓              ↓Most robust</pre>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Modulation</th><th>Bits/Symbol</th><th>When Used</th><th>Characteristic</th></tr></thead>
+        <tbody>
+          <tr><td>BPSK</td><td>1</td><td>Farthest, worst channel</td><td>Most robust, lowest throughput</td></tr>
+          <tr><td>QPSK</td><td>2</td><td>Medium distance</td><td>Good balance</td></tr>
+          <tr><td>16-QAM</td><td>4</td><td>Closer, good channel</td><td>Higher throughput</td></tr>
+          <tr><td>64-QAM</td><td>6</td><td>Closest, excellent channel</td><td>Highest throughput, least robust</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>TDD vs FDD Duplexing</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>TDD</th><th>FDD</th></tr></thead>
+        <tbody>
+          <tr><td>Spectrum</td><td>Single channel</td><td>Paired channels (UL + DL)</td></tr>
+          <tr><td>DL/UL Separation</td><td>Time</td><td>Frequency</td></tr>
+          <tr><td>Asymmetric Traffic</td><td>Easy (adjust ratio)</td><td>Difficult (fixed)</td></tr>
+          <tr><td>Synchronization</td><td>Required between BSs</td><td>Not needed (DL/UL)</td></tr>
+          <tr><td>Cost</td><td>Lower</td><td>Higher</td></tr>
+          <tr><td>Channel Reciprocity</td><td>Yes (same frequency)</td><td>No</td></tr>
+          <tr><td>Preferred In</td><td>Mobile WiMAX (802.16e)</td><td>Fixed WiMAX (802.16d)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>MIMO in WiMAX</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Technique</th><th>Purpose</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Space-Time Coding (STC)</td><td>Diversity</td><td>Same data from multiple antennas → improved reliability</td></tr>
+          <tr><td>Spatial Multiplexing (SM)</td><td>Throughput</td><td>Different streams from each antenna → increased data rate</td></tr>
+          <tr><td>Beamforming</td><td>Coverage/SIR</td><td>Focus signal toward specific user → improved range</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Mobile WiMAX (802.16e) supports <span class="hl-cyan">2×2 MIMO</span> with STC and Spatial Multiplexing.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 17 ===== -->
+<div class="section" id="s17">
+  <div class="section-title">
+    <span class="section-num">17</span>
+    <h2>WiMAX MAC Layer</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>MAC Layer Architecture — Three Sublayers</h3>
+    <div class="diagram-box">
+      <div class="diag-label">WiMAX MAC Architecture</div>
+      <pre>
+┌───────────────────────────────────────────────────┐
+│  CONVERGENCE SUBLAYER (CS)                        │  ← Interface to upper layers
+│  • ATM CS                                         │
+│  • Packet CS (IP, Ethernet, VLAN)                 │
+│  Functions: Classification, Header Suppression    │
+├───────────────────────────────────────────────────┤
+│  COMMON PART SUBLAYER (CPS)                       │  ← Core MAC functionality
+│  • Connection management (CID)                    │
+│  • Bandwidth Request/Grant                        │
+│  • Centralized Scheduling                         │
+│  • QoS Management                                 │
+│  • Fragmentation &amp;Packing                         │
+│  • ARQ (Selective Repeat)                         │
+├───────────────────────────────────────────────────┤
+│  SECURITY SUBLAYER                                │  ← Auth &amp; Encryption
+│  • PKMv2 Authentication                           │
+│  • AES-CCM (128-bit) Encryption                   │
+│  • X.509 Certificates                             │
+│  • Key Hierarchy: AK → KEK → TEK                  │
+└───────────────────────────────────────────────────┘</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Connection-Oriented Architecture — CID</h3>
+    <p>Unlike WiFi (connectionless), all WiMAX communication flows through <span class="hl-cyan">connections identified by unique 16-bit CID</span> (Connection Identifier).</p>
+    <p>When an SS enters the network, <strong>three management connections</strong> are automatically established:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Connection</th><th>CID Type</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Basic Management</td><td>Basic CID</td><td>Short, time-urgent MAC management messages</td></tr>
+          <tr><td>Primary Management</td><td>Primary CID</td><td>Longer, delay-tolerant management messages</td></tr>
+          <tr><td>Secondary Management</td><td>Secondary CID</td><td>IP-based management (DHCP, TFTP, SNMP)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>QoS Service Classes ⭐</h3>
+    <div class="tip-box">
+      <div class="box-label">🎯 This is a HIGH-FREQUENCY EXAM TOPIC</div>
+      <p>Memorize all 5 WiMAX QoS service classes, their full names, and typical applications. This appears in almost every exam.</p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Class</th><th>Full Name</th><th>Description</th><th>Application</th></tr></thead>
+        <tbody>
+          <tr><td><span class="hl-green">UGS</span></td><td>Unsolicited Grant Service</td><td>Fixed-size packets at periodic intervals. BS grants BW automatically.</td><td>VoIP (constant bit rate)</td></tr>
+          <tr><td><span class="hl-cyan">rtPS</span></td><td>Real-Time Polling Service</td><td>Variable-size packets at periodic intervals. BS polls regularly.</td><td>Streaming video, live gaming</td></tr>
+          <tr><td><span class="hl-purple">ertPS</span></td><td>Extended Real-Time Polling</td><td>Like UGS but variable-size. Unsolicited grants + variable size.</td><td>VoIP with silence suppression</td></tr>
+          <tr><td><span class="hl-gold">nrtPS</span></td><td>Non-Real-Time Polling</td><td>Variable-size, delay-tolerant, guaranteed minimum throughput.</td><td>FTP, large file downloads</td></tr>
+          <tr><td><span class="hl-red">BE</span></td><td>Best Effort</td><td>No guarantees. Gets leftover bandwidth.</td><td>Web browsing, general internet</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">BS Scheduler Priority Order</div>
+      <pre>
+Priority 1: UGS   ──→ Automatic periodic grants (highest)
+Priority 2: ertPS ──→ Adaptive unsolicited grants
+Priority 3: rtPS  ──→ Regular polling, variable grants
+Priority 4: nrtPS ──→ Less frequent polling, min guaranteed
+Priority 5: BE    ──→ Remaining bandwidth (lowest)</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Fragmentation and Packing</h3>
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--cyan)">Fragmentation</div>
+        <ul>
+          <li>Break large SDUs into smaller PDUs</li>
+          <li>Fits allocated bandwidth slots</li>
+          <li>Frag header added to each piece</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <div class="col-title" style="color:var(--purple)">Packing</div>
+        <ul>
+          <li>Combine multiple small SDUs into one PDU</li>
+          <li>Reduces overhead</li>
+          <li>Both can be used together</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Security Sublayer — Key Hierarchy</h3>
+    <div class="diagram-box">
+      <div class="diag-label">WiMAX Key Hierarchy</div>
+      <pre>
+┌──────────────────────────────────────────┐
+│  AK (Authorization Key) — 128-bit        │
+│  Derived from EAP authentication         │
+│  Lifetime: days                          │
+└─────────────────────┬────────────────────┘
+                      │ Derives
+                      ▼
+┌──────────────────────────────────────────┐
+│  KEK (Key Encryption Key) — 128-bit      │
+│  Used to ENCRYPT the TEK                 │
+└─────────────────────┬────────────────────┘
+                      │ Encrypts
+                      ▼
+┌──────────────────────────────────────────┐
+│  TEK (Traffic Encryption Key) — 128-bit  │
+│  Used to encrypt ACTUAL DATA             │
+│  Lifetime: hours · Two active at a time  │
+│  (for seamless key transition)           │
+└──────────────────────────────────────────┘
+Algorithm: AES-CCM (Advanced Encryption Standard)
+Device Auth: X.509 digital certificates
+User Auth: EAP (TLS, TTLS, SIM variants)</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>TDD Frame Structure</h3>
+    <div class="diagram-box">
+      <div class="diag-label">WiMAX TDD Frame (5 ms)</div>
+      <pre>
+┌────────────────────────────┬───┬─────────────────────┬───┐
+│       DL Subframe          │TTG│    UL Subframe      │RTG│
+│  BS → SS                   │   │    SS → BS          │   │
+│                            │   │                     │   │
+│ Preamble|FCH|DL-MAP|UL-MAP │   │ Ranging|Contention  │   │
+│         |DL Bursts (data)  │   │ |UL Bursts (data)   │   │
+└────────────────────────────┴───┴─────────────────────┴───┘
+  TTG = Transmit/Receive Transition Gap
+  RTG = Receive/Transmit Transition Gap
+
+DL-MAP: Tells each SS where to find its data (time+subchannel)
+UL-MAP: Tells each SS when and where to transmit (allocated slots)</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 18 ===== -->
+<div class="section" id="s18">
+  <div class="section-title">
+    <span class="section-num">18</span>
+    <h2>WiMAX Spectrum Allocation</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Band</th><th>Frequency</th><th>Type</th><th>Key Use</th></tr></thead>
+      <tbody>
+        <tr><td>2.3 GHz</td><td>2.3–2.4 GHz</td><td>Licensed</td><td>South Korea (WiBro), USA, India</td></tr>
+        <tr><td>2.5 GHz</td><td>2.5–2.7 GHz</td><td>Licensed</td><td>Most popular for Mobile WiMAX globally</td></tr>
+        <tr><td>3.5 GHz</td><td>3.4–3.6 GHz</td><td>Licensed</td><td>Most popular for Fixed WiMAX (Europe, Asia)</td></tr>
+        <tr><td>5.8 GHz</td><td>5.725–5.850 GHz</td><td>Unlicensed (ISM)</td><td>License-free deployment</td></tr>
+        <tr><td>10–66 GHz</td><td>Various</td><td>Licensed</td><td>LOS backhaul, high capacity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diag-label">Frequency vs Performance Trade-off</div>
+    <pre>
+Lower Frequency ←──────────────────────────────→ Higher Frequency
+  2.3 GHz               3.5 GHz                   5.8 GHz
+
+  Better range          Medium range              Shorter range
+  Better NLOS           Good NLOS                 Moderate NLOS
+  Better penetration    Good penetration          Less penetration
+  Less bandwidth        Moderate bandwidth        More bandwidth
+  Lower capacity        Good capacity             Higher capacity</pre>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Licensed Spectrum</th><th>Unlicensed Spectrum</th></tr></thead>
+      <tbody>
+        <tr><td>Cost</td><td>Expensive (spectrum auctions)</td><td>Free to use</td></tr>
+        <tr><td>Interference</td><td>Protected — no interference from others</td><td>Shared — no protection</td></tr>
+        <tr><td>QoS Guarantee</td><td>Can guarantee service quality</td><td>Cannot guarantee</td></tr>
+        <tr><td>Suitable For</td><td>Commercial ISP, carrier-grade</td><td>Community, rural, enterprise</td></tr>
+        <tr><td>WiMAX Example</td><td>2.3, 2.5, 3.5 GHz</td><td>5.8 GHz</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===================== UNIT 2 ===================== -->
+<div class="unit-divider">
+  <div class="unit-label">Unit 2</div>
+  <h2>Mobile Network and Transport Layer</h2>
+</div>
+
+<div class="part-divider">
+  <div class="part-label">Part A</div>
+  <h3>Mobile IP</h3>
+</div>
+
+<!-- ===== SECTION 19 ===== -->
+<div class="section" id="s19">
+  <div class="section-title">
+    <span class="section-num">19</span>
+    <h2>Introduction to Mobile IP</h2>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-label">⚠️ The Fundamental Problem</div>
+    <p>Traditional IP uses one address for TWO roles: <strong>Identifier</strong> (who you are) and <strong>Locator</strong> (where you are). When a device moves networks, its IP changes → all TCP connections BREAK!</p>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">💡 Mobile IP Solution (RFC 5944 / RFC 6275)</div>
+    <p><strong>Separate Identifier from Locator:</strong></p>
+    <p>→ <strong>Home Address</strong> = Permanent identifier (never changes)</p>
+    <p>→ <strong>Care-of Address (CoA)</strong> = Temporary locator (changes as you move)</p>
+    <p>A mapping (binding) between these two is maintained transparently.</p>
+  </div>
+
+  <h3>Key Entities</h3>
+  <div class="diagram-box">
+    <div class="diag-label">Mobile IP Architecture</div>
+    <pre>
+┌─────────────────────────────────────────────────────────────┐
+│                        INTERNET                             │
+│                                                             │
+│  ┌─────────────────┐                  ┌────────────────┐    │
+│  │  HOME NETWORK   │                  │ FOREIGN NETWORK│    │
+│  │                 │                  │                │    │
+│  │   ┌──────────┐  │                  │  ┌──────────┐  │    │
+│  │   │   HOME   │  │                  │  │ FOREIGN  │  │    │
+│  │   │  AGENT   │  │                  │  │  AGENT   │  │    │
+│  │   │  (HA)    │  │                  │  │  (FA)    │  │    │
+│  │   └──────────┘  │                  │  └────┬─────┘  │    │
+│  │                 │  ┌─────────────┐ │       │        │    │
+│  │ MN away from    │  │Correspondent│ │    ┌──┴──┐     │    │
+│  │ home            │  │   Node (CN) │ │    │ MN  │     │    │
+│  │                 │  │             │ │    └─────┘     │    │
+│  └─────────────────┘  └─────────────┘ └────────────────┘    │
+│                                                             │
+│   MN Home Address: 192.168.1.50 (PERMANENT, never changes)  │
+│   Care-of Address: 10.0.5.20 (current location)             │
+└─────────────────────────────────────────────────────────────┘</pre>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Entity</th><th>Full Form</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>MN</td><td>Mobile Node</td><td>Device that moves between networks. Has permanent Home Address + temporary CoA.</td></tr>
+        <tr><td>HA</td><td>Home Agent</td><td>Router on MN's home network. Intercepts packets for MN, tunnels to CoA. Maintains Binding Table.</td></tr>
+        <tr><td>FA</td><td>Foreign Agent</td><td>Router on foreign network. Receives tunneled packets from HA, de-tunnels, delivers to MN.</td></tr>
+        <tr><td>CN</td><td>Correspondent Node</td><td>Any device communicating with MN. Sends to Home Address — doesn't know MN moved.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Care-of Address Types</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Description</th><th>Obtained By</th></tr></thead>
+      <tbody>
+        <tr><td>Foreign Agent CoA</td><td>FA's own IP address. Multiple MNs share same CoA.</td><td>FA advertises it in Agent Advertisements</td></tr>
+        <tr><td>Co-located CoA</td><td>Unique IP address acquired by MN itself. MN handles de-tunneling.</td><td>DHCP or manual configuration</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 20 ===== -->
+<div class="section" id="s20">
+  <div class="section-title">
+    <span class="section-num">20</span>
+    <h2>IP Packet Delivery in Mobile IP</h2>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diag-label">Complete Packet Flow (CN to MN)</div>
+    <pre>
+STEP 1: CN sends packet normally to MN's Home Address
+  CN ──────(Src=CN, Dst=HomeAddr)────────────→ Internet
+
+STEP 2: Packet reaches home network. HA intercepts (proxy ARP)
+  HA checks Binding Table: HomeAddr ↔ CoA (at FA)
+
+STEP 3: HA encapsulates (tunnels) packet to CoA
+  HA ══(Outer: Src=HA, Dst=CoA [Inner: original packet])══→ FA
+
+STEP 4: FA decapsulates (de-tunnels)
+  FA removes outer header → recovers original packet
+  FA delivers to MN via link layer
+
+STEP 5: MN receives original packet (as if it never moved!)
+
+STEP 6: MN sends reply DIRECTLY to CN (standard routing)
+  MN ──────(Src=HomeAddr, Dst=CN)────────────→ CN (via FA's gateway)</pre>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-label">⚠️ Triangle Routing Problem (Dog-Leg Routing)</div>
+    <p>CN → HA → FA → MN (inefficient triangle). Even if CN and MN are on the same network, packets still go through HA (possibly on another continent). This causes <strong>increased latency</strong> and <strong>network load</strong>.</p>
+    <p><strong>Solution in Mobile IPv6:</strong> Route Optimization — MN sends Binding Update to CN directly. CN then sends directly to CoA (no HA involvement). This eliminates the triangle.</p>
+  </div>
+</div>
+
+<!-- ===== SECTION 21 ===== -->
+<div class="section" id="s21">
+  <div class="section-title">
+    <span class="section-num">21</span>
+    <h2>Agent Discovery &amp; Registration</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>Agent Discovery</h3>
+    <p>Process by which MN detects whether it's on its <span class="hl-cyan">home or foreign network</span> and identifies available HA/FA.</p>
+
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--cyan)">Agent Advertisement</div>
+        <ul>
+          <li>HA/FA periodically broadcasts ICMP Router Advertisement + Mobility Extension</li>
+          <li>MN compares network prefix with its home address prefix</li>
+          <li>Match → Home network. No match → Foreign network</li>
+          <li>Passive — MN just listens</li>
+        </ul>
+      </div>
+      <div class="col-box">
+        <div class="col-title" style="color:var(--gold)">Agent Solicitation</div>
+        <ul>
+          <li>MN actively requests advertisement via ICMP Router Solicitation</li>
+          <li>Used when MN just arrived and doesn't want to wait</li>
+          <li>Sent to 224.0.0.2 (all routers multicast)</li>
+          <li>Active — immediate response</li>
+        </ul>
+      </div>
+    </div>
+
+    <h4>Agent Advertisement Flags</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Flag</th><th>Name</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>H</td><td>Home Agent</td><td>This agent is a Home Agent</td></tr>
+          <tr><td>F</td><td>Foreign Agent</td><td>This agent is a Foreign Agent</td></tr>
+          <tr><td>R</td><td>Registration Required</td><td>Registration through FA is mandatory</td></tr>
+          <tr><td>B</td><td>Busy</td><td>FA is too busy to accept new registrations</td></tr>
+          <tr><td>T</td><td>Reverse Tunneling</td><td>Reverse tunneling is supported</td></tr>
+          <tr><td>M</td><td>Minimal Encapsulation</td><td>Minimal encapsulation supported</td></tr>
+          <tr><td>G</td><td>GRE Encapsulation</td><td>GRE encapsulation supported</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Registration Process</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Registration Message Exchange</div>
+      <pre>
+  MN                          FA                          HA
+   │                           │                           │
+   │─── Registration ─────────→│                           │
+   │    Request                │─── Registration ─────────→│
+   │    (Home Addr, HA Addr,   │    Request (relayed)      │
+   │     CoA, Lifetime,        │                           │
+   │     Authentication)       │                    HA verifies:
+   │                           │                    • Authentication
+   │                           │                    • Updates Binding Table
+   │                           │←── Registration ──────────│
+   │←── Registration ──────────│    Reply (Code + Lifetime)│
+   │    Reply                  │                           │
+   │                           │                           │
+   │ REGISTERED! HA binding:   │ FA updates Visitor List   │
+   │ HomeAddr ↔ CoA            │                           │</pre>
+    </div>
+
+    <h4>Reply Code Values — Key Ones</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--green)">0</td><td>Success — Registration accepted</td></tr>
+          <tr><td style="color:var(--red)">67</td><td>FA rejection — MN failed authentication</td></tr>
+          <tr><td style="color:var(--red)">69</td><td>FA rejection — Requested lifetime too long</td></tr>
+          <tr><td style="color:var(--red)">131</td><td>HA rejection — MN failed authentication</td></tr>
+          <tr><td style="color:var(--red)">133</td><td>HA rejection — Registration identification mismatch</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Deregistration</div>
+      <p>When MN returns to home network: Send Registration Request with <strong>Lifetime = 0</strong>. HA removes the binding entry. Normal IP routing resumes immediately.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 22 ===== -->
+<div class="section" id="s22">
+  <div class="section-title">
+    <span class="section-num">22</span>
+    <h2>Tunneling &amp; Encapsulation</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>IP-in-IP Encapsulation (RFC 2003) — DEFAULT</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Encapsulation at HA</div>
+      <pre>
+ORIGINAL PACKET:
+┌─────────────────────┬──────────────────┬──────────┐
+│  IP Header          │ Transport Header │  Data    │
+│  Src: CN_Addr       │ (TCP/UDP)        │          │
+│  Dst: MN_HomeAddr   │                  │          │
+└─────────────────────┴──────────────────┴──────────┘
+                          ↓ HA ENCAPSULATES
+
+TUNNELED PACKET (to FA):
+┌────────────────────┬────────────────────┬──────────────────┬──────────┐
+│  NEW Outer Header  │  ORIGINAL IP Hdr   │ Transport Header │  Data    │
+│  Src: HA_Addr      │  Src: CN_Addr      │ (TCP/UDP)        │  Payload │
+│  Dst: CoA (FA)     │  Dst: MN_HomeAddr  │                  │          │
+│  Protocol: 4       │  (UNTOUCHED)       │                  │          │
+└────────────────────┴────────────────────┴──────────────────┴──────────┘
+Internet routes OUTER packet to FA → FA decapsulates → MN sees original!</pre>
+    </div>
+  </div>
+
+  <h3>Three Types of Encapsulation — Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>IP-in-IP</th><th>Minimal</th><th>GRE</th></tr></thead>
+      <tbody>
+        <tr><td>RFC</td><td>2003</td><td>2004</td><td>2784</td></tr>
+        <tr><td>Protocol Number</td><td>4</td><td>55</td><td>47</td></tr>
+        <tr><td>Overhead</td><td>20 bytes</td><td>8–12 bytes</td><td>24–36 bytes</td></tr>
+        <tr><td>Original Header</td><td>Preserved intact</td><td>MODIFIED</td><td>Preserved intact</td></tr>
+        <tr><td>Support Status</td><td><span class="badge badge-green">Mandatory</span></td><td><span class="badge badge-gold">Optional</span></td><td><span class="badge badge-gold">Optional</span></td></tr>
+        <tr><td>Flexibility</td><td>IP-only</td><td>IP-only</td><td>Any protocol</td></tr>
+        <tr><td>Use with Fragments</td><td>Yes</td><td>No (first fragment only)</td><td>Yes</td></tr>
+        <tr><td>Industry Use</td><td>Mobile IP default</td><td>Rare</td><td>VPNs, tunnels</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3>Reverse Tunneling</h3>
+    <div class="warn-box">
+      <div class="box-label">⚠️ The Ingress Filtering Problem</div>
+      <p>MN sends packet from foreign network with Src = HomeAddr (192.168.1.50). Foreign router sees a packet with a source address that doesn't belong to its network (10.0.5.0/24). Router drops it as suspected IP spoofing (BCP 38/RFC 2827).</p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">Reverse Tunnel Solution</div>
+      <pre>
+Normal:  CN → Internet → HA ═══tunnel═══→ FA → MN  (HA to FA)
+
+Reverse: MN → FA ═══tunnel═══→ HA → Internet → CN  (FA to HA)
+
+Reverse Tunnel Encapsulation:
+┌─────────────────────┬──────────────────────┬─────────┐
+│ Outer: Src=FA_Addr  │ Inner: Src=HomeAddr  │  Data   │
+│       Dst=HA_Addr   │       Dst=CN_Addr    │         │
+└─────────────────────┴──────────────────────┴─────────┘
+  ↑ FA's address — valid for foreign network!
+
+HA receives, decapsulates → routes to CN normally.
+Source is now in HA's network → No ingress filtering issue! ✓
+
+Request: MN sets T flag in Registration Request
+Condition: FA must have T flag in Agent Advertisement</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART B ============ -->
+<div class="part-divider">
+  <div class="part-label">Part B</div>
+  <h3>IPv6, Mobile IPv6, and SIP</h3>
+</div>
+
+<!-- ===== SECTION 23 ===== -->
+<div class="section" id="s23">
+  <div class="section-title">
+    <span class="section-num">23</span>
+    <h2>IPv6 — Network Layer</h2>
+  </div>
+
+  <h3>Why IPv6? IPv4 Limitations vs Solutions</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>IPv4 Limitation</th><th>IPv6 Solution</th></tr></thead>
+      <tbody>
+        <tr><td>Only 2³² ≈ 4.3 billion addresses</td><td>128-bit addresses → 2¹²⁸ ≈ 3.4 × 10³⁸ addresses</td></tr>
+        <tr><td>Variable header, options slow processing</td><td>Fixed 40-byte header, options in extension headers</td></tr>
+        <tr><td>IPSec optional add-on</td><td>IPSec mandatory — built into the protocol</td></tr>
+        <tr><td>Depends on DHCP for config</td><td>SLAAC (Stateless Address Auto-Configuration) built-in</td></tr>
+        <tr><td>Broadcast wastes bandwidth</td><td>No broadcast — uses multicast and anycast</td></tr>
+        <tr><td>Routers fragment packets</td><td>Only SOURCE can fragment; routers do not</td></tr>
+        <tr><td>Header checksum at every hop</td><td>No header checksum — lower layers handle errors</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>IPv6 Header Format</h3>
+  <div class="diagram-box">
+    <div class="diag-label">Fixed 40-byte IPv6 Header</div>
+    <pre>
+ 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+┌───────┬───────────────┬─────────────────────────────────────────┐
+│Version│ Traffic Class │              Flow Label                 │
+│  (4)  │     (8)       │               (20)                      │
+├───────┴───────────────┼─────────────────┬───────────────────────┤
+│    Payload Length     │  Next Header    │      Hop Limit        │
+│       (16)            │      (8)        │        (8)            │
+├───────────────────────┴─────────────────┴───────────────────────┤
+│                  Source Address (128 bits / 16 bytes)           │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│                Destination Address (128 bits / 16 bytes)        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+             TOTAL: Fixed 40 bytes (always)</pre>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Size</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Version</td><td>4 bits</td><td>Always 6</td></tr>
+        <tr><td>Traffic Class</td><td>8 bits</td><td>QoS priority (like IPv4 ToS)</td></tr>
+        <tr><td>Flow Label</td><td>20 bits</td><td>Identifies a flow for special handling (e.g., real-time video)</td></tr>
+        <tr><td>Payload Length</td><td>16 bits</td><td>Length of data AFTER the IPv6 header</td></tr>
+        <tr><td>Next Header</td><td>8 bits</td><td>Type of next header (extension header or TCP=6/UDP=17/ICMPv6=58)</td></tr>
+        <tr><td>Hop Limit</td><td>8 bits</td><td>Decremented at each router; packet discarded at 0 (IPv4 TTL equivalent)</td></tr>
+        <tr><td>Source Address</td><td>128 bits</td><td>IPv6 address of sender</td></tr>
+        <tr><td>Destination Address</td><td>128 bits</td><td>IPv6 address of recipient</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>IPv6 Extension Headers</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Extension Header</th><th>Next Hdr Value</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Hop-by-Hop Options</td><td>0</td><td>Options examined by every router along the path</td></tr>
+        <tr><td>Routing</td><td>43</td><td>Specifies intermediate nodes to visit (source routing)</td></tr>
+        <tr><td>Fragment</td><td>44</td><td>Fragmentation info (only source can fragment)</td></tr>
+        <tr><td>Authentication Header (AH)</td><td>51</td><td>IPSec: Data integrity and authentication</td></tr>
+        <tr><td>Encapsulating Security Payload (ESP)</td><td>50</td><td>IPSec: Confidentiality (encryption) + authentication</td></tr>
+        <tr><td>Destination Options</td><td>60</td><td>Options for destination node only</td></tr>
+        <tr><td>Mobility</td><td>135</td><td>Mobile IPv6 signaling (Binding Update, BA, etc.)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 24 ===== -->
+<div class="section" id="s24">
+  <div class="section-title">
+    <span class="section-num">24</span>
+    <h2>Mobile IPv6</h2>
+  </div>
+
+  <h3>Mobile IPv4 vs Mobile IPv6</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Mobile IPv4</th><th>Mobile IPv6</th></tr></thead>
+      <tbody>
+        <tr><td>Foreign Agent</td><td>Required (usually)</td><td>Not needed ✅</td></tr>
+        <tr><td>CoA Type</td><td>FA CoA or Co-located</td><td>Always Co-located (SLAAC)</td></tr>
+        <tr><td>Route Optimization</td><td>Rare, complex extension</td><td>Built-in, fundamental ✅</td></tr>
+        <tr><td>Triangle Routing</td><td>Default problem</td><td>Solved by default ✅</td></tr>
+        <tr><td>Security</td><td>Separate auth extensions</td><td>IPSec (mandatory)</td></tr>
+        <tr><td>Agent Discovery</td><td>Special ICMP extensions</td><td>IPv6 Neighbor Discovery</td></tr>
+        <tr><td>Ingress Filtering</td><td>Requires reverse tunneling</td><td>Home Address Option</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3>Route Optimization with Return Routability</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Return Routability Procedure (MIPv6)</div>
+      <pre>
+  MN                    HA                    CN
+   │                     │                     │
+   │── HoTI ────────────→│── HoTI ────────────→│  (via HA tunnel)
+   │── CoTI ──────────────────────────────────→│  (direct)
+   │                     │                     │
+   │←── HoT ─────────────│←── HoT ─────────────│  (via HA tunnel)
+   │←── CoT ───────────────────────────────────│  (direct)
+   │                                           │
+   │  MN combines tokens → Binding Mgmt Key (BMK)
+   │                                           │
+   │── Binding Update (signed with BMK) ──────→│
+   │←── Binding Acknowledgement ───────────────│
+   │                                           │
+   │ ←═══════ Direct communication! ══════════→│
+   │      (No HA involved — no triangle!)      │</pre>
+    </div>
+
+    <h4>After Route Optimization — Header Usage</h4>
+    <div class="code-block">
+      <div class="code-header"><span class="code-label">IPv6 Header Usage After RO</span><div class="dots"><span></span><span></span><span></span></div></div>
+      <pre>
+CN to MN (After Route Optimization):
+  IPv6 Header: Src=CN, <span class="highlight">Dst=CoA</span>
+  Type 2 Routing Header: <span class="gold">Home Address = MN_HomeAddr</span>
+  ↑ MN's upper layers see HomeAddr as destination (transparent!)
+
+MN to CN (After Route Optimization):
+  IPv6 Header: Src=<span class="highlight">CoA</span>, Dst=CN
+  Home Address Destination Option: <span class="gold">HomeAddr = MN_HomeAddr</span>
+  ↑ CN's upper layers see HomeAddr as source (transparent!)</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 25 ===== -->
+<div class="section" id="s25">
+  <div class="section-title">
+    <span class="section-num">25</span>
+    <h2>Session Initiation Protocol (SIP)</h2>
+  </div>
+
+  <div class="quick-ref">
+    <div class="qr-title">📋 SIP Quick Facts</div>
+    <div class="qr-grid">
+      <div class="qr-item"><div class="qr-key">RFC</div><div class="qr-val">3261 (core)</div></div>
+      <div class="qr-item"><div class="qr-key">Layer</div><div class="qr-val">Application Layer</div></div>
+      <div class="qr-item"><div class="qr-key">Nature</div><div class="qr-val">Text-based (like HTTP)</div></div>
+      <div class="qr-item"><div class="qr-key">Transport</div><div class="qr-val">UDP/TCP port 5060, TLS 5061</div></div>
+      <div class="qr-item"><div class="qr-key">Media</div><div class="qr-val">RTP carries audio/video</div></div>
+      <div class="qr-item"><div class="qr-key">Description</div><div class="qr-val">SDP describes media params</div></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">📘 Critical Distinction</div>
+    <p><strong>SIP = SIGNALING</strong> (setup, modify, teardown calls)</p>
+    <p><strong>RTP = MEDIA</strong> (actual voice/video data)</p>
+    <p><strong>SDP = DESCRIPTION</strong> (codec, IP, port for media)</p>
+    <p>SIP says "Let's have a call." SDP says "Use this codec." RTP carries the audio.</p>
+  </div>
+
+  <div class="subsection">
+    <h3>SIP Architecture Components</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>UAC (User Agent Client)</td><td>Initiates SIP requests (the CALLER's side)</td></tr>
+          <tr><td>UAS (User Agent Server)</td><td>Receives and responds to SIP requests (the CALLEE's side)</td></tr>
+          <tr><td>Proxy Server</td><td>Routes SIP requests on behalf of users. Acts as both client and server. Can fork requests.</td></tr>
+          <tr><td>Redirect Server</td><td>Does NOT forward. Responds with "Callee is at X" → caller contacts callee directly.</td></tr>
+          <tr><td>Registrar Server</td><td>Handles REGISTER requests. Stores user's current contact in Location Database.</td></tr>
+          <tr><td>Location Server</td><td>Database: URI → contact address mapping. Queried by Proxy/Redirect servers.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Proxy vs Redirect Server</h4>
+    <div class="diagram-box">
+      <div class="diag-label">Comparison</div>
+      <pre>
+PROXY SERVER:                          REDIRECT SERVER:
+Caller → Proxy → Callee               Caller → Redirect Server
+                                       Caller ← "Callee is at X"
+                                       Caller → Callee (directly at X)
+
+Proxy: Stays in the call path          Redirect: Removes itself from path
+       More load, more control                 Less load, less control</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>SIP Request Methods</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Method</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><span class="hl-cyan">INVITE</span></td><td>Initiates a call / session. Also re-INVITE to modify existing session.</td></tr>
+          <tr><td><span class="hl-cyan">ACK</span></td><td>Final acknowledgment of INVITE response (completes 3-way handshake)</td></tr>
+          <tr><td><span class="hl-red">BYE</span></td><td>Terminates an active session/call</td></tr>
+          <tr><td>CANCEL</td><td>Cancels a pending INVITE that hasn't been answered yet</td></tr>
+          <tr><td><span class="hl-gold">REGISTER</span></td><td>Registers user's current contact with the registrar</td></tr>
+          <tr><td>OPTIONS</td><td>Queries server capabilities without establishing a session</td></tr>
+          <tr><td>SUBSCRIBE</td><td>Subscribes to receive notifications of specific events</td></tr>
+          <tr><td>NOTIFY</td><td>Delivers notifications of subscribed events</td></tr>
+          <tr><td>MESSAGE</td><td>Sends an instant message</td></tr>
+          <tr><td>REFER</td><td>Call transfer — instructs recipient to contact a third party</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>SIP Response Codes</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Range</th><th>Category</th><th>Key Examples</th></tr></thead>
+        <tbody>
+          <tr><td style="color:var(--cyan)">1xx</td><td>Provisional</td><td>100 Trying, 180 Ringing, 183 Session Progress</td></tr>
+          <tr><td style="color:var(--green)">2xx</td><td>Success</td><td>200 OK</td></tr>
+          <tr><td style="color:var(--gold)">3xx</td><td>Redirection</td><td>301 Moved Permanently, 302 Moved Temporarily, 305 Use Proxy</td></tr>
+          <tr><td style="color:var(--red)">4xx</td><td>Client Error</td><td>400 Bad Request, 401 Unauthorized, 404 Not Found, 486 Busy Here</td></tr>
+          <tr><td style="color:var(--red)">5xx</td><td>Server Error</td><td>500 Internal Server Error, 503 Service Unavailable</td></tr>
+          <tr><td style="color:var(--red)">6xx</td><td>Global Failure</td><td>600 Busy Everywhere, 603 Decline</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 SIP 3-Way Handshake — Exam Favorite</div>
+      <p>SIP call setup uses INVITE → 200 OK → ACK (just like TCP's SYN → SYN-ACK → ACK). The ACK is a separate method (not just an HTTP-style response). This 3-way handshake ensures reliable call setup over UDP.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Basic SIP Call Flow</h3>
+    <div class="diagram-box">
+      <div class="diag-label">SIP Basic Call Setup and Teardown</div>
+      <pre>
+Alice (UAC)          Proxy Server           Bob (UAS)
+     │                     │                    │
+     │── INVITE ──────────→│── INVITE ─────────→│
+     │                     │                    │
+     │←── 100 Trying ──────│                    │
+     │                     │←── 180 Ringing ────│
+     │←── 180 Ringing ─────│                    │
+     │                     │                    │ (Bob answers)
+     │                     │←── 200 OK ─────────│
+     │←── 200 OK ──────────│                    │
+     │                     │                    │
+     │── ACK ──────────────────────────────────→│
+     │                                          │
+     │←════════ RTP Media Stream ══════════════→│
+     │      (actual voice/video via RTP)        │
+     │                                          │
+     │── BYE ──────────────────────────────────→│
+     │←── 200 OK ───────────────────────────────│
+     │                                          │</pre>
+    </div>
+  </div>
+
+  <h3>SIP Addressing</h3>
+  <div class="code-block">
+    <div class="code-header"><span class="code-label">SIP URI Formats</span><div class="dots"><span></span><span></span><span></span></div></div>
+    <pre>
+<span class="highlight">sip:alice@example.com</span>                <span class="comment">← Basic SIP URI</span>
+<span class="highlight">sip:alice@192.168.1.50:5060</span>           <span class="comment">← With specific IP and port</span>
+<span class="highlight">sip:+1-212-555-1234@gateway.com</span>       <span class="comment">← PSTN phone number via gateway</span>
+<span class="highlight">sips:alice@example.com</span>               <span class="comment">← Secure SIP (over TLS)</span></pre>
+  </div>
+
+</div>
+
+<!-- ===== SECTION 26 ===== -->
+<div class="section" id="s26">
+  <div class="section-title">
+    <span class="section-num">26</span>
+    <h2>SIP Call Flow &amp; Mobility Support</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>Complete SIP Call Flow with SDP</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Full SIP Call Setup → Media → Teardown</div>
+      <pre>
+Alice (UAC)          Proxy Server          Bob (UAS)
+    │                    │                     │
+    │──── INVITE ───────→│──── INVITE ────────→│
+    │    (SDP: Alice's   │                     │  (Bob's phone rings)
+    │     media params)  │←── 100 Trying ──────│
+    │←── 100 Trying ──── │                     │
+    │                    │←── 180 Ringing ─────│
+    │←── 180 Ringing ─── │                     │  (Bob picks up)
+    │                    │←── 200 OK ──────────│
+    │←── 200 OK ──────── │    (SDP: Bob's      │
+    │                    │    media params)    │
+    │──── ACK ────────────────────────────────→│
+    │                                          │
+    │ ←═══════════ RTP Media Stream ══════════→│
+    │        (Direct audio/video via RTP)      │
+    │        (Parameters negotiated via SDP)   │
+    │                                          │  (Alice hangs up)
+    │────── BYE ──────────────────────────────→│
+    │←── 200 OK ───────────────────────────────│
+    │                                          │
+    │           SESSION TERMINATED             │</pre>
+    </div>
+
+    <h3>SIP Message Format (INVITE Example)</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="code-label">INVITE sip:bob@example.com SIP/2.0</span><div class="dots"><span></span><span></span><span></span></div></div>
+      <pre>
+<span class="highlight">INVITE sip:bob@example.com SIP/2.0</span>
+<span class="gold">Via:</span> SIP/2.0/UDP alice-pc.example.com:5060;branch=z9hG4bK776asdhds
+<span class="gold">Max-Forwards:</span> 70
+<span class="gold">To:</span> Bob &lt;sip:bob@example.com&gt;
+<span class="gold">From:</span> Alice &lt;sip:alice@example.com&gt;;tag=1928301774
+<span class="gold">Call-ID:</span> a84b4c76e66710@alice-pc.example.com
+<span class="gold">CSeq:</span> 314159 INVITE
+<span class="gold">Contact:</span> &lt;sip:alice@192.168.1.50:5060&gt;
+<span class="gold">Content-Type:</span> application/sdp
+<span class="gold">Content-Length:</span> 142
+
+<span class="comment">v=0                         ← SDP body begins</span>
+<span class="comment">o=alice 2890844526 2890844526 IN IP4 192.168.1.50</span>
+<span class="comment">s=Session SDP</span>
+<span class="comment">c=IN IP4 192.168.1.50</span>
+<span class="comment">t=0 0</span>
+<span class="comment">m=audio 49170 RTP/AVP 0   ← Audio on port 49170</span>
+<span class="comment">a=rtpmap:0 PCMU/8000        ← G.711 (PCMU) codec at 8 KHz</span></pre>
+    </div>
+
+    <h4>Key SIP Headers</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Header</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Via</td><td>Records path of request; used to route responses back</td></tr>
+          <tr><td>To</td><td>Intended recipient of the request</td></tr>
+          <tr><td>From</td><td>Initiator of the request (includes tag)</td></tr>
+          <tr><td>Call-ID</td><td>Unique identifier for the entire call/dialog</td></tr>
+          <tr><td>CSeq</td><td>Sequence number + method name for ordering requests</td></tr>
+          <tr><td>Contact</td><td>Direct URI where the sender can be reached</td></tr>
+          <tr><td>Max-Forwards</td><td>Limits number of hops (decremented at each proxy)</td></tr>
+          <tr><td>Content-Type</td><td>Type of message body (usually application/sdp)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>SIP Mobility Support</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mobility Type</th><th>Description</th><th>Mechanism</th></tr></thead>
+        <tbody>
+          <tr><td><span class="hl-cyan">Terminal Mobility</span></td><td>Physical device moves, gets new IP</td><td>Re-REGISTER with new contact; re-INVITE with new SDP</td></tr>
+          <tr><td><span class="hl-gold">Personal Mobility</span></td><td>Same user, different devices</td><td>REGISTER from multiple devices; Proxy forks INVITE to all</td></tr>
+          <tr><td><span class="hl-purple">Session Mobility</span></td><td>Transfer active session to another device</td><td>re-INVITE with new device's SDP; RTP stream re-targeted</td></tr>
+          <tr><td><span class="hl-green">Service Mobility</span></td><td>Personalized services follow user</td><td>Server-side logic; preferences tied to SIP URI, not device</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>SIP vs Mobile IP</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Mobile IP</th><th>SIP</th></tr></thead>
+        <tbody>
+          <tr><td>OSI Layer</td><td>Network Layer (L3)</td><td>Application Layer (L7)</td></tr>
+          <tr><td>Transparency</td><td>Transparent to applications</td><td>App must be SIP-aware</td></tr>
+          <tr><td>Session Continuity</td><td>Automatic, seamless</td><td>Requires re-INVITE</td></tr>
+          <tr><td>Handoff Speed</td><td>Fast (milliseconds)</td><td>Slower (seconds)</td></tr>
+          <tr><td>Infrastructure</td><td>HA, FA (network-level)</td><td>SIP servers (application-level)</td></tr>
+          <tr><td>Application Changes</td><td>None needed</td><td>Must support SIP</td></tr>
+          <tr><td>Route Optimization</td><td>Difficult (triangle default)</td><td>Natural (re-INVITE)</td></tr>
+          <tr><td>Deployment</td><td>Network-level changes</td><td>Software-only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 27 ===== -->
+<div class="section" id="s27">
+  <div class="section-title">
+    <span class="section-num">27</span>
+    <h2>Mobile Ad-Hoc Networks (MANET)</h2>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diag-label">Infrastructure vs MANET</div>
+    <pre>
+Traditional (Infrastructure):
+  STA ──→ AP ──→ Router ──→ Internet
+  (Fixed infrastructure required)
+
+MANET (No Infrastructure):
+  ┌───┐           ┌───┐
+  │ A │←─────────→│ B │
+  └───┘        ↗  └─┬─┘
+    ↑        ↗      │
+    │      ↗        ↓
+  ┌─┴─┐           ┌───┐
+  │ D │←─────────→│ C │
+  └───┘           └───┘
+  
+  Every node = HOST + ROUTER
+  No fixed infrastructure!
+  Topology changes continuously!</pre>
+  </div>
+
+  <h3>Key Characteristics</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Characteristic</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>No Infrastructure</td><td>No base stations, APs, or centralized controllers</td></tr>
+        <tr><td>Self-organizing</td><td>Nodes autonomously form and maintain the network</td></tr>
+        <tr><td>Multi-hop Communication</td><td>Intermediate nodes relay packets if destination is out of range</td></tr>
+        <tr><td>Dynamic Topology</td><td>Nodes move freely; links form and break continuously</td></tr>
+        <tr><td>Distributed Operation</td><td>No centralized control; all decisions made collaboratively</td></tr>
+        <tr><td>Limited Resources</td><td>Battery power, bandwidth, and processing are constrained</td></tr>
+        <tr><td>Asymmetric Links</td><td>A can reach B but B may not reach A (different TX power/direction)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Applications</h3>
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--cyan)">Key Use Cases</div>
+      <ul>
+        <li>Military battlefield communication</li>
+        <li>Disaster relief / emergency services</li>
+        <li>Vehicular Networks (VANET)</li>
+        <li>Wireless sensor networks</li>
+        <li>Remote / rural areas</li>
+        <li>Marine and aviation comms</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">Routing Challenges</div>
+      <ul>
+        <li>Dynamic topology — routes become invalid frequently</li>
+        <li>Bandwidth constraints — routing overhead must be minimized</li>
+        <li>Energy constraints — battery-powered, routing must be efficient</li>
+        <li>Asymmetric links complicate routing</li>
+        <li>Security — no centralized trust authority</li>
+        <li>High packet loss on wireless links</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Classification of MANET Routing Protocols</h3>
+  <div class="diagram-box">
+    <div class="diag-label">Routing Protocol Taxonomy</div>
+    <pre>
+MANET Routing Protocols
+├── Proactive (Table-Driven)        ← Routes maintained for ALL destinations
+│   ├── DSDV (Destination-Sequenced Distance Vector)
+│   ├── OLSR (Optimized Link State Routing)
+│   └── WRP (Wireless Routing Protocol)
+│
+├── Reactive (On-Demand)            ← Routes discovered ONLY when needed
+│   ├── DSR (Dynamic Source Routing)
+│   ├── AODV (Ad-hoc On-demand Distance Vector)
+│   └── TORA (Temporally Ordered Routing Algorithm)
+│
+└── Hybrid                          ← Proactive within zone, Reactive outside
+    └── ZRP (Zone Routing Protocol)</pre>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Description</th><th>Advantage</th><th>Disadvantage</th></tr></thead>
+      <tbody>
+        <tr><td>Proactive</td><td>Routes to ALL destinations maintained at ALL times</td><td>Low latency (route always ready)</td><td>High overhead (constant updates)</td></tr>
+        <tr><td>Reactive</td><td>Routes discovered ONLY when needed</td><td>Low overhead (on-demand only)</td><td>Higher latency for first packet</td></tr>
+        <tr><td>Hybrid</td><td>Combines both approaches</td><td>Balanced trade-off</td><td>More complex implementation</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== SECTION 28 ===== -->
+<div class="section" id="s28">
+  <div class="section-title">
+    <span class="section-num">28</span>
+    <h2>DSDV — Destination-Sequenced Distance Vector</h2>
+    <span class="badge badge-gold">Proactive</span>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">📘 Overview</div>
+    <p>DSDV (Perkins, 1994) is a <strong>proactive (table-driven)</strong> MANET routing protocol. It enhances classical Bellman-Ford distance vector routing with <strong>sequence numbers</strong> to prevent routing loops.</p>
+  </div>
+
+  <div class="subsection">
+    <h3>Routing Table Structure</h3>
+    <p>Every node maintains a <strong>complete routing table</strong> with entries for every other node in the network.</p>
+    <div class="code-block">
+      <div class="code-header"><span class="code-label">Example Routing Table at Node A</span><div class="dots"><span></span><span></span><span></span></div></div>
+      <pre>
+┌─────────────┬──────────┬──────┬───────────────┐
+│ Destination │ Next Hop │ Hops │  Seq Number   │
+├─────────────┼──────────┼──────┼───────────────┤
+│      A      │    A     │  0   │   A-100       │  ← Self
+│      B      │    B     │  1   │   B-200       │  ← Direct neighbor
+│      C      │    B     │  2   │   C-150       │  ← Learned via B
+│      D      │    D     │  1   │   D-300       │  ← Direct neighbor
+│      E      │    D     │  2   │   E-250       │  ← Learned via D
+└─────────────┴──────────┴──────┴───────────────┘</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Sequence Numbers — The Key Innovation</h3>
+    <div class="warn-box">
+      <div class="box-label">⚠️ Why Sequence Numbers?</div>
+      <p>Classical Bellman-Ford creates routing loops when topology changes and stale information circulates. Packet: A→B→A→B→... (infinite loop!). DSDV solves this with sequence numbers.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Rule</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Generator</td><td>Each node generates its own sequence number (for routes TO itself)</td></tr>
+          <tr><td>Even numbers</td><td>Indicate a valid, active link/route</td></tr>
+          <tr><td>Odd numbers</td><td>Indicate a broken/invalid link (link failure detected)</td></tr>
+          <tr><td>Monotonically increasing</td><td>Sequence numbers only ever increase, never decrease</td></tr>
+          <tr><td>Increment by 2</td><td>Normal updates (even); +1 more when link breaks (→ odd)</td></tr>
+          <tr><td>Freshness</td><td>Higher sequence number = newer (fresher) information</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Route Selection Rules</h4>
+    <div class="diagram-box">
+      <div class="diag-label">Two-Level Decision</div>
+      <pre>
+When a node receives an update for a destination:
+
+Rule 1: Compare SEQUENCE NUMBERS
+   received seq# > current seq# → ACCEPT (newer info!)
+   received seq# &lt; current seq# → REJECT (stale info!)
+   received seq# = current seq# → Go to Rule 2
+
+Rule 2: Compare HOP COUNTS (only if same sequence number)
+   received hops &lt; current hops → ACCEPT (shorter path!)
+   received hops ≥ current hops → REJECT (not better)
+
+This two-level comparison GUARANTEES loop-free routing!</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>DSDV Link Break Handling</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Link Break Example — Sequence Number Mechanism</div>
+      <pre>
+Network: A ——— B ——— C ——— D
+                 ↑
+           B-C link breaks!
+
+Step 1: B detects link break to C
+        B sets C's seq# to C-153 (odd = INVALID route)
+        B sets C's metric to ∞ (infinity)
+        B sends TRIGGERED UPDATE: {C, ∞, C-153}
+
+Step 2: A receives update
+        Current: C via B, 2 hops, seq# C-152
+        Received: C, ∞ hops, seq# C-153
+        C-153 > C-152 → ACCEPT! (newer info)
+        A now knows: C is unreachable via B
+
+Step 3: Eventually, alternative route found
+        New even seq# (C-154) propagates → route restored</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Full Dump vs Incremental Updates</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Full Dump</th><th>Incremental Update</th></tr></thead>
+        <tbody>
+          <tr><td>Content</td><td>Entire routing table</td><td>Only changed entries</td></tr>
+          <tr><td>Size</td><td>Large (may need multiple packets)</td><td>Small (single packet)</td></tr>
+          <tr><td>When Sent</td><td>Periodically</td><td>On topology change (triggered)</td></tr>
+          <tr><td>Bandwidth</td><td>High</td><td>Low</td></tr>
+          <tr><td>Purpose</td><td>Ensure global consistency</td><td>Quick propagation of changes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ Advantages</div>
+      <ul>
+        <li>Loop-free routing (guaranteed by seq#)</li>
+        <li>Low latency — route always in table</li>
+        <li>Simple, based on well-understood algorithm</li>
+        <li>Incremental updates save bandwidth</li>
+        <li>Clear freshness metric (seq numbers)</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ Disadvantages</div>
+      <ul>
+        <li>High bandwidth overhead (periodic full dumps)</li>
+        <li>Scalability issues (table grows with network)</li>
+        <li>Slow convergence on topology changes</li>
+        <li>Wasted resources maintaining unused routes</li>
+        <li>Not suited for highly dynamic networks</li>
+        <li>Battery drain from constant periodic updates</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 29 ===== -->
+<div class="section" id="s29">
+  <div class="section-title">
+    <span class="section-num">29</span>
+    <h2>DSR — Dynamic Source Routing</h2>
+    <span class="badge badge-cyan">Reactive</span>
+  </div>
+
+  <div class="info-box">
+    <div class="box-label">📘 Overview</div>
+    <p>DSR (Johnson &amp; Maltz, 1996) is a <strong>reactive (on-demand)</strong> protocol. No routing tables maintained. Routes discovered only when needed. Uses <strong>source routing</strong> — the complete path is carried in every packet's header.</p>
+  </div>
+
+  <div class="subsection">
+    <h3>Source Routing Concept</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Source Routing — Complete Path in Header</div>
+      <pre>
+Source S wants to reach Destination D via A, B, C:
+
+Packet Header: [S → A → B → C → D]
+
+S sends to A   (A is next in list)
+A sends to B   (B is next in list)
+B sends to C   (C is next in list)
+C sends to D   (D is destination — arrived!)
+
+No intermediate node makes routing decisions!
+They just look at the source route list.</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 1: Route Discovery</h3>
+    <p>Triggered when Source S has data for Destination D but finds <strong>no route in its Route Cache</strong>.</p>
+
+    <div class="diagram-box">
+      <div class="diag-label">Route Discovery — RREQ Flooding + RREP Unicast</div>
+      <pre>
+Network: S ── A ── B ── D
+         |         |
+         C ── E ── F
+
+1. S checks Route Cache → No route to D!
+   S broadcasts RREQ [Source=S, Target=D, ID=1, Route=[S]]
+
+2. A receives RREQ: Not seen, not destination, no cached route
+   A appends self → Route=[S,A]
+   A rebroadcasts RREQ
+
+3. C receives RREQ: Same process
+   C appends self → Route=[S,C], rebroadcasts
+
+4. B receives RREQ from A (Route=[S,A])
+   B appends → Route=[S,A,B], rebroadcasts
+
+5. D receives RREQ from B → I AM THE DESTINATION!
+   Route Record = [S, A, B, D]  ← Complete route!
+
+6. D sends RREP back to S:
+   RREP contains: Route=[S, A, B, D]
+   Sent via REVERSE route: D → B → A → S
+
+7. S receives RREP:
+   Caches route: S → A → B → D
+   Begins sending data with source route header!
+
+(Any node that receives duplicate RREQ with same
+ Source+ID → DROPS it. Prevents infinite flooding.)</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Packet</th><th>Direction</th><th>Key Fields</th></tr></thead>
+        <tbody>
+          <tr><td>RREQ (Route Request)</td><td>Broadcast (flood)</td><td>Source, Target, Request ID, Route Record (grows)</td></tr>
+          <tr><td>RREP (Route Reply)</td><td>Unicast back to S</td><td>Complete route from S to D</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Duplicate RREQ Prevention</div>
+      <p>Each node checks (Source Address + Request ID) pair. If already seen → DROP. This prevents exponential flooding and infinite loops.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 2: Route Maintenance</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Link Break Detection and Recovery</div>
+      <pre>
+Data flow: S ──→ A ──→ B ──✗──→ D
+                          ↑
+                    Link B→D BREAKS!
+
+Step 1: B attempts to forward to D → FAILS (no link-layer ACK)
+Step 2: B retries multiple times → still fails
+Step 3: B generates RERR (Route Error):
+        "Link B→D is broken"
+Step 4: B sends RERR back to S: B → A → S
+Step 5: S and all intermediate nodes remove routes
+        using broken link B→D from their caches
+Step 6: S checks cache for alternative route to D
+        → Found? Use it immediately!
+        → Not found? Initiate new Route Discovery!
+
+Optional SALVAGING (at B):
+   B checks own cache for alternative path to D
+   e.g., B → E → F → D
+   B forwards packet via alternative → saves it!
+   B also notifies S via RERR (to update S's cache)</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>DSR Optimizations</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Optimization</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Route Caching</td><td>Cache routes from all overheard RREQs, RREPs, and data packets</td></tr>
+          <tr><td>Promiscuous Mode</td><td>Listen to packets not addressed to you — learn routes passively</td></tr>
+          <tr><td>Salvaging</td><td>Intermediate node uses cached alternative route when link breaks</td></tr>
+          <tr><td>Gratuitous RREP</td><td>Intermediate with cached route to D can reply to RREQ on D's behalf</td></tr>
+          <tr><td>Expanding Ring Search</td><td>Start RREQ with small TTL; increase only if no reply (limits flooding)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3>DSDV vs DSR — Master Comparison</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>DSDV (Proactive)</th><th>DSR (Reactive)</th></tr></thead>
+      <tbody>
+        <tr><td>Type</td><td>Table-driven</td><td>On-demand</td></tr>
+        <tr><td>Route Information</td><td>ALL destinations, ALL the time</td><td>Discovered ONLY when needed</td></tr>
+        <tr><td>Periodic Updates</td><td>Yes (full dump + incremental)</td><td>No periodic updates</td></tr>
+        <tr><td>Route Discovery Latency</td><td>None (route always ready)</td><td>High for first packet</td></tr>
+        <tr><td>Bandwidth Overhead</td><td>High (constant updates)</td><td>Low (on-demand only)</td></tr>
+        <tr><td>Loop Prevention</td><td>Sequence numbers</td><td>Source routing (path in header)</td></tr>
+        <tr><td>Source Routing</td><td>No (next-hop only)</td><td>Yes (full path in every packet)</td></tr>
+        <tr><td>Packet Header</td><td>Small (normal IP)</td><td>Large (route list grows with hops)</td></tr>
+        <tr><td>Multiple Routes</td><td>No (one best per dest)</td><td>Yes (cache stores multiple)</td></tr>
+        <tr><td>Best For</td><td>Small, low-mobility networks</td><td>Medium-size, moderate-mobility</td></tr>
+        <tr><td>Energy Efficiency</td><td>Poor (constant updates)</td><td>Better (no periodic broadcasts)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="col-box">
+      <div class="col-title" style="color:var(--green)">✅ DSR Advantages</div>
+      <ul>
+        <li>On-demand — no wasted bandwidth on unused routes</li>
+        <li>No periodic updates → significant savings</li>
+        <li>Loop-free by construction (path in header)</li>
+        <li>Multiple routes cached → quick recovery</li>
+        <li>Promiscuous learning of routes</li>
+      </ul>
+    </div>
+    <div class="col-box dis">
+      <div class="col-title" style="color:var(--red)">❌ DSR Disadvantages</div>
+      <ul>
+        <li>Source route overhead in every packet</li>
+        <li>First packet has high discovery latency</li>
+        <li>RREQ flooding costly in large networks</li>
+        <li>Stale cache entries cause failures</li>
+        <li>Promiscuous mode drains battery</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PART C ============ -->
+<div class="part-divider">
+  <div class="part-label">Part C</div>
+  <h3>TCP Enhancements for Wireless</h3>
+</div>
+
+<!-- ===== SECTION 30 ===== -->
+<div class="section" id="s30">
+  <div class="section-title">
+    <span class="section-num">30</span>
+    <h2>Traditional TCP Congestion Control</h2>
+  </div>
+
+  <div class="quick-ref">
+    <div class="qr-title">📋 Key TCP Variables</div>
+    <div class="qr-grid">
+      <div class="qr-item"><div class="qr-key">cwnd</div><div class="qr-val">Congestion Window — max unACKed data sender can have</div></div>
+      <div class="qr-item"><div class="qr-key">rwnd</div><div class="qr-val">Receiver Window — max data receiver can accept</div></div>
+      <div class="qr-item"><div class="qr-key">ssthresh</div><div class="qr-val">Slow Start Threshold — boundary between phases</div></div>
+      <div class="qr-item"><div class="qr-key">MSS</div><div class="qr-val">Maximum Segment Size — max data per segment</div></div>
+      <div class="qr-item"><div class="qr-key">RTT</div><div class="qr-val">Round Trip Time — sender-to-receiver and back</div></div>
+      <div class="qr-item"><div class="qr-key">RTO</div><div class="qr-val">Retransmission Timeout — retransmit if no ACK</div></div>
+    </div>
+  </div>
+
+  <div class="formula-box">
+    <div class="formula-label">Effective Sending Window</div>
+    <div class="formula">Effective Window = min(cwnd, rwnd)</div>
+    <div class="formula-note">Sender can have at most min(cwnd, rwnd) bytes of unacknowledged data in flight</div>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 1: Slow Start</h3>
+    <div class="diagram-box">
+      <div class="diag-label">cwnd Growth — Exponential</div>
+      <pre>
+cwnd
+ ↑
+16│                     ─ ─ ssthresh
+ │                ╱ ← Switch to Congestion Avoidance here
+ 8│             ╱
+ │            ╱
+ 4│         ╱
+ │        ╱
+ 2│     ╱
+ │    ╱
+ 1│ ╱   ← starts here ("slow" initial point)
+ └──┴──┴──┴──┴──┴──→ RTT
+     1  2  3  4  5
+
+Per ACK received: cwnd += 1 MSS
+Per RTT: cwnd DOUBLES (exponential growth)
+RTT1: 1→2 → RTT2: 2→4 → RTT3: 4→8 → RTT4: 8→16...</pre>
+    </div>
+
+    <div class="tip-box">
+      <div class="box-label">🎯 Why "Slow" Start?</div>
+      <p>Despite exponential growth, it starts from just 1 MSS — very "slow" compared to immediately using the full window. The name reflects the starting point, not the growth rate!</p>
+    </div>
+
+    <p><strong>Termination Conditions:</strong></p>
+    <ul class="styled">
+      <li>cwnd reaches ssthresh → Switch to Congestion Avoidance</li>
+      <li>Timeout detected → ssthresh = cwnd/2, cwnd = 1 MSS, restart Slow Start</li>
+      <li>3 duplicate ACKs → Fast Retransmit / Fast Recovery</li>
+    </ul>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 2: Congestion Avoidance</h3>
+    <div class="diagram-box">
+      <div class="diag-label">cwnd Growth — Linear (AIMD)</div>
+      <pre>
+cwnd
+ ↑              __________
+ │          ___/         Linear growth (+1 MSS per RTT)
+ │      ___/
+ │  ___/ ← ssthresh reached
+ │╱  (Slow Start below)
+ └──────────────────────→ RTT
+
+Per RTT: cwnd += 1 MSS (linear — additive increase)
+Per ACK: cwnd += MSS × (MSS/cwnd)   [≈ 1/cwnd per ACK]
+
+AIMD = Additive Increase, Multiplicative Decrease
+  • Additive Increase: +1 MSS per RTT (linear)
+  • Multiplicative Decrease: ssthresh = cwnd/2 on loss (multiplicative cut)</pre>
+    </div>
+    <div class="tip-box">
+      <div class="box-label">🎯 AIMD is mathematically proven to converge to fairness and efficiency</div>
+      <p>Multiple TCP flows competing for bandwidth will converge to equal shares over time thanks to AIMD. This is a frequently asked theory point.</p>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 3: Fast Retransmit</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Duplicate ACK Mechanism</div>
+      <pre>
+Sender                              Receiver
+│── Seg 1 ─────────────────────→│ ACK 2
+│── Seg 2 ─────────────────────→│ ACK 3
+│── Seg 3 ─── LOST! ──────✗    │
+│── Seg 4 ─────────────────────→│ ACK 3 (dup #1 — still need seg 3)
+│── Seg 5 ─────────────────────→│ ACK 3 (dup #2)
+│── Seg 6 ─────────────────────→│ ACK 3 (dup #3)
+│                                │
+│  3 dup ACKs! → Seg 3 is LOST! │
+│  Don't wait for timeout!       │
+│── Seg 3 (RETRANSMIT!) ──────→│ ACK 7 (cumulative ACK)
+│                                │
+
+Why threshold = 3 dup ACKs?
+• 1-2 dup ACKs could be normal packet reordering
+• 3 dup ACKs = strong signal of actual loss</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Phase 4: Fast Recovery — Tahoe vs Reno</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Event</th><th>TCP Tahoe (1988)</th><th>TCP Reno (1990)</th></tr></thead>
+        <tbody>
+          <tr><td>3 Dup ACKs</td><td>ssthresh=cwnd/2, cwnd=1, Slow Start ← very aggressive</td><td>ssthresh=cwnd/2, cwnd=ssthresh+3, Fast Recovery → Congestion Avoidance</td></tr>
+          <tr><td>Timeout</td><td>ssthresh=cwnd/2, cwnd=1, Slow Start</td><td>ssthresh=cwnd/2, cwnd=1, Slow Start (same)</td></tr>
+          <tr><td>After Recovery</td><td>Slow Start (from cwnd=1)</td><td>Congestion Avoidance (from ssthresh)</td></tr>
+          <tr><td>Performance</td><td>Poor (dramatic drop)</td><td>Better (moderate drop)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">Tahoe vs Reno cwnd Behavior After Loss</div>
+      <pre>
+cwnd
+ ↑
+ │   ╱╲
+ │ ╱    ╲  TAHOE: drops to 1 MSS
+ │╱      ╲
+ │        ╲↓ cwnd=1
+ │         │╲ Slow Start again
+ │         │  ╲__
+ └──────────────────→ Time  [Loss at peak]
+
+
+cwnd
+ ↑
+ │   ╱╲
+ │ ╱    ╲  RENO: drops to ssthresh (half)
+ │╱      ╲____
+ │            ╲____      ← Congestion Avoidance
+ │                  ╲___   (linear from ssthresh)
+ └──────────────────────→ Time  [Loss at peak]</pre>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Complete TCP State Diagram</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Four Phases and Transitions</div>
+      <pre>
+Start ──────────────────→ SLOW START
+cwnd=1, ssthresh=large    Per ACK: cwnd += 1 MSS (×2 per RTT)
+                              │              │
+                   cwnd ≥ ssthresh     3 dup ACKs       Timeout
+                              │              │               │
+                              ▼              │      ssthresh=cwnd/2
+                   CONGESTION AVOIDANCE      │      cwnd=1 → Slow Start
+                   Per RTT: cwnd += 1 MSS    │
+                              │              │
+                         3 dup ACKs     Timeout
+                              │              │
+                              ▼      ssthresh=cwnd/2, cwnd=1 → Slow Start
+                     FAST RETRANSMIT
+                     (Retransmit lost segment)
+                              │
+                              ▼
+                     FAST RECOVERY (Reno only)
+                     ssthresh = cwnd/2
+                     cwnd = ssthresh + 3
+                     Each dup ACK: cwnd += 1
+                     New ACK: cwnd = ssthresh → Congestion Avoidance
+                     Timeout: cwnd=1 → Slow Start</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 31 ===== -->
+<div class="section" id="s31">
+  <div class="section-title">
+    <span class="section-num">31</span>
+    <h2>Implications of Mobility on TCP</h2>
+  </div>
+
+  <div class="warn-box">
+    <div class="box-label">⚠️ TCP's Fatal Assumption in Wireless</div>
+    <p><strong>TCP assumes: Packet loss = Network congestion.</strong><br>This works perfectly in wired networks (BER ≈ 10⁻⁹). It fails catastrophically in wireless (BER ≈ 10⁻³ to 10⁻⁶). Wireless losses are due to channel errors, NOT congestion — but TCP doesn't know the difference!</p>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Wireless/Mobile Problem</th><th>TCP Misinterpretation</th><th>TCP Response</th><th>Actual Result</th></tr></thead>
+      <tbody>
+        <tr><td>Wireless bit errors (fading, noise)</td><td>"Network congested!"</td><td>Reduce cwnd</td><td>Unnecessary throughput drop</td></tr>
+        <tr><td>Handoff packet loss (brief gap)</td><td>"Congestion!"</td><td>Reduce cwnd / Timeout</td><td>Severe throughput degradation</td></tr>
+        <tr><td>Disconnection (tunnel, no signal)</td><td>"Severe congestion!"</td><td>Multiple timeouts, exponential backoff</td><td>Very slow recovery after reconnect</td></tr>
+        <tr><td>Bandwidth variation (cell edge)</td><td>"—"</td><td>Slow adaptation</td><td>Under-utilization or congestion</td></tr>
+        <tr><td>Packet reordering (multipath)</td><td>"Packet lost!"</td><td>Fast Retransmit</td><td>Unnecessary retransmission</td></tr>
+        <tr><td>Asymmetric links (DL >> UL)</td><td>"ACK lost = congestion"</td><td>Reduce cwnd</td><td>Downlink limited by uplink ACK path</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="subsection">
+    <h3>Disconnection Problem — Deep Dive</h3>
+    <div class="diagram-box">
+      <div class="diag-label">RTO Exponential Backoff After Disconnection</div>
+      <pre>
+Connected │ Disconnected (tunnel, no signal) │ Connected
+──────────┤                                  ├──────────
+
+During disconnection (no ACKs received):
+  RTO ──→ 2×RTO ──→ 4×RTO ──→ 8×RTO ──→ 16×RTO...
+  (Each timeout DOUBLES the RTO — exponential backoff)
+
+After reconnection:
+  RTO is now ENORMOUS → very slow restart
+  cwnd = 1 MSS → Slow Start from scratch
+  
+  → Effective throughput near zero for many seconds!
+  → Application may have already timed out independently!</pre>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 32 ===== -->
+<div class="section" id="s32">
+  <div class="section-title">
+    <span class="section-num">32</span>
+    <h2>I-TCP &amp; Snooping TCP</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>I-TCP — Indirect TCP (Split Connection)</h3>
+    <div class="diagram-box">
+      <div class="diag-label">I-TCP Architecture</div>
+      <pre>
+┌──────┐  Conn 1 (Wireless TCP)   ┌──────┐  Conn 2 (Regular TCP)   ┌──────┐
+│      │ ←═══════════════════════→│  BS  │←═══════════════════════→│      │
+│  MN  │  (wireless-optimized)    │ /FA  │  (standard wired TCP)   │  CN  │
+│      │  Short RTT, fast retry   │(Split│  Long RTT, reliable     │      │
+└──────┘                          │Point)│                         └──────┘
+                                  └──────┘
+CN thinks: single connection. Knows nothing about wireless segment!
+BS: ACKs CN immediately (before MN gets data!)</pre>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Feature</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Connection</td><td>SPLIT into two independent TCP connections at BS</td></tr>
+          <tr><td>End-to-End Semantics</td><td><span class="hl-red">BROKEN — BS ACKs CN before MN receives data!</span></td></tr>
+          <tr><td>Wireless Error Handling</td><td>BS retransmits locally from buffer → CN never knows</td></tr>
+          <tr><td>Data Loss Risk</td><td>Yes — if BS crashes after ACKing CN, data is lost</td></tr>
+          <tr><td>CN Modification</td><td>None needed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--green)">✅ I-TCP Advantages</div>
+        <ul>
+          <li>Wireless errors don't reach CN (no cwnd reduction)</li>
+          <li>Fast local retransmit (short MN↔BS RTT)</li>
+          <li>CN uses unmodified standard TCP</li>
+          <li>Wireless-optimized protocol on Conn 1</li>
+        </ul>
+      </div>
+      <div class="col-box dis">
+        <div class="col-title" style="color:var(--red)">❌ I-TCP Disadvantages</div>
+        <ul>
+          <li>Breaks end-to-end semantics (ACK before delivery)</li>
+          <li>State transfer overhead during handoff</li>
+          <li>BS becomes bottleneck and processing load</li>
+          <li>Security — BS sees all unencrypted data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Snooping TCP — Link Layer Approach</h3>
+    <div class="diagram-box">
+      <div class="diag-label">Snooping TCP Architecture</div>
+      <pre>
+┌──────┐                 ┌────────────────────────┐                ┌──────┐
+│      │                 │   BS with Snoop Agent  │                │      │
+│  CN  │←───────────────→│  ┌──────────────────┐  │←──────────────→│  MN  │
+│      │                 │  │ Cache of TCP segs│  │                │      │
+│      │                 │  │ (unACKed copies) │  │                │      │
+└──────┘                 │  └──────────────────┘  │                └──────┘
+                         └────────────────────────┘
+                          Wired side    Wireless side
+                          
+KEY: TCP connection is still END-TO-END (NOT split!)
+     BS just SNOOPS and helps transparently.</pre>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">Snooping TCP Working — Wireless Loss Scenario</div>
+      <pre>
+CN → [Segment] → BS → [Segment] → MN
+                 ↓
+            Snoop agent CACHES the segment
+
+Scenario A: Delivery OK
+  MN ACKs → ACK passes through BS → Snoop removes cache → ACK forwarded to CN
+
+Scenario B: Wireless Loss (bit error / interference)
+  Segment lost on wireless link!
+  MN sends DUPLICATE ACK (still needs lost segment)
+  
+  BS Snoop Agent detects dup ACK:
+  → Recognizes: wireless loss (NOT congestion!)
+  → RETRANSMITS from cache locally (fast!)
+  → SUPPRESSES the dup ACK (CN NEVER SEES IT!)
+  → CN never reduces cwnd!
+  → CN has no idea anything went wrong!
+  
+  MN receives retransmitted segment → sends proper ACK
+  ACK forwarded to CN normally ✓</pre>
+    </div>
+
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--green)">✅ Snooping TCP Advantages</div>
+        <ul>
+          <li>Preserves end-to-end semantics (not split)</li>
+          <li>Transparent — no CN or MN modification</li>
+          <li>Hides wireless losses from CN</li>
+          <li>Fast local retransmission from cache</li>
+          <li>No reliability risk (ACK from MN goes to CN)</li>
+        </ul>
+      </div>
+      <div class="col-box dis">
+        <div class="col-title" style="color:var(--red)">❌ Snooping TCP Disadvantages</div>
+        <ul>
+          <li>Cannot work with encrypted connections (can't read headers)</li>
+          <li>Cache transfer between BSs is challenging</li>
+          <li>BS must buffer all unACKed segments (memory)</li>
+          <li>If local retransmit takes too long → CN times out anyway</li>
+          <li>Primarily helps downlink (CN→MN)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 33 ===== -->
+<div class="section" id="s33">
+  <div class="section-title">
+    <span class="section-num">33</span>
+    <h2>M-TCP &amp; Freeze TCP</h2>
+  </div>
+
+  <div class="subsection">
+    <h3>M-TCP — Mobile TCP</h3>
+    <div class="info-box">
+      <div class="box-label">💡 Key Improvement over I-TCP</div>
+      <p>M-TCP is a split connection like I-TCP, but <strong>preserves end-to-end semantics</strong> — CN is only ACKed AFTER MN confirms receipt. If the Supervisory Host (SH) crashes, data is NOT lost because CN hasn't been ACKed yet.</p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">M-TCP Disconnection Handling — The Key Innovation</div>
+      <pre>
+MN becomes DISCONNECTED (handoff, tunnel, no signal):
+
+Step 1: SH detects MN is disconnected (no ACKs, link-layer signal)
+
+Step 2: SH sets MN's receiver window = 0
+        SH advertises rwnd=0 to CN
+        
+        SH ──── rwnd = 0 ──────────→ CN
+
+Step 3: CN enters TCP PERSIST MODE:
+        ✓ STOPS sending new data
+        ✓ Does NOT reduce cwnd  ← Most important!
+        ✓ Does NOT start retransmission timers
+        ✓ Sends periodic 1-byte PROBE segments
+        ✓ cwnd and ssthresh FROZEN (preserved!)
+
+Step 4: MN reconnects (handoff complete, signal returns)
+
+Step 5: SH detects MN is back → restores rwnd to normal
+
+Step 6: SH ──── rwnd = 65535 ──────→ CN
+        CN exits persist mode
+        CN RESUMES at PREVIOUS cwnd!
+        NO SLOW START! Full throughput immediately!</pre>
+    </div>
+
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--green)">✅ M-TCP Advantages</div>
+        <ul>
+          <li>Preserves end-to-end semantics</li>
+          <li>Handles disconnection via rwnd=0 elegantly</li>
+          <li>No Slow Start after reconnection</li>
+          <li>CN remains completely unmodified</li>
+          <li>No data loss risk (CN ACKed only after MN confirms)</li>
+        </ul>
+      </div>
+      <div class="col-box dis">
+        <div class="col-title" style="color:var(--red)">❌ M-TCP Disadvantages</div>
+        <ul>
+          <li>Split connection overhead at SH</li>
+          <li>State transfer on handoff still needed</li>
+          <li>Delayed ACKs (slightly higher effective RTT)</li>
+          <li>SH is a processing bottleneck</li>
+          <li>Applications may time out if disconnect is long</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Freeze TCP — Timeout Freezing</h3>
+    <div class="info-box">
+      <div class="box-label">💡 True End-to-End Approach</div>
+      <p>Freeze TCP modifies <strong>ONLY the MN</strong>. No split connection, no snooping agent, no BS modification. MN proactively predicts disconnection (via signal monitoring) and sends rwnd=0 to freeze CN's state BEFORE the link drops.</p>
+    </div>
+
+    <div class="diagram-box">
+      <div class="diag-label">Freeze TCP — Complete Timeline</div>
+      <pre>
+Signal
+Strength  ╲
+           ╲─ Warning Threshold crossed by MN
+            │
+            │  MN sends rwnd=0 (ZWA) to CN
+            │  CN enters Persist Mode (cwnd FROZEN)
+            │
+            ╲─ Link drops / Handoff happens
+             │
+             │  CN frozen (no timeouts, cwnd preserved)
+             │  MN performs handoff
+             │
+            ╱─ MN reconnects!
+           ╱
+          ╱   MN sends normal rwnd → CN exits persist mode
+         ╱    Full throughput resumes IMMEDIATELY!
+
+Throughput
+↑ ──────╲           ╱────────────────
+│        ╲         ╱  ← Immediate full throughput!
+│    ZWA  ╲_______╱  ← No Slow Start penalty!
+│         Freeze period
+└─────────────────────────────────→ Time</pre>
+    </div>
+
+    <h4>Freeze TCP vs Other Approaches</h4>
+    <div class="two-col">
+      <div class="col-box">
+        <div class="col-title" style="color:var(--green)">✅ Freeze TCP Advantages</div>
+        <ul>
+          <li>True end-to-end (no split connection)</li>
+          <li>No intermediate node modification</li>
+          <li>Preserves end-to-end semantics completely</li>
+          <li>Fast recovery after reconnection (cwnd preserved)</li>
+          <li>Uses standard TCP mechanisms (rwnd, persist mode)</li>
+          <li>Works with any CN (zero CN modifications)</li>
+          <li>No security concerns (no BS processing data)</li>
+        </ul>
+      </div>
+      <div class="col-box dis">
+        <div class="col-title" style="color:var(--red)">❌ Freeze TCP Disadvantages</div>
+        <ul>
+          <li>Requires disconnection prediction in advance</li>
+          <li>Sudden disconnection (elevator!) cannot be predicted</li>
+          <li>MN modification required (signal monitoring)</li>
+          <li>Does NOT solve wireless BER problem (only disconnection)</li>
+          <li>If ZWA sent too early → unnecessarily freezes</li>
+          <li>Applications may time out during long freeze</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SECTION 34 ===== -->
+<div class="section" id="s34">
+  <div class="section-title">
+    <span class="section-num">34</span>
+    <h2>Master Comparison — All TCP Improvements</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>I-TCP</th><th>Snooping TCP</th><th>M-TCP</th><th>Freeze TCP</th></tr></thead>
+      <tbody>
+        <tr><td>Approach</td><td>Split connection</td><td>Link-layer snooping</td><td>Split connection</td><td>End-to-end</td></tr>
+        <tr><td>Connection</td><td>Split at BS (2 TCPs)</td><td>End-to-end (NOT split)</td><td>Split at SH (2 TCPs)</td><td>End-to-end (NOT split)</td></tr>
+        <tr><td>End-to-End Semantics</td><td><span class="hl-red">BROKEN</span></td><td><span class="hl-green">Preserved</span></td><td><span class="hl-green">Preserved</span></td><td><span class="hl-green">Preserved</span></td></tr>
+        <tr><td>CN Modification</td><td>None</td><td>None</td><td>None</td><td>None</td></tr>
+        <tr><td>MN Modification</td><td>None</td><td>None</td><td>None</td><td><span class="hl-gold">Yes (signal monitoring, ZWA)</span></td></tr>
+        <tr><td>BS/Network Modification</td><td>Yes (full TCP at BS)</td><td>Yes (snoop agent)</td><td>Yes (SH at BS)</td><td><span class="hl-green">None!</span></td></tr>
+        <tr><td>Wireless Error Handling</td><td>Local retransmit at BS</td><td>Local retransmit from cache</td><td>Local retransmit at SH</td><td>Not addressed</td></tr>
+        <tr><td>Disconnection Handling</td><td>State transfer between BSs</td><td>Limited</td><td>rwnd=0 freezes CN</td><td>rwnd=0 freezes CN</td></tr>
+        <tr><td>cwnd Preservation</td><td>No</td><td>Partial</td><td><span class="hl-green">Yes (persist mode)</span></td><td><span class="hl-green">Yes (persist mode)</span></td></tr>
+        <tr><td>Post-Reconnection</td><td>May need Slow Start</td><td>May trigger retransmit</td><td>Resumes at previous cwnd</td><td>Resumes at previous cwnd</td></tr>
+        <tr><td>Works with Encryption</td><td>Yes</td><td><span class="hl-red">No (can't snoop encrypted)</span></td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Data Loss Risk</td><td><span class="hl-red">Yes (BS crash after ACK)</span></td><td>None</td><td>None</td><td>None</td></tr>
+        <tr><td>Scalability</td><td>Poor (BS overloaded)</td><td>Good</td><td>Poor (SH overloaded)</td><td><span class="hl-green">Best (no network changes)</span></td></tr>
+        <tr><td>Prediction Needed</td><td>No</td><td>No</td><td>No</td><td><span class="hl-gold">Yes (signal strength)</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="quick-ref">
+    <div class="qr-title">🎯 When to Use Which?</div>
+    <div class="qr-grid">
+      <div class="qr-item">
+        <div class="qr-key">High wireless BER, stable</div>
+        <div class="qr-val">→ Snooping TCP (handles errors transparently)</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Predictable handoffs</div>
+        <div class="qr-val">→ Freeze TCP (cwnd preserved, no BS changes)</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Unpredictable handoffs</div>
+        <div class="qr-val">→ M-TCP (rwnd=0 disconnect handling)</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Encrypted traffic (IPSec)</div>
+        <div class="qr-val">→ Freeze TCP or I-TCP (snooping fails)</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Minimal infrastructure change</div>
+        <div class="qr-val">→ Freeze TCP (only MN modified)</div>
+      </div>
+      <div class="qr-item">
+        <div class="qr-key">Maximum reliability</div>
+        <div class="qr-val">→ Snooping TCP or Freeze TCP (semantics preserved)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINAL COMPREHENSIVE SUMMARY -->
+  <div class="unit-divider" style="margin-top: 40px;">
+    <div class="unit-label">Complete Quick Revision</div>
+    <h2>Unit 2 Summary — Exam Ready</h2>
+  </div>
+
+  <div class="diagram-box">
+    <div class="diag-label">Complete Unit 2 Mind Map</div>
+    <pre>
+UNIT 2: Mobile Network and Transport Layer
+│
+├── PART A: Mobile IP
+│   ├── Problem: IP = Identifier + Locator → breaks when node moves
+│   ├── Entities: MN (mobile node), HA (home agent), FA (foreign agent), CN, CoA
+│   ├── Packet Delivery: CN→HA→tunnel→FA→MN (triangle routing problem)
+│   ├── Agent Discovery: Advertisement (periodic ICMP) + Solicitation (on-demand)
+│   ├── Registration: Request→Reply, Binding Table (HomeAddr↔CoA)
+│   └── Tunneling Types:
+│       ├── IP-in-IP (RFC 2003): MANDATORY, 20B overhead, Protocol=4
+│       ├── Minimal  (RFC 2004): Optional, 8-12B overhead, Protocol=55
+│       └── GRE      (RFC 2784): Optional, 24-36B overhead, Protocol=47
+│
+├── PART B: IPv6, SIP, MANETs
+│   ├── IPv6: 128-bit addrs, fixed 40B header, no checksum, mandatory IPSec
+│   │   └── Mobile IPv6: No FA, SLAAC CoA, built-in Route Optimization
+│   ├── SIP: App-layer signaling · UAC/UAS, Proxy, Redirect, Registrar
+│   │   ├── Methods: INVITE, ACK, BYE, CANCEL, REGISTER, OPTIONS
+│   │   └── Mobility: Terminal, Personal, Session, Service
+│   ├── MANET: No infrastructure, multi-hop, dynamic, self-organizing
+│   ├── DSDV (Proactive):
+│   │   ├── Full routing table always maintained for ALL destinations
+│   │   ├── Sequence numbers: even=valid, odd=broken link
+│   │   ├── Rule: Higher seq# → accept. Equal seq# → fewer hops wins
+│   │   └── Updates: Full dump (periodic) + Incremental (triggered)
+│   └── DSR (Reactive):
+│       ├── Route discovery: RREQ (flood) → RREP (unicast back)
+│       ├── Source routing: full path in every packet header
+│       ├── Route maintenance: RERR on link break → new discovery
+│       └── Route cache: stores multiple routes, promiscuous learning
+│
+└── PART C: TCP Enhancements for Wireless
+    ├── Traditional TCP: 4 phases
+    │   ├── Slow Start: cwnd doubles/RTT (exponential) until ssthresh
+    │   ├── Congestion Avoidance: +1 MSS/RTT (linear, AIMD)
+    │   ├── Fast Retransmit: 3 dup ACKs → immediate retransmit
+    │   └── Fast Recovery: Reno (to ssthresh, CA) vs Tahoe (to 1, SS)
+    ├── TCP Problems in Wireless: BER, handoff, disconnection, reordering
+    │   └── Core: TCP assumes all loss = congestion (wrong in wireless!)
+    ├── I-TCP: Split at BS · local retransmit · BREAKS end-to-end semantics
+    ├── Snooping: Cache+retransmit+suppress dup ACKs · PRESERVES semantics
+    ├── M-TCP: Split at SH · ACK after MN confirms · rwnd=0 freeze · PRESERVES
+    └── Freeze TCP: MN predicts disconnect · ZWA (rwnd=0) · CN persist mode
+                    cwnd PRESERVED · No slow start · TRUE end-to-end</pre>
+  </div>
+
+  <div class="tip-box" style="margin-top: 24px;">
+    <div class="box-label">🎯 TOP EXAM PRIORITY TABLE</div>
+    <p><span class="hl-red">⭐⭐⭐ Highest Priority</span> — Mobile IP entities + packet delivery + triangle routing | Tunneling 3 types comparison | TCP 4 congestion phases | Compare all 4 TCP improvements | DSDV vs DSR</p>
+    <p><span class="hl-gold">⭐⭐ High Priority</span> — Agent discovery process | TCP wireless implications | SIP components + call flow | Mobile IPv6 improvements | DSR route discovery example</p>
+    <p><span class="hl-green">⭐ Standard Priority</span> — IPv6 header format | Registration messages | DSDV sequence number mechanism | Reverse tunneling | MANET classification</p>
+  </div>
+</div>
+<div class="unit-divider" style="margin-top:40px;">
+  <div class="unit-label">Quick Reference</div>
+  <h2>Master Comparison &amp; Exam Summary</h2>
+</div>
+
+<div class="section">
+  <div class="subsection">
+    <h3>All Major Protocols at a Glance</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Standard</th><th>Full Name</th><th>Type</th><th>Key Features</th></tr></thead>
+        <tbody>
+          <tr><td>IEEE 802.11</td><td>WiFi</td><td>WLAN</td><td>CSMA/CA, DCF/PCF, FHSS/DSSS/OFDM</td></tr>
+          <tr><td>IEEE 802.15</td><td>Bluetooth</td><td>WPAN</td><td>FHSS, 2.4 GHz, 79 channels, 1600 hops/sec</td></tr>
+          <tr><td>IEEE 802.16</td><td>WiMAX</td><td>WMAN</td><td>OFDM/OFDMA, scheduled MAC, built-in QoS</td></tr>
+          <tr><td>Mobile IP (RFC 5944)</td><td>Mobile IPv4</td><td>Protocol</td><td>HA, FA, CoA, Binding, Tunneling</td></tr>
+          <tr><td>Mobile IP (RFC 6275)</td><td>Mobile IPv6</td><td>Protocol</td><td>Route Optimization, Return Routability</td></tr>
+          <tr><td>SIP (RFC 3261)</td><td>Session Initiation Protocol</td><td>Application</td><td>Signaling, INVITE/BYE, 3-way handshake</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>All Multiple Access Techniques Summary</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Technique</th><th>Separates by</th><th>Guard</th><th>Power Control</th><th>Handoff</th><th>Generation</th></tr></thead>
+        <tbody>
+          <tr><td>SDMA</td><td>Space/Direction</td><td>None</td><td>Not critical</td><td>Yes</td><td>All</td></tr>
+          <tr><td>FDMA</td><td>Frequency</td><td>Guard bands</td><td>Not critical</td><td>Hard</td><td>1G</td></tr>
+          <tr><td>TDMA</td><td>Time</td><td>Guard times</td><td>Not critical</td><td>Hard</td><td>2G</td></tr>
+          <tr><td>CDMA</td><td>Code</td><td>None</td><td>CRITICAL ⚠️</td><td>Soft</td><td>3G</td></tr>
+          <tr><td>OFDMA</td><td>Time + Freq</td><td>CP only</td><td>Required</td><td>Varies</td><td>4G/5G</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="subsection">
+    <h3>Critical Formulas — Final Review</h3>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="card-title" style="color:var(--cyan)">Signals</div>
+        <div class="card-item"><span class="label">Signal equation</span><span class="val">s(t) = A·sin(2πft+φ)</span></div>
+        <div class="card-item"><span class="label">Wavelength</span><span class="val">λ = c/f</span></div>
+        <div class="card-item"><span class="label">Bandwidth</span><span class="val">f_max - f_min</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="card-title" style="color:var(--gold)">Cellular</div>
+        <div class="card-item"><span class="label">Reuse distance</span><span class="val">D = R√(3N)</span></div>
+        <div class="card-item"><span class="label">SIR (urban)</span><span class="val">(√3N)⁴ / 6</span></div>
+        <div class="card-item"><span class="label">LOS distance</span><span class="val">d = √(2Rh)</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="card-title" style="color:var(--purple)">Spread Spectrum</div>
+        <div class="card-item"><span class="label">Shannon Capacity</span><span class="val">C = B·log₂(1+S/N)</span></div>
+        <div class="card-item"><span class="label">Processing Gain</span><span class="val">Gp = Chip Rate / Data Rate</span></div>
+        <div class="card-item"><span class="label">Antenna Gain</span><span class="val">G = 4πAe / λ²</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="card-title" style="color:var(--green)">WiMAX</div>
+        <div class="card-item"><span class="label">Subcarrier spacing</span><span class="val">10.94 KHz (constant)</span></div>
+        <div class="card-item"><span class="label">Frame duration</span><span class="val">5 ms (TDD)</span></div>
+        <div class="card-item"><span class="label">MIMO 2×2</span><span class="val">2× data rate (max)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:30px;">
+    <div class="box-label">🎯 TOP 10 EXAM POINTS TO REMEMBER</div>
+    <p>1. <strong>CSMA/CA not CSMA/CD in WiFi</strong> — hidden node problem + can't TX and RX simultaneously</p>
+    <p>2. <strong>SIFS &lt; PIFS &lt; DIFS &lt; EIFS</strong> — shorter IFS = higher priority</p>
+    <p>3. <strong>CDMA near-far problem</strong> — solved by power control. CDMA only!</p>
+    <p>4. <strong>WiMAX QoS classes</strong> — UGS (VoIP constant), rtPS (video), ertPS (VoIP variable), nrtPS (FTP), BE (web)</p>
+    <p>5. <strong>Mobile IP triangle routing</strong> — solved in IPv6 by Route Optimization + Return Routability</p>
+    <p>6. <strong>OFDM cyclic prefix</strong> — copy of symbol end prepended. Eliminates ISI from multipath.</p>
+    <p>7. <strong>SOFDMA constant subcarrier spacing</strong> — 10.94 KHz regardless of bandwidth (only FFT size changes)</p>
+    <p>8. <strong>SIP = signaling, RTP = media, SDP = description</strong> — never confuse these</p>
+    <p>9. <strong>IPv6 no broadcast</strong>, no router fragmentation, no header checksum. Fixed 40-byte header.</p>
+    <p>10. <strong>Bluetooth uses FHSS</strong> — 79 channels, 1600 hops/sec. GPS/CDMA uses DSSS.</p>
+  </div>
+</div>
+
+</div><!-- end content-wrap -->
+</div><!-- end main -->
+</body>
+</html>
