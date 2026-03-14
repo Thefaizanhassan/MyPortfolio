@@ -1,0 +1,2428 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Software Project Management — Complete Exam Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<style>
+/* ========= CSS VARIABLES ========= */
+:root {
+  --bg: #faf7f2;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --warm: #f3ede3;
+  --warm2: #ede4d6;
+  --rose: #d4808a;
+  --rose-lt: #f0cdd1;
+  --rose-dk: #b55e69;
+  --sage: #7a9e8e;
+  --sage-lt: #c8ddd5;
+  --gold: #c9a96e;
+  --gold-lt: #f0e4cc;
+  --ink: #2c2420;
+  --muted: #8a7d76;
+  --border: #e2d8ce;
+  --code-bg: #faf6f2;
+  --code-text: #5a4040;
+  --shadow: 0 2px 24px rgba(44,36,32,.07);
+  --shadow-md: 0 8px 40px rgba(44,36,32,.12);
+  --sidebar-w: 260px;
+  --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"] {
+  --bg: #181310;
+  --surface: #211b17;
+  --card: #2a211c;
+  --warm: #2a211c;
+  --warm2: #32271f;
+  --ink: #f5ede6;
+  --muted: #b8a99e;
+  --border: #3d302a;
+  --code-bg: #211b17;
+  --code-text: #e8c9b8;
+  --shadow: 0 2px 24px rgba(0,0,0,.3);
+  --shadow-md: 0 8px 40px rgba(0,0,0,.4);
+}
+
+/* ========= RESET & BASE ========= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.7;
+  transition: var(--transition);
+  font-size: 15px;
+}
+
+/* ========= TOP STRIPE ========= */
+.stripe {
+  height: 4px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--gold) 45%, var(--sage) 100%);
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+}
+
+/* ========= HEADER — anchored to sidebar's right edge ========= */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  position: fixed; top: 4px;
+  left: var(--sidebar-w);   /* starts exactly where sidebar ends */
+  right: 0;
+  z-index: 900;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: left var(--layout-ease), padding 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--shadow);
+}
+
+/* Sidebar collapsed — header expands to full width */
+body.sidebar-collapsed .site-header {
+  left: 0;
+  padding-left: 52px; /* clear the floating toggle button */
+}
+
+/* Scrolled state — collapse title area */
+.site-header.scrolled {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: var(--shadow-md);
+}
+
+.header-left {
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.header-left h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 600; color: var(--ink);
+  letter-spacing: .01em;
+  transition: font-size 0.3s ease, opacity 0.3s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.site-header.scrolled .header-left h1 {
+  font-size: 1.05rem;
+}
+
+.header-left h1 em { color: var(--rose-dk); font-style: italic; }
+
+.header-meta {
+  font-size: .72rem; color: var(--muted); font-weight: 500;
+  letter-spacing: .08em; text-transform: uppercase;
+  display: flex; gap: 10px; align-items: center; margin-top: 2px;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin 0.3s ease;
+  max-height: 40px; opacity: 1; overflow: hidden;
+}
+
+.site-header.scrolled .header-meta {
+  max-height: 0; opacity: 0; margin-top: 0;
+}
+
+.header-meta span { background: var(--warm); border: 1px solid var(--border); border-radius: 20px; padding: 2px 10px; }
+
+/* Theme toggle — always visible, floats independently */
+.header-right {
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; /* never compress */
+}
+
+/* ========= DARK MODE TOGGLE ========= */
+.theme-toggle {
+  background: var(--warm); border: 1px solid var(--border);
+  border-radius: 50px; width: 52px; height: 28px;
+  cursor: pointer; position: relative; transition: var(--transition);
+  display: flex; align-items: center; padding: 3px;
+}
+
+.theme-toggle:hover { border-color: var(--rose); }
+
+.toggle-ball {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  transition: var(--transition); box-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+
+[data-theme="dark"] .toggle-ball { transform: translateX(24px); background: linear-gradient(135deg, var(--gold), var(--sage)); }
+
+.toggle-label { font-size: .7rem; color: var(--muted); font-weight: 500; letter-spacing: .06em; }
+
+/* ========= LAYOUT TRANSITION HELPER ========= */
+/* All layout shifts share the same easing */
+:root { --layout-ease: 0.35s cubic-bezier(.4,0,.2,1); }
+
+/* ========= SIDEBAR TOGGLE BUTTON ========= */
+/* Lives inside the sidebar header strip; floats at top-left when sidebar is hidden */
+.sidebar-toggle {
+  position: fixed;
+  top: 14px;
+  left: calc(var(--sidebar-w) - 46px); /* sits near right edge of sidebar */
+  z-index: 1100;
+  width: 32px; height: 32px; border-radius: 9px;
+  background: var(--warm); border: 1px solid var(--border);
+  cursor: pointer; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 4px;
+  box-shadow: var(--shadow); transition: left var(--layout-ease), background var(--layout-ease), border-color var(--layout-ease);
+  padding: 0;
+}
+
+.sidebar-toggle:hover { border-color: var(--rose); background: var(--rose-lt); }
+
+.sidebar-toggle span {
+  display: block; width: 14px; height: 2px;
+  background: var(--rose-dk); border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+/* When open → show ← arrow (two lines angled left) */
+.sidebar-toggle .bar2 { width: 10px; margin-left: -4px; }
+
+/* Collapsed state — toggle floats to top-left, shows → arrow */
+body.sidebar-collapsed .sidebar-toggle {
+  left: 12px;
+  background: var(--surface);
+}
+
+body.sidebar-collapsed .sidebar-toggle .bar1 { transform: translateY(3px) rotate(-30deg); width: 10px; margin-left: -4px; }
+body.sidebar-collapsed .sidebar-toggle .bar2 { width: 14px; margin-left: 0; transform: none; }
+body.sidebar-collapsed .sidebar-toggle .bar3 { transform: translateY(-3px) rotate(30deg); width: 10px; margin-left: -4px; }
+
+/* ========= SIDEBAR ========= */
+.sidebar {
+  position: fixed; top: 4px; left: 0; bottom: 0;
+  width: var(--sidebar-w); background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; padding: 60px 0 24px;
+  z-index: 850;
+  transition: transform var(--layout-ease);
+}
+
+/* Collapsed: slide fully off-screen */
+body.sidebar-collapsed .sidebar {
+  transform: translateX(calc(-1 * var(--sidebar-w)));
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: var(--warm); }
+.sidebar::-webkit-scrollbar-thumb { background: var(--rose-lt); border-radius: 4px; }
+
+.nav-section { padding: 8px 0; border-bottom: 1px solid var(--border); }
+
+.nav-unit {
+  font-size: .65rem; font-weight: 600; color: var(--rose-dk);
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 20px 4px; display: block;
+}
+
+.nav-link {
+  display: block; padding: 6px 20px 6px 24px;
+  color: var(--muted); text-decoration: none;
+  font-size: .78rem; font-weight: 400;
+  transition: var(--transition); border-left: 2px solid transparent;
+  line-height: 1.3;
+}
+
+.nav-link:hover { color: var(--ink); background: var(--warm); border-left-color: var(--rose-lt); }
+.nav-link.active { color: var(--rose-dk); background: var(--warm); border-left-color: var(--rose); font-weight: 500; }
+
+/* ========= MAIN CONTENT ========= */
+.main {
+  margin-left: var(--sidebar-w);
+  padding: 100px 40px 60px;
+  max-width: none;         /* no cap — fills all available space */
+  width: auto;
+  transition: margin-left var(--layout-ease);
+}
+
+/* When sidebar collapses, main fills entire viewport width */
+body.sidebar-collapsed .main {
+  margin-left: 0;
+}
+
+/* ========= SECTION STYLES ========= */
+.unit-section {
+  margin-bottom: 56px;
+  scroll-margin-top: 80px;
+}
+
+.unit-header {
+  background: linear-gradient(135deg, var(--rose-dk) 0%, #9a3d48 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 24px 32px;
+  margin-bottom: 0;
+}
+
+.unit-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem; font-weight: 700; color: #fff;
+  letter-spacing: .01em;
+}
+
+.unit-header p { color: rgba(255,255,255,.8); font-size: .85rem; margin-top: 4px; }
+
+.unit-body {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+}
+
+.subsection {
+  padding: 32px;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 80px;
+}
+
+.subsection:last-child { border-bottom: none; }
+
+.subsection-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 600; color: var(--ink);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 10px;
+}
+
+.subsection-title::before {
+  content: ''; display: inline-block;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rose); flex-shrink: 0;
+}
+
+h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-weight: 600; color: var(--ink);
+  margin: 20px 0 10px;
+}
+
+p { margin-bottom: 12px; color: var(--ink); }
+
+ul, ol { padding-left: 22px; margin-bottom: 12px; }
+li { margin-bottom: 6px; color: var(--ink); }
+
+strong { font-weight: 600; }
+
+/* ========= DEFINITION BOX ========= */
+.def-box {
+  background: linear-gradient(135deg, #fff8f4 0%, #fdf5fb 100%);
+  border: 1px solid var(--rose-lt);
+  border-left: 3px solid var(--rose);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-style: italic;
+  color: var(--ink);
+}
+
+[data-theme="dark"] .def-box {
+  background: linear-gradient(135deg, rgba(212,128,138,.1) 0%, rgba(201,169,110,.05) 100%);
+}
+
+.def-box strong { color: var(--rose-dk); font-style: normal; }
+
+/* ========= EXAM TIP BOX ========= */
+.tip-box {
+  background: linear-gradient(135deg, var(--gold-lt) 0%, #fdf8f0 100%);
+  border: 1px solid var(--gold);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+
+[data-theme="dark"] .tip-box {
+  background: rgba(201,169,110,.1);
+  border-color: var(--gold);
+}
+
+.tip-box .tip-head {
+  font-size: .7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--gold); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.tip-box p { margin: 0; font-size: .88rem; color: var(--ink); }
+
+/* ========= WARNING BOX ========= */
+.warn-box {
+  background: linear-gradient(135deg, #fff3f4 0%, #fff8f4 100%);
+  border: 1px solid var(--rose-lt);
+  border-left: 4px solid var(--rose-dk);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+
+[data-theme="dark"] .warn-box { background: rgba(181,94,105,.1); }
+
+.warn-box p { margin: 0; font-size: .88rem; }
+
+/* ========= MEMORY TRICK BOX ========= */
+.memory-box {
+  background: linear-gradient(135deg, #eef7f4 0%, #f0f8f5 100%);
+  border: 1px solid var(--sage-lt);
+  border-left: 4px solid var(--sage);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 14px 0;
+}
+
+[data-theme="dark"] .memory-box { background: rgba(122,158,142,.1); }
+
+.memory-box .mem-head {
+  font-size: .7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--sage); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ========= FORMULA BOX ========= */
+.formula-box {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem;
+  color: var(--code-text);
+  line-height: 1.8;
+  position: relative;
+  overflow-x: auto;
+}
+
+.formula-box .formula-label {
+  font-family: 'Jost', sans-serif;
+  font-size: .68rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted); margin-bottom: 8px;
+}
+
+/* ========= CODE BLOCK ========= */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+
+.code-header {
+  background: var(--warm);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.code-lang {
+  font-size: .7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--rose-dk);
+}
+
+.code-dots { display: flex; gap: 6px; }
+.code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.code-dots span:nth-child(1) { background: #ff6b6b; }
+.code-dots span:nth-child(2) { background: #ffd93d; }
+.code-dots span:nth-child(3) { background: #6bcb77; }
+
+pre.code-content {
+  padding: 16px 20px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .82rem; line-height: 1.7;
+  color: var(--code-text);
+  white-space: pre;
+}
+
+/* ========= TABLES ========= */
+.table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 12px; border: 1px solid var(--border); }
+
+table { width: 100%; border-collapse: collapse; }
+
+thead tr { background: var(--warm); }
+
+th {
+  padding: 11px 16px; text-align: left;
+  font-size: .75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--rose-dk);
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 10px 16px; font-size: .85rem; color: var(--ink);
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--warm); }
+
+td:first-child { font-weight: 500; }
+
+/* ========= MERMAID DIAGRAMS ========= */
+.diagram-wrap {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin: 16px 0;
+  overflow-x: auto;
+  text-align: center;
+}
+
+.diagram-label {
+  font-size: .7rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--muted); margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.diagram-label::before {
+  content: ''; display: inline-block; width: 16px; height: 1px; background: var(--border);
+}
+
+/* ========= CARDS GRID ========= */
+.cards-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px; margin: 16px 0;
+}
+
+.info-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+
+.info-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  opacity: 0; transition: var(--transition);
+}
+
+.info-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.info-card:hover::before { opacity: 1; }
+
+.info-card .card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 600; color: var(--rose-dk);
+  margin-bottom: 8px;
+}
+
+.info-card p { font-size: .83rem; color: var(--muted); margin: 0; }
+
+/* ========= COMPARISON GRID ========= */
+.compare-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 16px 0;
+}
+
+.compare-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.compare-card.good { border-left: 3px solid var(--sage); }
+.compare-card.bad { border-left: 3px solid var(--rose-dk); }
+
+.compare-card .cc-title {
+  font-size: .75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 10px;
+}
+
+.compare-card.good .cc-title { color: var(--sage); }
+.compare-card.bad .cc-title { color: var(--rose-dk); }
+
+.compare-card ul { padding-left: 16px; }
+.compare-card li { font-size: .84rem; margin-bottom: 5px; }
+
+/* ========= FORMULA CARDS ========= */
+.formula-cards {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px; margin: 16px 0;
+}
+
+.formula-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+  border-top: 3px solid var(--gold);
+}
+
+.formula-card .fc-name {
+  font-size: .72rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--gold); margin-bottom: 10px;
+}
+
+.formula-card .fc-formula {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .85rem; color: var(--code-text);
+  background: var(--code-bg);
+  border-radius: 8px; padding: 10px 12px;
+  margin-bottom: 8px;
+}
+
+.formula-card p { font-size: .8rem; color: var(--muted); margin: 0; }
+
+/* ========= EXAM TIPS SECTION ========= */
+.hot-topics-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px; margin: 16px 0;
+}
+
+.hot-topic-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+}
+
+.ht-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+
+.ht-icon.num { background: var(--rose-lt); color: var(--rose-dk); }
+.ht-icon.diag { background: var(--sage-lt); color: var(--sage); }
+.ht-icon.comp { background: var(--gold-lt); color: var(--gold); }
+.ht-icon.calc { background: #e8d5f5; color: #8a5ab5; }
+
+.ht-content .ht-title { font-size: .88rem; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+.ht-content .ht-type { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+
+/* ========= MEMORY TRICKS TABLE ========= */
+.mem-grid {
+  display: grid; grid-template-columns: 1fr;
+  gap: 10px; margin: 16px 0;
+}
+
+.mem-row {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+
+.mem-topic {
+  font-weight: 600; color: var(--rose-dk); font-size: .88rem;
+  min-width: 170px; flex-shrink: 0;
+}
+
+.mem-trick {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .82rem; color: var(--code-text);
+  background: var(--code-bg);
+  border-radius: 6px; padding: 4px 10px;
+}
+
+/* ========= PHASE TIMELINE ========= */
+.phase-line {
+  display: flex; gap: 0; margin: 16px 0; overflow-x: auto;
+}
+
+.phase-step {
+  flex: 1; min-width: 100px; text-align: center;
+  padding: 12px 8px;
+  position: relative;
+}
+
+.phase-step:not(:last-child)::after {
+  content: '→'; position: absolute; right: -8px; top: 50%;
+  transform: translateY(-50%); color: var(--border); font-size: 1.2rem;
+  z-index: 1;
+}
+
+.phase-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  margin: 0 auto 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 600;
+  border: 2px solid;
+}
+
+.phase-step .phase-name {
+  font-size: .74rem; font-weight: 500; color: var(--ink); line-height: 1.2;
+}
+
+/* ========= SUMMARY BANNER ========= */
+.summary-banner {
+  background: linear-gradient(135deg, var(--rose-dk) 0%, #6a1b9a 50%, var(--sage) 100%);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 24px 0;
+  color: white;
+  text-align: center;
+}
+
+.summary-banner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 700; margin-bottom: 8px;
+}
+
+.summary-banner p { color: rgba(255,255,255,.85); font-size: .9rem; }
+
+/* ========= ORNAMENT ========= */
+.ornament {
+  text-align: center; color: var(--rose-lt);
+  font-size: 1.1rem; letter-spacing: 8px;
+  margin: 32px 0;
+}
+
+/* ========= FOOTER ========= */
+footer {
+  background: #1a110d; /* always dark espresso, regardless of theme */
+  color: rgba(250,247,242,.75);
+  padding: 40px;
+  margin-left: var(--sidebar-w);
+  text-align: center;
+  font-size: .85rem;
+  transition: margin-left var(--layout-ease);
+}
+
+body.sidebar-collapsed footer {
+  margin-left: 0;
+}
+
+footer .footer-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-weight: 600; color: rgba(250,247,242,.95);
+  margin-bottom: 8px;
+}
+
+footer .footer-brand em { color: var(--rose); font-style: italic; }
+
+footer .footer-quote {
+  font-style: italic; font-size: .82rem;
+  color: rgba(250,247,242,.65); margin-top: 16px;
+  line-height: 1.8;
+}
+
+/* ========= UTILITY ========= */
+.badge {
+  display: inline-block;
+  background: var(--warm);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 12px;
+  font-size: .72rem; font-weight: 500;
+  color: var(--muted); letter-spacing: .04em;
+  margin: 2px;
+}
+
+.badge.rose { background: var(--rose-lt); border-color: var(--rose); color: var(--rose-dk); }
+.badge.sage { background: var(--sage-lt); border-color: var(--sage); color: #3d7062; }
+.badge.gold { background: var(--gold-lt); border-color: var(--gold); color: #7a5f2a; }
+
+.divider {
+  height: 1px; background: var(--border); margin: 20px 0;
+}
+
+.tag-group { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+
+/* ========= RESPONSIVE ========= */
+@media (max-width: 768px) {
+  /* On mobile, sidebar is always overlaid (collapsed by default) */
+  .sidebar { z-index: 950; }
+  .site-header { left: 0; padding-left: 52px; }
+  .main { margin-left: 0; padding: 90px 20px 40px; }
+  footer { margin-left: 0; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .mem-row { flex-direction: column; }
+  /* Overlay background when sidebar open on mobile */
+  body:not(.sidebar-collapsed) .sidebar-overlay { display: block; }
+}
+
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.4); z-index: 849;
+}
+
+/* ========= SCROLL PROGRESS ========= */
+.scroll-progress {
+  position: fixed; top: 4px; left: 0; height: 3px; z-index: 1001;
+  background: var(--rose-dk); width: 0%; transition: width .1s linear;
+  border-radius: 0 2px 2px 0;
+}
+
+/* ========= BACK TO TOP ========= */
+.back-top {
+  position: fixed; bottom: 24px; right: 24px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--rose-dk); color: white;
+  border: none; cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition); opacity: 0;
+  z-index: 700;
+}
+
+.back-top.visible { opacity: 1; }
+.back-top:hover { transform: translateY(-2px); background: var(--rose); }
+
+/* ========= MERMAID OVERRIDES ========= */
+.mermaid { max-width: 100%; }
+
+.mermaid svg { max-width: 100%; height: auto; }
+
+/* ========= SECTION NUMBER ========= */
+.sec-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--rose-lt); color: var(--rose-dk);
+  font-size: .75rem; font-weight: 700;
+  margin-right: 8px; flex-shrink: 0;
+}
+
+/* ========= ANIMATION ========= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.unit-section { animation: fadeIn .4s ease both; }
+
+.unit-section:nth-child(2) { animation-delay: .05s; }
+.unit-section:nth-child(3) { animation-delay: .1s; }
+.unit-section:nth-child(4) { animation-delay: .15s; }
+
+/* Light/dark mermaid theming handled by JS */
+</style>
+</head>
+<body>
+
+<div class="stripe"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Sidebar toggle — always visible -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+  <span class="bar1"></span>
+  <span class="bar2"></span>
+  <span class="bar3"></span>
+</button>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ========= SIDEBAR ========= -->
+<nav class="sidebar" id="sidebar">
+  <div class="nav-section">
+    <span class="nav-unit">Unit 1A — Fundamentals</span>
+    <a href="#u1-intro" class="nav-link">What is Management?</a>
+    <a href="#u1-pm" class="nav-link">Project Management</a>
+    <a href="#u1-project" class="nav-link">What is a Project?</a>
+    <a href="#u1-spm" class="nav-link">Software PM</a>
+    <a href="#u1-stakeholders" class="nav-link">Stakeholders & Objectives</a>
+    <a href="#u1-pbs" class="nav-link">PBS & Management Control</a>
+    <a href="#u1-fail" class="nav-link">Why Projects Fail/Succeed</a>
+    <a href="#u1-vsd" class="nav-link">Vision & Scope Doc</a>
+    <a href="#u1-pcm" class="nav-link">PCM & 4 P's</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Unit 1B — Planning</span>
+    <a href="#u1b-planning" class="nav-link">Project Planning</a>
+    <a href="#u1b-spmp" class="nav-link">SPMP (IEEE 1058)</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Unit 1C — Estimation</span>
+    <a href="#u1c-cocomo" class="nav-link">COCOMO Model</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Unit 2A — Evaluation</span>
+    <a href="#u2-eval" class="nav-link">Project Evaluation</a>
+    <a href="#u2-cba" class="nav-link">Cost-Benefit Analysis</a>
+    <a href="#u2-npv" class="nav-link">NPV, ROI, IRR</a>
+    <a href="#u2-risk" class="nav-link">Risk Evaluation</a>
+    <a href="#u2-decision" class="nav-link">Decision Trees</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Unit 2B — Organization</span>
+    <a href="#u2b-wbs" class="nav-link">WBS</a>
+    <a href="#u2b-lifecycle" class="nav-link">Life Cycles</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Unit 2C — Scheduling</span>
+    <a href="#u2c-pert" class="nav-link">PERT</a>
+    <a href="#u2c-cpm" class="nav-link">CPM</a>
+    <a href="#u2c-gantt" class="nav-link">Gantt Chart</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">Master Summary</span>
+    <a href="#summary-formulas" class="nav-link">All Formulas</a>
+    <a href="#exam-tips" class="nav-link">🔥 Exam Hot Topics</a>
+    <a href="#memory-tricks" class="nav-link">💡 Memory Tricks</a>
+  </div>
+</nav>
+
+<!-- ========= HEADER ========= -->
+<header class="site-header">
+  <div class="header-left">
+    <h1>Software Project Management — <em>Complete Exam Notes</em></h1>
+    <div class="header-meta">
+      <span>📚 Units 1 & 2</span>
+      <span>Full Syllabus</span>
+      <span>Exam Ready</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="toggle-label" id="toggleLabel">☀️ Light</span>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <div class="toggle-ball"></div>
+    </button>
+  </div>
+</header>
+
+<!-- ========= MAIN ========= -->
+<main class="main">
+
+<!-- ====== UNIT 1 ====== -->
+<div class="unit-section" id="unit1">
+  <div class="unit-header">
+    <h2>🔷 Unit 1 — Introduction to Software Project Management</h2>
+    <p>Fundamentals · Planning Framework · Project Estimation · COCOMO</p>
+  </div>
+  <div class="unit-body">
+
+    <!-- 1A: Management -->
+    <div class="subsection" id="u1-intro">
+      <div class="subsection-title"><span class="sec-num">1</span>What is Management?</div>
+      <div class="def-box">
+        <strong>Simple Definition:</strong> Management is the process of getting things done <em>through people and resources</em> in an organized way.
+      </div>
+
+      <h4>8 Key Management Activities</h4>
+      <div class="cards-grid">
+        <div class="info-card">
+          <div class="card-title">📋 Planning</div>
+          <p>Deciding what to do; setting goals and direction</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">🗂️ Organizing</div>
+          <p>Making arrangements; setting up team structure</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">👥 Staffing</div>
+          <p>Selecting the right people; HR decisions</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">🎯 Directing</div>
+          <p>Giving instructions; leading the team</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">📊 Monitoring</div>
+          <p>Checking progress; tracking project status</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">⚙️ Controlling</div>
+          <p>Taking remedial action; fixing problems</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">💡 Innovating</div>
+          <p>Finding new solutions; creative thinking</p>
+        </div>
+        <div class="info-card">
+          <div class="card-title">🤝 Representing</div>
+          <p>Liaising with users; stakeholder communication</p>
+        </div>
+      </div>
+
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"P O S D M C I R"</strong> → Plan, Organize, Staff, Direct, Monitor, Control, Innovate, Represent</p>
+      </div>
+    </div>
+
+    <!-- 1A: Project Management -->
+    <div class="subsection" id="u1-pm">
+      <div class="subsection-title"><span class="sec-num">2</span>What is Project Management?</div>
+      <div class="def-box">
+        <strong>Definition 1:</strong> The art of maximizing the probability that a project delivers its goals <em>on time, to budget, and at required quality.</em>
+      </div>
+      <div class="def-box">
+        <strong>Definition 2:</strong> The application of <em>knowledge, skills, tools, and techniques</em> to project activities to meet project requirements.
+      </div>
+
+      <h4>Project Management Process Flow</h4>
+      <div class="diagram-wrap">
+        <div class="diagram-label">Process Flow — Iterative</div>
+        <pre class="mermaid">
+flowchart LR
+    A([🚀 Initiating]) --> B([📋 Planning])
+    B --> C([⚙️ Executing])
+    C --> D([📊 Controlling])
+    D --> C
+    D --> E([✅ Closing])
+    style A fill:#d4808a,color:#fff,stroke:none
+    style B fill:#7a9e8e,color:#fff,stroke:none
+    style C fill:#c9a96e,color:#fff,stroke:none
+    style D fill:#b55e69,color:#fff,stroke:none
+    style E fill:#4a7a6d,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip</div>
+        <p>These processes are <strong>ITERATIVE</strong> — the project becomes easier as more becomes known about it. The Controlling process can loop back to Executing.</p>
+      </div>
+    </div>
+
+    <!-- 1A: Project -->
+    <div class="subsection" id="u1-project">
+      <div class="subsection-title"><span class="sec-num">3</span>What is a Project? — Jobs vs Projects vs Exploration</div>
+      <div class="def-box">
+        <strong>Project:</strong> A <em>unique, temporary undertaking</em> with a clear start and end date, done to achieve a specific objective under constraints of time, cost, and resources.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Spectrum of Certainty</div>
+        <pre class="mermaid">
+flowchart LR
+    J[📋 JOBS\nRepetitive tasks\nLittle uncertainty\nWell-defined] ---|sits between| P[🎯 PROJECTS\nClear goals\nSome uncertainty\nSome risk]
+    P ---|sits between| E[🔬 EXPLORATION\nHighly uncertain\nUnclear outcomes\nMax risk]
+    style J fill:#7a9e8e,color:#fff,stroke:none
+    style P fill:#c9a96e,color:#fff,stroke:none
+    style E fill:#b55e69,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Uncertainty</th><th>Risk</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Jobs</td><td>Very low</td><td>Minimal</td><td>Daily payroll processing</td></tr>
+            <tr><td>Projects</td><td>Medium</td><td>Some</td><td>Build a new website</td></tr>
+            <tr><td>Exploration</td><td>Very high</td><td>Maximum</td><td>Research new AI algorithm</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Characteristics of a Project (More project-like if…)</h4>
+      <div class="cards-grid">
+        <div class="info-card"><div class="card-title">Non-routine</div><p>Not a regular task; unique in nature</p></div>
+        <div class="info-card"><div class="card-title">Planned</div><p>Has defined steps; organized approach</p></div>
+        <div class="info-card"><div class="card-title">Target-oriented</div><p>Specific goals; defined outcomes</p></div>
+        <div class="info-card"><div class="card-title">Customer-driven</div><p>Done for a client; external deliverable</p></div>
+        <div class="info-card"><div class="card-title">Multi-disciplinary</div><p>Several specialisms; different skills needed</p></div>
+        <div class="info-card"><div class="card-title">Constrained</div><p>Limited time; limited resources</p></div>
+      </div>
+    </div>
+
+    <!-- 1A: SPM -->
+    <div class="subsection" id="u1-spm">
+      <div class="subsection-title"><span class="sec-num">4</span>Software Project Management</div>
+      <div class="def-box">
+        <strong>SPM</strong> is concerned with ensuring software is delivered ✅ <em>on time, on schedule, according to requirements, and within budget.</em>
+      </div>
+
+      <h4>Why Software Projects Are DIFFERENT</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Property</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>Intangible</td><td>Can't see or touch software like a physical building</td></tr>
+            <tr><td>Uniquely Flexible</td><td>Software can be changed easily → causes scope creep</td></tr>
+            <tr><td>Non-standardized</td><td>No single agreed engineering process</td></tr>
+            <tr><td>Often one-off</td><td>Each software project is unique</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>The 4 Difficult Properties — ICCF</h4>
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--rose)">
+          <div class="card-title">👁️ Invisibility</div>
+          <p>Can't see progress physically; hard to measure completion</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">🔄 Complexity</div>
+          <p>More complex than most products; many interacting components</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="card-title">📐 Conformity</div>
+          <p>Must conform to human systems; humans don't change for software</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid #b55e69">
+          <div class="card-title">🔀 Flexibility</div>
+          <p>Easy to change = constant change requests → scope creep danger</p>
+        </div>
+      </div>
+
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"I Can Count Fast"</strong> → Invisibility, Complexity, Conformity, Flexibility (ICCF)</p>
+      </div>
+    </div>
+
+    <!-- 1A: Stakeholders & Objectives -->
+    <div class="subsection" id="u1-stakeholders">
+      <div class="subsection-title"><span class="sec-num">5</span>Stakeholders & Setting Objectives</div>
+      <div class="def-box">
+        <strong>Stakeholders:</strong> People who have a <em>stake or interest</em> in the project.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Stakeholder Types</div>
+        <pre class="mermaid">
+flowchart TD
+    S[Stakeholders] --> D[Direct Stakeholders]
+    S --> I[Indirect Stakeholders]
+    D --> D1[Users & Clients\nPrimary beneficiaries]
+    D --> D2[Developers\nBuild the system]
+    D --> D3[Team Members\nDay-to-day work]
+    I --> I1[Internal: Management\nOther departments]
+    I --> I2[External: Vendors\nRegulators, Partners]
+    style S fill:#d4808a,color:#fff,stroke:none
+    style D fill:#c9a96e,color:#fff,stroke:none
+    style I fill:#7a9e8e,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="warn-box">
+        <p>⚠️ <strong>Key Point:</strong> Each stakeholder may have <em>different goals and concerns</em>. Major stakeholders must understand and accept the overall project objectives.</p>
+      </div>
+
+      <h4>SMART Objectives</h4>
+      <div class="cards-grid">
+        <div class="info-card" style="border-left:3px solid var(--rose)">
+          <div class="card-title">S — Specific</div>
+          <p>Clear and unambiguous; well defined</p>
+        </div>
+        <div class="info-card" style="border-left:3px solid var(--sage)">
+          <div class="card-title">M — Measurable</div>
+          <p>Can be tracked; quantifiable</p>
+        </div>
+        <div class="info-card" style="border-left:3px solid var(--gold)">
+          <div class="card-title">A — Achievable</div>
+          <p>Realistic; within team capability</p>
+        </div>
+        <div class="info-card" style="border-left:3px solid var(--rose-dk)">
+          <div class="card-title">R — Relevant</div>
+          <p>Aligned with business goals; meaningful</p>
+        </div>
+        <div class="info-card" style="border-left:3px solid #8a5ab5">
+          <div class="card-title">T — Time-Constrained</div>
+          <p>Has a deadline; time-bound</p>
+        </div>
+      </div>
+
+      <h4>Good vs Bad Objective Example</h4>
+      <div class="compare-grid">
+        <div class="compare-card bad">
+          <div class="cc-title">❌ Bad Objective</div>
+          <ul><li>"Design and code a new payroll application"</li></ul>
+        </div>
+        <div class="compare-card good">
+          <div class="cc-title">✅ Better Objective</div>
+          <ul><li>"A new payroll application will be operational by 4th April"</li></ul>
+        </div>
+      </div>
+
+      <h4>Types of Projects</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+          <tbody>
+            <tr><td>Information Systems</td><td>Business data management</td><td>Hospital Management System</td></tr>
+            <tr><td>Embedded Systems</td><td>Hardware-integrated software</td><td>Car control systems</td></tr>
+            <tr><td>Objective-based</td><td>Goal defined, multiple paths possible</td><td>"Improve customer satisfaction"</td></tr>
+            <tr><td>Product-based</td><td>Product clearly specified, just implement</td><td>"Build this exact e-commerce site"</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 1A: PBS & Management Control -->
+    <div class="subsection" id="u1-pbs">
+      <div class="subsection-title"><span class="sec-num">6</span>PBS, Goals & Management Control</div>
+
+      <h4>Product Breakdown Structure (PBS)</h4>
+      <div class="def-box">
+        <strong>PBS:</strong> A hierarchical structure of <em>things the project will make</em> or outcomes it will deliver.
+      </div>
+      <div class="diagram-wrap">
+        <div class="diagram-label">PBS Example — Hospital Management System</div>
+        <pre class="mermaid">
+flowchart TD
+    PBS[Hospital Management System] --> P1[Patient Management]
+    PBS --> P2[Doctor Management]
+    PBS --> P3[Billing System]
+    PBS --> P4[Reports Module]
+    P1 --> P1a[Patient Registration]
+    P1 --> P1b[Patient Records]
+    P2 --> P2a[Doctor Profiles]
+    P2 --> P2b[Appointment System]
+    P3 --> P3a[Invoice Generation]
+    P3 --> P3b[Payment Processing]
+    style PBS fill:#b55e69,color:#fff,stroke:none
+    style P1 fill:#c9a96e,color:#fff,stroke:none
+    style P2 fill:#7a9e8e,color:#fff,stroke:none
+    style P3 fill:#d4808a,color:#fff,stroke:none
+    style P4 fill:#8a7d76,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <h4>Management Control Flow</h4>
+      <div class="diagram-wrap">
+        <div class="diagram-label">Data → Decision Pipeline</div>
+        <pre class="mermaid">
+flowchart LR
+    A[Data\nRaw Facts\n6000 docs processed] --> B[Information\nMeaningful\n100 docs/day]
+    B --> C[Comparison\nVs Objectives\nWill miss deadline!]
+    C --> D[Modelling\nWhat-If Analysis\nHire 2 more staff?]
+    D --> E[Implementation\nTake Action\nHire the staff]
+    style A fill:#8a7d76,color:#fff,stroke:none
+    style B fill:#7a9e8e,color:#fff,stroke:none
+    style C fill:#c9a96e,color:#fff,stroke:none
+    style D fill:#d4808a,color:#fff,stroke:none
+    style E fill:#4a7a6d,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <h4>Business Case — Benefits vs Costs</h4>
+      <div class="compare-grid">
+        <div class="compare-card bad">
+          <div class="cc-title">💸 Costs</div>
+          <ul>
+            <li>Development: salaries, tools, licenses</li>
+            <li>Setup: hardware, recruitment, training</li>
+            <li>Operational: running, maintenance, support</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <div class="cc-title">💰 Benefits</div>
+          <ul>
+            <li><strong>Quantifiable:</strong> cost savings, revenue increase</li>
+            <li><strong>Indirect:</strong> reduced errors, faster processes</li>
+            <li><strong>Intangible:</strong> brand improvement, staff morale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1A: Why Projects Fail -->
+    <div class="subsection" id="u1-fail">
+      <div class="subsection-title"><span class="sec-num">7</span>Why Projects Fail & How to Succeed</div>
+
+      <h4>Why Projects FAIL</h4>
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">📋 Planning Issues</div>
+          <p>Start coding before understanding; underestimate work; address wrong needs</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">📝 Requirements Issues</div>
+          <p>Wrong behavior specified; changing requirements; poor scope management</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">🔧 Technical Issues</div>
+          <p>Flawed design; poor code quality; defects found late</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">👥 People Issues</div>
+          <p>Poor habits; low accountability; poor testing practices</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">⚙️ Process Issues</div>
+          <p>Weak source code control; quality tested only at end; no visibility</p>
+        </div>
+      </div>
+
+      <h4>How to Make Projects SUCCEED</h4>
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">🔍 Share Information Openly</div>
+          <p>Transparency is key — share schedules, plans, estimates</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">✅ Quality from the Start</div>
+          <p>Not just at the end — review and test everything</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">🤝 Trust Team Expertise</div>
+          <p>No artificial hierarchy; use good engineering practices</p>
+        </div>
+      </div>
+
+      <div class="warn-box">
+        <p>⚠️ <strong>WARNING:</strong> Cutting estimation, reviews, requirements gathering, and testing <em>seems faster</em> but causes time loss and lower quality later!</p>
+      </div>
+    </div>
+
+    <!-- 1A: Vision and Scope -->
+    <div class="subsection" id="u1-vsd">
+      <div class="subsection-title"><span class="sec-num">8</span>Vision and Scope Document</div>
+      <div class="def-box">
+        <strong>Purpose:</strong> Show that stakeholder needs are understood. Defines <em>WHAT</em> we are building and <em>WHY</em>.
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card"><div class="card-title">Problem Statement</div><p>What problem are we solving?</p></div>
+        <div class="info-card"><div class="card-title">Project Background</div><p>History, previous attempts, how project was initiated</p></div>
+        <div class="info-card"><div class="card-title">Stakeholders</div><p>Name / Title / Role / Their needs</p></div>
+        <div class="info-card"><div class="card-title">Users</div><p>User groups, role-based grouping, user needs</p></div>
+        <div class="info-card"><div class="card-title">Risks</div><p>Potential risks, external issues, causes of delay</p></div>
+        <div class="info-card"><div class="card-title">Assumptions</div><p>Team and stakeholder assumptions</p></div>
+        <div class="info-card"><div class="card-title">Vision Statement</div><p>What will be accomplished; why invest time and money</p></div>
+        <div class="info-card"><div class="card-title">List of Features</div><p>~10 major features; cohesive functionality</p></div>
+        <div class="info-card"><div class="card-title">Scope of Release</div><p>Which features come first / later (phased)</p></div>
+        <div class="info-card"><div class="card-title">Features NOT Developed</div><p>Clear exclusions; boundary definition</p></div>
+      </div>
+    </div>
+
+    <!-- 1A: PCM & 4P's -->
+    <div class="subsection" id="u1-pcm">
+      <div class="subsection-title"><span class="sec-num">9</span>PCM & The 4 P's of Management</div>
+      <div class="def-box">
+        <strong>PCM (Project Cycle Management):</strong> A methodology for <em>preparation, implementation, and evaluation</em> of projects based on the Logical Framework Approach.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">PCM Cycle</div>
+        <pre class="mermaid">
+flowchart LR
+    A([🔍 Identification]) --> B([📝 Formulation])
+    B --> C([💰 Financing Decision])
+    C --> D([⚙️ Implementation])
+    D --> E([📊 Evaluation])
+    E -->|Feedback loop| A
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style B fill:#c9a96e,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style D fill:#b55e69,color:#fff,stroke:none
+    style E fill:#4a7a6d,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"I F F I E"</strong> → Identify, Formulate, Finance, Implement, Evaluate</p>
+      </div>
+
+      <h4>The 4 P's of Project Management</h4>
+      <div class="diagram-wrap">
+        <div class="diagram-label">4 P's Framework</div>
+        <pre class="mermaid">
+flowchart TD
+    PM[Project Manager] --> P1[👥 PEOPLE\nTeam, Clients, Stakeholders]
+    PM --> P2[📦 PRODUCT\nWhat we build, Requirements, Quality]
+    PM --> P3[⚙️ PROCESS\nHow we build, Methods, Standards]
+    PM --> P4[📋 PROJECT\nScope, Time, Cost management]
+    style PM fill:#b55e69,color:#fff,stroke:none
+    style P1 fill:#7a9e8e,color:#fff,stroke:none
+    style P2 fill:#c9a96e,color:#fff,stroke:none
+    style P3 fill:#d4808a,color:#fff,stroke:none
+    style P4 fill:#8a5ab5,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"People Produce Proper Projects"</strong> → People, Product, Process, Project</p>
+      </div>
+    </div>
+
+  </div><!-- /unit-body -->
+</div><!-- /unit1 -->
+
+<!-- ====== UNIT 1B ====== -->
+<div class="unit-section" id="unit1b">
+  <div class="unit-header" style="background:linear-gradient(135deg,#4a7a6d 0%,#2d5e53 100%)">
+    <h2>📋 Unit 1B — SPM Framework & Project Planning</h2>
+    <p>Planning Activities · SPMP Structure · SOW · Resource Planning</p>
+  </div>
+  <div class="unit-body">
+
+    <div class="subsection" id="u1b-planning">
+      <div class="subsection-title"><span class="sec-num">1</span>Project Planning</div>
+      <div class="def-box">
+        <em>"If you don't plan for the project, you are planning for failure."</em> Planning continues throughout the <strong>entire project life cycle</strong>.
+      </div>
+
+      <h4>Main Objectives of Software Project Planning</h4>
+      <p>To estimate: <span class="badge rose">Resources</span> <span class="badge sage">Cost</span> <span class="badge gold">Schedule</span></p>
+
+      <h4>Eight Plans Created During Planning Phase</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plan</th><th>Key Contents</th></tr></thead>
+          <tbody>
+            <tr><td>📋 Project Plan</td><td>SOW, WBS, Estimates, Schedule, Risk Plan</td></tr>
+            <tr><td>👥 Resource Plan</td><td>People, Hardware, Rooms, Costs</td></tr>
+            <tr><td>💰 Financial Plan</td><td>Budget, Cost breakdown</td></tr>
+            <tr><td>✅ Quality Plan</td><td>Standards, Review processes</td></tr>
+            <tr><td>⚠️ Risk Plan</td><td>Risk list, Mitigation strategies</td></tr>
+            <tr><td>🤝 Acceptance Plan</td><td>How client will accept deliverables</td></tr>
+            <tr><td>📢 Communications Plan</td><td>Who gets what info, When</td></tr>
+            <tr><td>🛒 Procurement Plan</td><td>What to buy, Vendors</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Statement of Work (SOW)</h4>
+      <div class="def-box">
+        <strong>SOW:</strong> A detailed description of all <em>work products to be created</em>. Contains feature list, intermediate deliverables, and estimated effort per work product.
+      </div>
+
+      <h4>Resource List</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Resource Type</th><th>Details Required</th></tr></thead>
+          <tbody>
+            <tr><td>People</td><td>Name, Role, Availability, Cost/hour</td></tr>
+            <tr><td>Hardware</td><td>Type, Quantity, Availability</td></tr>
+            <tr><td>Software Tools</td><td>Name, License, Cost</td></tr>
+            <tr><td>Rooms/Space</td><td>Location, Availability</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="subsection" id="u1b-spmp">
+      <div class="subsection-title"><span class="sec-num">2</span>SPMP Structure (IEEE 1058)</div>
+      <div class="def-box">
+        <strong>SPMP</strong> = Software Project Management Plan. The master document governing the entire project.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">SPMP Structure</div>
+        <pre class="mermaid">
+flowchart TD
+    SPMP[📄 SPMP] --> FM[Front Matter]
+    SPMP --> INTRO[Introduction]
+    SPMP --> PO[Project Organization]
+    SPMP --> MP[Managerial Processes]
+    SPMP --> TP[Technical Process]
+    SPMP --> WE[Work Elements]
+    FM --> FM1[Title Page · Revision Sheet\nPreface · ToC · Figures]
+    INTRO --> I1[Overview · Executive Summary\nDeliverables · Definitions]
+    PO --> PO1[Process Model\nOrg Structure · Responsibilities]
+    MP --> MP1[Objectives · Risk Management\nMonitoring · Staffing Plan]
+    TP --> TP1[Methods & Tools\nDocumentation · QA & Config Mgmt]
+    WE --> WE1[Work Packages · Dependencies\nResources · Budget · Schedule]
+    style SPMP fill:#b55e69,color:#fff,stroke:none
+    style FM fill:#7a9e8e,color:#fff,stroke:none
+    style INTRO fill:#c9a96e,color:#fff,stroke:none
+    style PO fill:#d4808a,color:#fff,stroke:none
+    style MP fill:#8a5ab5,color:#fff,stroke:none
+    style TP fill:#4a7a6d,color:#fff,stroke:none
+    style WE fill:#5a4040,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip</div>
+        <p>Remember the 6 main sections of SPMP: <strong>Front Matter, Introduction, Project Organization, Managerial Processes, Technical Process, Work Elements</strong>.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== UNIT 1C ====== -->
+<div class="unit-section" id="unit1c">
+  <div class="unit-header" style="background:linear-gradient(135deg,#7a5a2a 0%,#c9a96e 100%)">
+    <h2>📐 Unit 1C — Software Project Estimation</h2>
+    <p>COCOMO Model · Barry Boehm · Regression-based Formulas</p>
+  </div>
+  <div class="unit-body">
+
+    <div class="subsection" id="u1c-cocomo">
+      <div class="subsection-title"><span class="sec-num">1</span>COCOMO Model</div>
+      <div class="def-box">
+        <strong>COCOMO</strong> = <em>Constructive Cost Model</em>, developed by <strong>Barry W. Boehm</strong>. Uses a regression-based formula derived from historical project data.
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">Basic COCOMO</div>
+          <p>Quick rough estimates. Based on KLOC/SLOC only. Least accurate.</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="card-title">Intermediate COCOMO</div>
+          <p>Size + 15 Cost Drivers. More accurate than basic.</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">Detailed COCOMO</div>
+          <p>Phase-level estimates. Most accurate. Most complex.</p>
+        </div>
+      </div>
+
+      <h4>Basic COCOMO Formulas</h4>
+
+      <div class="formula-cards">
+        <div class="formula-card">
+          <div class="fc-name">🟢 Organic Mode — Small, simple, familiar</div>
+          <div class="fc-formula">E = 2.4 × (KLOC)^1.05 PM
+D = 2.5 × (E)^0.38 Months</div>
+          <p>Small teams, experienced staff, familiar domain</p>
+        </div>
+        <div class="formula-card">
+          <div class="fc-name">🟡 Semi-detached Mode — Medium size</div>
+          <div class="fc-formula">E = 3.0 × (KLOC)^1.12 PM
+D = 2.5 × (E)^0.35 Months</div>
+          <p>Mix of experienced and inexperienced staff</p>
+        </div>
+        <div class="formula-card">
+          <div class="fc-name">🔴 Embedded Mode — Complex, real-time</div>
+          <div class="fc-formula">E = 3.6 × (KLOC)^1.20 PM
+D = 2.5 × (E)^0.32 Months</div>
+          <p>Tight constraints, hardware/software integration</p>
+        </div>
+      </div>
+
+      <h4>Example Calculation</h4>
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang">COCOMO Calculation</div>
+        </div>
+        <pre class="code-content">Given: Project Size = 10 KLOC, Organic Mode
+
+Effort:    E = 2.4 × (10)^1.05
+             = 2.4 × 11.22
+             = 26.93 Person-Months
+
+Duration:  D = 2.5 × (26.93)^0.38
+             = 2.5 × 3.87
+             = 9.67 Months
+
+Team Size: N = E / D
+             = 26.93 / 9.67
+             ≈ 3 People</pre>
+      </div>
+
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"Once She Explored"</strong> → Organic, Semi-detached, Embedded (increasing complexity)</p>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip — Numerical</div>
+        <p>COCOMO calculations are <strong>very frequently asked</strong>. Practice with different KLOC values. Remember: higher mode = higher constants = more effort estimate.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== UNIT 2 ====== -->
+<div class="unit-section" id="unit2">
+  <div class="unit-header" style="background:linear-gradient(135deg,#3d2b6a 0%,#8a5ab5 100%)">
+    <h2>🔷 Unit 2 — Project Organization, Scheduling & Evaluation</h2>
+    <p>WBS · Life Cycles · Cost-Benefit Analysis · NPV · Risk · PERT · CPM · Gantt</p>
+  </div>
+  <div class="unit-body">
+
+    <!-- 2A: Project Evaluation -->
+    <div class="subsection" id="u2-eval">
+      <div class="subsection-title"><span class="sec-num">1</span>Project Evaluation & Strategic Assessment</div>
+      <div class="def-box">
+        <strong>Project Evaluation:</strong> A step-by-step process of collecting, recording, and organizing information about project results and outputs. Done at <em>Step 0</em> — BEFORE committing to the project.
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-title">📦 Short-term Outputs</div>
+          <ul>
+            <li>Immediate results of activities</li>
+            <li>Direct deliverables</li>
+            <li>Tangible products/services</li>
+          </ul>
+        </div>
+        <div class="compare-card good" style="border-left:3px solid var(--gold)">
+          <div class="cc-title">🔮 Long-term Outputs</div>
+          <ul>
+            <li>Changes in behavior</li>
+            <li>Changes in practice</li>
+            <li>Changes in policy</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>Strategic Assessment Issues</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Issue</th><th>Key Question</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Objectives</td><td>How will system contribute to organizational objectives?</td></tr>
+            <tr><td>2</td><td>Plan Fit</td><td>Which systems does it replace? What does it interface with?</td></tr>
+            <tr><td>3</td><td>Organization Structure</td><td>How will it affect departments? What changes are needed?</td></tr>
+            <tr><td>4</td><td>MIS</td><td>What information will it provide? At what management levels?</td></tr>
+            <tr><td>5</td><td>Personnel</td><td>Staffing changes? Skills needed? Training implications?</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2A: CBA -->
+    <div class="subsection" id="u2-cba">
+      <div class="subsection-title"><span class="sec-num">2</span>Economic Assessment — Cost-Benefit Analysis</div>
+      <div class="def-box">
+        <strong>CBA:</strong> Compares expected <em>development and operating costs</em> with expected <em>benefits</em>. Purpose: determine if estimated costs are justified by income and benefits.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">CBA Process</div>
+        <pre class="mermaid">
+flowchart LR
+    S1[Identify & Estimate\nCosts and Benefits] --> S2[Express in\nCommon Units - Money]
+    S2 --> S3[Calculate\nNet Benefit = Benefits - Costs]
+    S3 --> S4{Decision}
+    S4 -->|Net Benefit > 0| S5[✅ PROCEED]
+    S4 -->|Net Benefit < 0| S6[❌ REJECT]
+    style S1 fill:#7a9e8e,color:#fff,stroke:none
+    style S2 fill:#c9a96e,color:#fff,stroke:none
+    style S3 fill:#d4808a,color:#fff,stroke:none
+    style S5 fill:#4a7a6d,color:#fff,stroke:none
+    style S6 fill:#b55e69,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card bad">
+          <div class="cc-title">💸 Categories of Costs</div>
+          <ul>
+            <li><strong>Development:</strong> salaries, tools, licenses</li>
+            <li><strong>Setup:</strong> hardware, file conversion, training</li>
+            <li><strong>Operational:</strong> running, maintenance, support</li>
+          </ul>
+        </div>
+        <div class="compare-card good">
+          <div class="cc-title">💰 Categories of Benefits</div>
+          <ul>
+            <li><strong>Direct:</strong> reduced salary bills after computerization</li>
+            <li><strong>Indirect/Assessable:</strong> reduced data entry errors</li>
+            <li><strong>Intangible:</strong> increased job interest, loyalty</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>Cash Flow Pattern</h4>
+      <div class="compare-grid">
+        <div class="compare-card bad">
+          <div class="cc-title">📉 Development Stage — Negative Cash Flow</div>
+          <ul>
+            <li>Spending money, no income yet</li>
+            <li>Staff wages, hardware/software purchase</li>
+            <li>Installation costs, borrowed money + interest</li>
+          </ul>
+        </div>
+        <div class="compare-card good" style="border-left:3px solid var(--sage)">
+          <div class="cc-title">📈 Operational Stage — Positive Cash Flow</div>
+          <ul>
+            <li>System running, generating benefits</li>
+            <li>Payment on completion or stage payments</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>5 CBA Evaluation Techniques</h4>
+      <div class="memory-box">
+        <div class="mem-head">💡 Memory Trick</div>
+        <p><strong>"N P R N I"</strong> → Net Profit, Payback period, ROI (Return on investment), NPV (Net present value), IRR (Internal rate of return)</p>
+      </div>
+    </div>
+
+    <!-- 2A: NPV ROI IRR -->
+    <div class="subsection" id="u2-npv">
+      <div class="subsection-title"><span class="sec-num">3</span>NPV, ROI, IRR & Payback Period</div>
+
+      <h4>1. Net Profit</h4>
+      <div class="formula-box">
+        <div class="formula-label">Net Profit Formula</div>
+        Net Profit = Total Income − Total Expenses
+      </div>
+
+      <h4>2. Payback Period</h4>
+      <div class="def-box">
+        <strong>Payback Period:</strong> The time taken to <em>recover the initial investment</em>.
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">Payback Period</div>
+        Payback = Time when Cumulative Returns = Cumulative Costs
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Annual Benefit</th><th>Cumulative Benefit</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>-₹50,000 (Investment)</td><td>-₹50,000</td></tr>
+            <tr><td>1</td><td>₹15,000</td><td>-₹35,000</td></tr>
+            <tr><td>2</td><td>₹15,000</td><td>-₹20,000</td></tr>
+            <tr><td>3</td><td>₹15,000</td><td>-₹5,000</td></tr>
+            <tr><td>4</td><td>₹15,000</td><td style="color:var(--sage);font-weight:600">+₹10,000 ✅ Payback reached!</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-title">✅ Advantages of Payback</div>
+          <ul><li>Simple to calculate</li><li>Easy comparison</li><li>Quick assessment</li></ul>
+        </div>
+        <div class="compare-card bad">
+          <div class="cc-title">❌ Disadvantages of Payback</div>
+          <ul><li>Ignores benefits AFTER payback</li><li>Doesn't measure profitability</li><li>Ignores time value of money</li></ul>
+        </div>
+      </div>
+
+      <h4>3. Return on Investment (ROI)</h4>
+      <div class="formula-box">
+        <div class="formula-label">ROI Formula — Also called ARR (Accounting Rate of Return)</div>
+Average Annual Profit = Net Profit / Total Number of Years
+ROI = (Average Annual Profit / Total Investment) × 100%
+
+Example: Net Profit = ₹50,000 over 5 years, Investment = ₹100,000
+Average Annual Profit = 50,000 / 5 = ₹10,000
+ROI = (10,000 / 100,000) × 100 = 10%</div>
+
+      <h4>4. Net Present Value (NPV)</h4>
+      <div class="def-box">
+        <strong>Key Concept — Time Value of Money:</strong> Money received TODAY is worth MORE than the same money in the FUTURE. <em>₹100 today &gt; ₹100 next year</em>.
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">Discounted Cash Flow (DCF)</div>
+Present Value = Future Value / (1 + r)^n
+
+Where:
+  r = discount rate (interest rate)
+  n = number of periods into the future
+
+As n increases → PV decreases
+As r increases → PV decreases</div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Year</th><th>Cash Flow</th><th>Discount Factor (10%)</th><th>Present Value</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>-₹50,000</td><td>1.000</td><td>-₹50,000</td></tr>
+            <tr><td>1</td><td>₹15,000</td><td>0.909</td><td>₹13,635</td></tr>
+            <tr><td>2</td><td>₹15,000</td><td>0.826</td><td>₹12,390</td></tr>
+            <tr><td>3</td><td>₹15,000</td><td>0.751</td><td>₹11,265</td></tr>
+            <tr><td>4</td><td>₹15,000</td><td>0.683</td><td>₹10,245</td></tr>
+            <tr><td>5</td><td>₹15,000</td><td>0.621</td><td>₹9,315</td></tr>
+            <tr style="background:var(--sage-lt)"><td colspan="3"><strong>NPV (Sum of all PVs)</strong></td><td style="color:var(--sage);font-weight:700">+₹6,850 ✅</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card" style="border-left:3px solid var(--sage)">
+          <div class="card-title">NPV &gt; 0</div>
+          <p>Project is profitable → <strong>PROCEED ✅</strong></p>
+        </div>
+        <div class="info-card" style="border-left:3px solid var(--rose-dk)">
+          <div class="card-title">NPV &lt; 0</div>
+          <p>Project loses money → <strong>REJECT ❌</strong></p>
+        </div>
+        <div class="info-card" style="border-left:3px solid var(--gold)">
+          <div class="card-title">NPV = 0</div>
+          <p>Break even → <strong>REVIEW ⚠️</strong></p>
+        </div>
+      </div>
+
+      <h4>5. Internal Rate of Return (IRR)</h4>
+      <div class="def-box">
+        <strong>IRR:</strong> The discount rate that makes NPV = 0. Higher IRR = Better investment. Compare IRR with hurdle rate.
+      </div>
+      <div class="formula-box">
+        <div class="formula-label">IRR Decision Rule</div>
+IRR > Hurdle Rate → Accept project
+Between two projects: Higher IRR = Better Choice
+IRR is the rate where: NPV = 0</div>
+    </div>
+
+    <!-- 2A: Risk -->
+    <div class="subsection" id="u2-risk">
+      <div class="subsection-title"><span class="sec-num">4</span>Risk Evaluation</div>
+      <div class="def-box">
+        <strong>Risk Evaluation:</strong> Deciding whether to proceed based on the <em>uncertainty</em> surrounding costs and benefits.
+      </div>
+
+      <h4>Risk Adjustment to NPV Discount Rate</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Risk Level</th><th>Additional Discount Rate</th></tr></thead>
+          <tbody>
+            <tr><td>Safe project</td><td>+2%</td></tr>
+            <tr><td>Fairly risky project</td><td>+5%</td></tr>
+            <tr><td>High risk project</td><td>+10% or more</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Three Approaches to Risk Evaluation</h4>
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--rose)">
+          <div class="card-title">1. Cost-Benefit Analysis</div>
+          <p>Compare costs vs benefits after adjusting for risk via higher discount rate</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">2. Risk Profile Analysis</div>
+          <p>Sensitivity analysis — vary parameters ±5-10% to find most sensitive factors</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="card-title">3. Decision Trees</div>
+          <p>Visual tool to choose best option under risk using expected values</p>
+        </div>
+      </div>
+
+      <h4>Risk Identification Process</h4>
+      <div class="diagram-wrap">
+        <div class="diagram-label">Risk Management Flow</div>
+        <pre class="mermaid">
+flowchart LR
+    R1[Identify All Risks\nBrainstorming] --> R2[Categorize\nTechnical / Org / External]
+    R2 --> R3[Assess\nProbability × Impact]
+    R3 --> R4[Rank\nHigh / Medium / Low]
+    R4 --> R5[Risk Matrix\n& Mitigation Plan]
+    style R1 fill:#7a9e8e,color:#fff,stroke:none
+    style R2 fill:#c9a96e,color:#fff,stroke:none
+    style R3 fill:#d4808a,color:#fff,stroke:none
+    style R4 fill:#b55e69,color:#fff,stroke:none
+    style R5 fill:#8a5ab5,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <h4>Risk Profile / Sensitivity Analysis Example</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Parameter Varied</th><th>Change</th><th>Effect on NPV</th></tr></thead>
+          <tbody>
+            <tr><td>Development cost</td><td>+5%</td><td>NPV decreases</td></tr>
+            <tr><td>Benefits</td><td>-5%</td><td>NPV decreases significantly</td></tr>
+            <tr><td>Duration</td><td>+10%</td><td>NPV decreases (delayed payback)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2A: Decision Trees -->
+    <div class="subsection" id="u2-decision">
+      <div class="subsection-title"><span class="sec-num">5</span>Decision Trees</div>
+      <div class="def-box">
+        <strong>Decision Tree:</strong> A visual tool that helps <em>choose the best option under risk</em> by calculating expected values of different decisions.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Decision Tree Example</div>
+        <pre class="mermaid">
+flowchart LR
+    D{Decision\nNode} -->|Option 1:\nExtend System| E1{Chance\nNode}
+    D -->|Option 2:\nReplace System| E2{Chance\nNode}
+    E1 -->|Prob 0.8 Success| O1[✅ Gain Rs.75,000]
+    E1 -->|Prob 0.2 Failure| O2[❌ Loss Rs.100,000]
+    E2 -->|Prob 0.2 Success| O3[✅ Gain Rs.250,000]
+    E2 -->|Prob 0.8 Failure| O4[❌ Loss Rs.50,000]
+    style D fill:#b55e69,color:#fff,stroke:none
+    style E1 fill:#c9a96e,color:#fff,stroke:none
+    style E2 fill:#c9a96e,color:#fff,stroke:none
+    style O1 fill:#4a7a6d,color:#fff,stroke:none
+    style O2 fill:#b55e69,color:#fff,stroke:none
+    style O3 fill:#4a7a6d,color:#fff,stroke:none
+    style O4 fill:#b55e69,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><span></span><span></span><span></span></div>
+          <div class="code-lang">Decision Tree Calculation</div>
+        </div>
+        <pre class="code-content">Expected Value — Extending System:
+  EV = (0.8 × 75,000) – (0.2 × 100,000)
+     = 60,000 – 20,000
+     = Rs. 40,000 ✅
+
+Expected Value — Replacing System:
+  EV = (0.2 × 250,000) – (0.8 × 50,000)
+     = 50,000 – 40,000
+     = Rs. 10,000
+
+∴ Decision: EXTEND the existing system
+           (Higher Expected Value = Rs. 40,000 > Rs. 10,000)</pre>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip — Numerical</div>
+        <p>Always show your working clearly. EV = Σ (Probability × Outcome). For losses, subtract the probability × loss amount.</p>
+      </div>
+    </div>
+
+    <!-- 2B: WBS -->
+    <div class="subsection" id="u2b-wbs">
+      <div class="subsection-title"><span class="sec-num">6</span>Work Breakdown Structure (WBS)</div>
+      <div class="def-box">
+        <strong>WBS:</strong> A hierarchical structure of <em>project activity</em> focusing on the <strong>work required</strong> to accomplish the project.
+      </div>
+
+      <h4>PBS vs WBS — Key Difference</h4>
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-title">📦 PBS — Product Breakdown Structure</div>
+          <ul>
+            <li>Hierarchical structure of <strong>THINGS</strong></li>
+            <li>Focuses on WHAT will be PRODUCED</li>
+            <li>Deliverables and outputs</li>
+            <li>Example: Patient Module, Billing System</li>
+          </ul>
+        </div>
+        <div class="compare-card good" style="border-left:3px solid var(--gold)">
+          <div class="cc-title">⚙️ WBS — Work Breakdown Structure</div>
+          <ul>
+            <li>Hierarchical structure of <strong>WORK</strong></li>
+            <li>Focuses on WHAT WORK will be DONE</li>
+            <li>Activities and tasks</li>
+            <li>Example: Design Module, Code Module, Test Module</li>
+          </ul>
+        </div>
+      </div>
+
+      <h4>Types of WBS</h4>
+      <div class="cards-grid">
+        <div class="info-card"><div class="card-title">Deliverable-Based</div><p>Organized by what you deliver. Most common type.</p></div>
+        <div class="info-card"><div class="card-title">Phase-Based</div><p>Organized by project phases (initiation → closure)</p></div>
+        <div class="info-card"><div class="card-title">Responsibility-Based</div><p>Organized by teams or departments</p></div>
+      </div>
+    </div>
+
+    <!-- 2B: Life Cycles -->
+    <div class="subsection" id="u2b-lifecycle">
+      <div class="subsection-title"><span class="sec-num">7</span>Project Life Cycle vs Product Life Cycle</div>
+
+      <div class="compare-grid">
+        <div class="compare-card good">
+          <div class="cc-title">📋 Project Life Cycle — Temporary</div>
+          <ul>
+            <li>Initiation → Planning → Execution → Closure</li>
+            <li>Has a definite end</li>
+            <li>Managed by <strong>Project Manager</strong></li>
+            <li>Creates/delivers the product</li>
+          </ul>
+        </div>
+        <div class="compare-card good" style="border-left:3px solid var(--gold)">
+          <div class="cc-title">🔄 Product Life Cycle — Long Term</div>
+          <ul>
+            <li>Introduction → Growth → Maturity → Decline → Retirement</li>
+            <li>Lasts years or decades</li>
+            <li>Managed by <strong>Product Manager</strong></li>
+            <li>Marketing and maintaining the product</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>Project Life Cycle</th><th>Product Life Cycle</th></tr></thead>
+          <tbody>
+            <tr><td>Duration</td><td>Temporary (definite end)</td><td>Long-term (years/decades)</td></tr>
+            <tr><td>Focus</td><td>Creating the product</td><td>Managing/marketing product</td></tr>
+            <tr><td>Who manages</td><td>Project Manager</td><td>Product Manager</td></tr>
+            <tr><td>Ends when</td><td>Product is delivered</td><td>Product is retired</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2C: PERT -->
+    <div class="subsection" id="u2c-pert">
+      <div class="subsection-title"><span class="sec-num">8</span>PERT — Program Evaluation and Review Technique</div>
+
+      <div class="def-box">
+        <strong>PERT:</strong> Developed by the <em>US Navy (1950s)</em>. Uses three time estimates to handle uncertainty in project scheduling.
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card" style="border-top:3px solid var(--sage)">
+          <div class="card-title">O — Optimistic</div>
+          <p>Best case — everything goes perfectly</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--gold)">
+          <div class="card-title">M — Most Likely</div>
+          <p>Normal conditions — most probable scenario</p>
+        </div>
+        <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+          <div class="card-title">P — Pessimistic</div>
+          <p>Worst case — everything goes wrong</p>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">PERT Formulas</div>
+Expected Time:      te = (O + 4M + P) / 6
+Standard Deviation: σ  = (P - O) / 6
+Variance:           σ² = [(P - O) / 6]²</div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip</div>
+        <p>The factor <strong>4</strong> in the formula weights the Most Likely estimate more heavily (Beta distribution assumption). Always use te for network calculations.</p>
+      </div>
+    </div>
+
+    <!-- 2C: CPM -->
+    <div class="subsection" id="u2c-cpm">
+      <div class="subsection-title"><span class="sec-num">9</span>CPM — Critical Path Method</div>
+      <div class="def-box">
+        <strong>CPM:</strong> Developed by <em>DuPont (1950s)</em>. Uses one deterministic time estimate. Identifies the critical path — the longest path through the network.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">CPM Steps</div>
+        <pre class="mermaid">
+flowchart LR
+    A[Draw Network\nDiagram] --> B[Forward Pass\nCalculate ES and EF]
+    B --> C[Backward Pass\nCalculate LS and LF]
+    C --> D[Calculate Float\nFloat = LS - ES]
+    D --> E[Critical Path\nActivities with Float = 0]
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style B fill:#c9a96e,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style D fill:#8a5ab5,color:#fff,stroke:none
+    style E fill:#b55e69,color:#fff,stroke:none
+        </pre>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula-label">CPM Key Terms</div>
+ES = Earliest Start time
+EF = Earliest Finish time  = ES + Duration
+LS = Latest Start time
+LF = Latest Finish time    = LS + Duration
+Total Float = LS - ES  (or LF - EF)
+Critical Path = Path where Float = 0</div>
+
+      <h4>PERT vs CPM Comparison</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>PERT</th><th>CPM</th></tr></thead>
+          <tbody>
+            <tr><td>Developed by</td><td>US Navy (1950s)</td><td>DuPont (1950s)</td></tr>
+            <tr><td>Time Estimates</td><td>3 (O, M, P)</td><td>1 (deterministic)</td></tr>
+            <tr><td>Uncertainty</td><td>✅ Handles uncertainty</td><td>❌ Assumes known durations</td></tr>
+            <tr><td>Focus</td><td>Time management</td><td>Time + Cost tradeoff</td></tr>
+            <tr><td>Best for</td><td>R&D, new projects</td><td>Construction, IT projects</td></tr>
+            <tr><td>Orientation</td><td>Event-oriented</td><td>Activity-oriented</td></tr>
+            <tr><td>Crashing</td><td>Not typical</td><td>Yes — cost-time tradeoff</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 2C: Gantt -->
+    <div class="subsection" id="u2c-gantt">
+      <div class="subsection-title"><span class="sec-num">10</span>Gantt Chart</div>
+      <div class="def-box">
+        <strong>Gantt Chart:</strong> Created by <em>Henry Gantt (1910)</em>. Shows all tasks with durations on a timeline. Modern Gantt charts also show task interdependencies.
+      </div>
+
+      <div class="diagram-wrap">
+        <div class="diagram-label">Gantt Chart — Software Development Project</div>
+        <pre class="mermaid">
+gantt
+    title Software Development Project
+    dateFormat  YYYY-MM-DD
+    axisFormat %b %d
+    section Planning
+    Requirements Gathering    :done,    p1, 2024-01-01, 10d
+    Feasibility Study         :done,    p2, 2024-01-01, 8d
+    section Design
+    System Architecture       :active,  d1, 2024-01-11, 8d
+    Database Design           :active,  d2, 2024-01-11, 6d
+    UI/UX Design              :         d3, 2024-01-17, 10d
+    section Development
+    Backend Development       :         dev1, 2024-01-27, 20d
+    Frontend Development      :         dev2, 2024-02-03, 15d
+    section Testing
+    Unit Testing              :         t1, 2024-02-16, 10d
+    Integration Testing       :         t2, 2024-02-23, 8d
+    section Deployment
+    Deployment                :         dep1, 2024-03-02, 3d
+    Training                  :milestone, m1, 2024-03-05, 0d
+        </pre>
+      </div>
+
+      <div class="tip-box">
+        <div class="tip-head">🎯 Exam Tip</div>
+        <p>Gantt charts show <strong>when</strong> tasks happen. Critical Path shows <strong>which tasks can't be delayed</strong>. PERT/CPM are used to find critical paths; Gantt is used to visualize schedules.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== MASTER SUMMARY ====== -->
+<div class="unit-section" id="summary">
+  <div class="summary-banner">
+    <h2>📊 Master Summary</h2>
+    <p>All Key Formulas · Hot Topics · Memory Tricks · Quick Reference</p>
+  </div>
+
+  <!-- Formula Sheet -->
+  <div class="subsection" id="summary-formulas">
+    <div class="subsection-title"><span class="sec-num">📐</span>Complete Formula Sheet</div>
+
+    <div class="formula-cards">
+      <div class="formula-card">
+        <div class="fc-name">🔴 COCOMO — Organic</div>
+        <div class="fc-formula">E = 2.4 × (KLOC)^1.05
+D = 2.5 × (E)^0.38
+N = E / D</div>
+        <p>Small familiar projects</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">🟡 COCOMO — Semi-detached</div>
+        <div class="fc-formula">E = 3.0 × (KLOC)^1.12
+D = 2.5 × (E)^0.35</div>
+        <p>Medium mixed teams</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">🔵 COCOMO — Embedded</div>
+        <div class="fc-formula">E = 3.6 × (KLOC)^1.20
+D = 2.5 × (E)^0.32</div>
+        <p>Complex real-time systems</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">📊 PERT</div>
+        <div class="fc-formula">te = (O + 4M + P) / 6
+σ  = (P - O) / 6
+σ² = [(P-O)/6]²</div>
+        <p>Three-estimate technique</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">💰 NPV</div>
+        <div class="fc-formula">PV = FV / (1 + r)^n
+NPV = Σ(all PVs)
+NPV > 0 → PROCEED</div>
+        <p>Time value of money</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">📈 ROI</div>
+        <div class="fc-formula">Avg Profit = Net Profit / Years
+ROI = (Avg Profit / Investment)
+      × 100%</div>
+        <p>Accounting Rate of Return</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">🌳 Decision Tree</div>
+        <div class="fc-formula">EV = Σ(Probability × Outcome)
+For losses: subtract prob × loss</div>
+        <p>Expected Value calculation</p>
+      </div>
+      <div class="formula-card">
+        <div class="fc-name">⏱️ Payback Period</div>
+        <div class="fc-formula">PP = Time when:
+Cumulative Returns
+  = Cumulative Costs</div>
+        <p>Investment recovery time</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Hot Topics -->
+  <div class="subsection" id="exam-tips">
+    <div class="subsection-title"><span class="sec-num">🔥</span>Exam Hot Topics</div>
+
+    <div class="hot-topics-grid">
+      <div class="hot-topic-card">
+        <div class="ht-icon calc">🔢</div>
+        <div class="ht-content"><div class="ht-title">COCOMO Calculation</div><div class="ht-type">Numerical — Very Frequent</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon diag">📊</div>
+        <div class="ht-content"><div class="ht-title">Critical Path Method</div><div class="ht-type">Diagram + Numerical</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon calc">📐</div>
+        <div class="ht-content"><div class="ht-title">PERT Expected Time</div><div class="ht-type">Numerical</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon calc">🌳</div>
+        <div class="ht-content"><div class="ht-title">Decision Tree</div><div class="ht-type">Numerical + Draw</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon calc">💰</div>
+        <div class="ht-content"><div class="ht-title">NPV / Payback Period</div><div class="ht-type">Numerical</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon diag">🗂️</div>
+        <div class="ht-content"><div class="ht-title">WBS Diagram</div><div class="ht-type">Draw and Explain</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon comp">⚡</div>
+        <div class="ht-content"><div class="ht-title">PERT vs CPM</div><div class="ht-type">Comparison Table</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon comp">📝</div>
+        <div class="ht-content"><div class="ht-title">Why Projects Fail</div><div class="ht-type">List/Explain</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon comp">🎯</div>
+        <div class="ht-content"><div class="ht-title">SMART Objectives</div><div class="ht-type">Define with Example</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon diag">📄</div>
+        <div class="ht-content"><div class="ht-title">Vision & Scope Document</div><div class="ht-type">Contents List</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon diag">🔄</div>
+        <div class="ht-content"><div class="ht-title">PCM Phases</div><div class="ht-type">Flowchart/Explain</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon comp">⚠️</div>
+        <div class="ht-content"><div class="ht-title">Risk Evaluation Methods</div><div class="ht-type">Explain 3 types</div></div>
+      </div>
+      <div class="hot-topic-card">
+        <div class="ht-icon comp">💼</div>
+        <div class="ht-content"><div class="ht-title">Types of Benefits in CBA</div><div class="ht-type">Direct/Indirect/Intangible</div></div>
+      </div>
+    </div>
+
+    <h4>Important Comparisons for Exams</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Comparison</th><th>Side A</th><th>Side B</th></tr></thead>
+        <tbody>
+          <tr><td>Project vs Product Life Cycle</td><td>Temporary, creates product</td><td>Long-term, uses product</td></tr>
+          <tr><td>PERT vs CPM</td><td>3 estimates, uncertain, event-oriented</td><td>1 estimate, certain, activity-oriented</td></tr>
+          <tr><td>PBS vs WBS</td><td>WHAT will be produced</td><td>WHAT WORK will be done</td></tr>
+          <tr><td>NPV vs IRR</td><td>Find value at given rate</td><td>Find rate that gives NPV=0</td></tr>
+          <tr><td>Jobs vs Projects vs Exploration</td><td>Low uncertainty → medium → high uncertainty</td><td>Repetitive → unique → highly uncertain</td></tr>
+          <tr><td>Gantt vs Milestone</td><td>All tasks with duration shown</td><td>Key events/achievements only</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Memory Tricks -->
+  <div class="subsection" id="memory-tricks">
+    <div class="subsection-title"><span class="sec-num">💡</span>Memory Tricks — Never Forget Again</div>
+
+    <div class="mem-grid">
+      <div class="mem-row">
+        <div class="mem-topic">COCOMO Modes</div>
+        <div class="mem-trick">"Once She Explored" → Organic, Semi-detached, Embedded</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">Management Activities</div>
+        <div class="mem-trick">"P O S D M C I R" → Plan, Organize, Staff, Direct, Monitor, Control, Innovate, Represent</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">SMART Objectives</div>
+        <div class="mem-trick">Specific · Measurable · Achievable · Relevant · Time-bound</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">4 P's of Management</div>
+        <div class="mem-trick">"People Produce Proper Projects" → People, Product, Process, Project</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">CBA Techniques</div>
+        <div class="mem-trick">"N P R N I" → Net Profit, Payback, ROI, NPV, IRR</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">PCM Phases</div>
+        <div class="mem-trick">"I F F I E" → Identify, Formulate, Finance, Implement, Evaluate</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">Software Properties (ICCF)</div>
+        <div class="mem-trick">"I Can Count Fast" → Invisibility, Complexity, Conformity, Flexibility</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">PERT vs CPM</div>
+        <div class="mem-trick">PERT = Probabilistic (P for Probabilistic), CPM = Certain/Deterministic</div>
+      </div>
+      <div class="mem-row">
+        <div class="mem-topic">NPV Decision Rule</div>
+        <div class="mem-trick">NPV > 0 = Go, NPV < 0 = No, NPV = 0 = Review (G-N-R)</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /summary -->
+
+<div class="ornament">✦ ✦ ✦</div>
+
+</main>
+
+<!-- ========= FOOTER ========= -->
+<footer>
+  <div class="footer-brand">Software Project Management — <em>Exam Notes</em></div>
+  <p style="color:rgba(250,247,242,.5);font-size:.8rem;margin-top:8px">Units 1 & 2 · Complete Syllabus Coverage · All Diagrams Included</p>
+  <div class="footer-quote">
+    <p>"A goal without a plan is just a wish." — Antoine de Saint-Exupéry</p>
+    <p style="margin-top:6px">"By failing to prepare, you are preparing to fail." — Benjamin Franklin</p>
+    <p style="margin-top:10px;color:rgba(250,247,242,.4)">🍀 All the very best for your exam!</p>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ========= SCRIPTS ========= -->
+<script>
+// ── Sidebar Toggle ──
+const sidebarToggle = document.getElementById('sidebarToggle');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+// On mobile, start collapsed; on desktop, restore from localStorage
+const isMobile = window.innerWidth <= 768;
+let sidebarCollapsed = isMobile ? true : (localStorage.getItem('spm-sidebar') === 'collapsed');
+
+function applySidebar() {
+  document.body.classList.toggle('sidebar-collapsed', sidebarCollapsed);
+}
+
+applySidebar();
+
+sidebarToggle.addEventListener('click', () => {
+  sidebarCollapsed = !sidebarCollapsed;
+  if (!isMobile) localStorage.setItem('spm-sidebar', sidebarCollapsed ? 'collapsed' : 'open');
+  applySidebar();
+});
+
+// Close sidebar on overlay click (mobile)
+sidebarOverlay.addEventListener('click', () => {
+  sidebarCollapsed = true;
+  applySidebar();
+});
+
+// ── Theme Toggle ──
+const html = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+const label = document.getElementById('toggleLabel');
+
+let theme = localStorage.getItem('spm-theme') || 'light';
+html.setAttribute('data-theme', theme);
+updateLabel();
+
+toggle.addEventListener('click', () => {
+  theme = theme === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', theme);
+  localStorage.setItem('spm-theme', theme);
+  updateLabel();
+  // Re-initialize mermaid with new theme
+  setTimeout(initMermaid, 100);
+});
+
+function updateLabel() {
+  label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
+}
+
+// ── Mermaid Init ──
+function getMermaidTheme() {
+  return html.getAttribute('data-theme') === 'dark' ? 'dark' : 'base';
+}
+
+function initMermaid() {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: isDark ? {
+      background: '#211b17',
+      primaryColor: '#3d2b20',
+      primaryTextColor: '#f5ede6',
+      primaryBorderColor: '#d4808a',
+      lineColor: '#8a7d76',
+      secondaryColor: '#2a2210',
+      tertiaryColor: '#1a2a25',
+      edgeLabelBackground: '#211b17',
+      noteBkgColor: '#2a2515',
+      noteTextColor: '#f5ede6',
+      actorBkg: '#3d2b20',
+      actorBorder: '#d4808a',
+      actorTextColor: '#f5ede6',
+      activationBkgColor: '#4d2b30',
+      activationBorderColor: '#c9a96e',
+    } : {
+      background: '#faf7f2',
+      primaryColor: '#fde8eb',
+      primaryTextColor: '#2c2420',
+      primaryBorderColor: '#d4808a',
+      lineColor: '#b49a94',
+      secondaryColor: '#f0e4cc',
+      tertiaryColor: '#c8ddd5',
+      edgeLabelBackground: '#faf7f2',
+      noteBkgColor: '#f0e4cc',
+      noteTextColor: '#5a4040',
+      actorBkg: '#fde8eb',
+      actorBorder: '#d4808a',
+      actorTextColor: '#2c2420',
+      activationBkgColor: '#f0cdd1',
+      activationBorderColor: '#c9a96e',
+    },
+    securityLevel: 'loose',
+    fontFamily: 'Jost, sans-serif',
+    fontSize: 13,
+  });
+}
+
+// ── Render Mermaid ──
+async function renderAll() {
+  initMermaid();
+  const elems = document.querySelectorAll('.mermaid');
+  // Clear previous renders
+  elems.forEach(el => {
+    if (el.getAttribute('data-processed')) {
+      const original = el.getAttribute('data-original');
+      if (original) {
+        el.innerHTML = original;
+        el.removeAttribute('data-processed');
+      }
+    } else {
+      el.setAttribute('data-original', el.textContent);
+    }
+  });
+  try {
+    await mermaid.run({ nodes: elems });
+  } catch(e) {
+    console.warn('Mermaid render error', e);
+  }
+}
+
+// ── Scroll Progress + Header Shrink ──
+const progress = document.getElementById('scrollProgress');
+const siteHeader = document.querySelector('.site-header');
+
+window.addEventListener('scroll', () => {
+  const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+  progress.style.width = pct + '%';
+
+  // Shrink header after 60px of scroll
+  siteHeader.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ── Back to Top ──
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  backTop.classList.toggle('visible', window.scrollY > 300);
+});
+
+// ── Active Nav Link ──
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-100px 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// ── Init ──
+window.addEventListener('load', renderAll);
+</script>
+
+</body>
+</html>
