@@ -795,6 +795,180 @@ footer .footer-quote {
 .unit-section:nth-child(3) { animation-delay: .1s; }
 .unit-section:nth-child(4) { animation-delay: .15s; }
 
+/* ========= IMPORTANT QUESTIONS ========= */
+.iq-section {
+  margin-bottom: 56px;
+  scroll-margin-top: 80px;
+}
+
+.iq-header {
+  background: linear-gradient(135deg, #1a3a4a 0%, #2d6a8a 100%);
+  border-radius: 16px 16px 0 0;
+  padding: 24px 32px;
+}
+
+.iq-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.9rem; font-weight: 700; color: #fff;
+  letter-spacing: .01em;
+}
+
+.iq-header p { color: rgba(255,255,255,.8); font-size: .85rem; margin-top: 4px; }
+
+.iq-body {
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 16px 16px;
+  overflow: hidden;
+}
+
+/* Individual question card */
+.q-card {
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 80px;
+  overflow: hidden;
+}
+
+.q-card:last-child { border-bottom: none; }
+
+/* Question header — clickable accordion toggle */
+.q-head {
+  padding: 20px 32px;
+  display: flex; align-items: flex-start; gap: 16px;
+  cursor: pointer; user-select: none;
+  background: var(--surface);
+  transition: background var(--transition);
+}
+
+.q-head:hover { background: var(--warm); }
+
+.q-num {
+  flex-shrink: 0;
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, #2d6a8a, #1a3a4a);
+  color: #fff; font-size: .78rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -.02em;
+}
+
+.q-title-wrap { flex: 1; min-width: 0; }
+
+.q-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 600; color: var(--ink);
+  line-height: 1.3;
+}
+
+.q-subtitle {
+  font-size: .75rem; color: var(--muted); margin-top: 3px;
+  letter-spacing: .02em;
+}
+
+.q-chevron {
+  flex-shrink: 0; width: 24px; height: 24px;
+  border-radius: 50%; background: var(--warm);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .7rem; color: var(--muted);
+  transition: transform 0.3s ease, background 0.2s ease;
+  margin-top: 4px;
+}
+
+.q-card.open .q-chevron {
+  transform: rotate(180deg);
+  background: var(--rose-lt); border-color: var(--rose);
+  color: var(--rose-dk);
+}
+
+/* Answer body — accordion content */
+.q-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(.4,0,.2,1);
+  background: var(--bg);
+}
+
+.q-card.open .q-body { max-height: 9999px; }
+
+.q-body-inner { padding: 24px 32px 28px; }
+
+/* Part labels inside answers e.g. (a), (b), (c) */
+.part-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: #2d6a8a; margin: 16px 0 8px;
+  padding: 3px 12px; background: #e8f4f8; border-radius: 20px;
+  border: 1px solid #b8d8e8;
+}
+
+[data-theme="dark"] .part-label {
+  background: rgba(45,106,138,.2); border-color: rgba(45,106,138,.4); color: #7bbfd4;
+}
+
+/* Numbered steps inside answers */
+.answer-steps { counter-reset: step; list-style: none; padding: 0; margin: 10px 0; }
+
+.answer-steps li {
+  counter-increment: step;
+  display: flex; gap: 14px; margin-bottom: 12px; align-items: flex-start;
+}
+
+.answer-steps li::before {
+  content: counter(step);
+  flex-shrink: 0; width: 24px; height: 24px;
+  border-radius: 50%; background: var(--rose-lt);
+  color: var(--rose-dk); font-size: .72rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+
+/* Calculation box — teal accent for maths */
+.calc-box {
+  background: #f0f8fc;
+  border: 1px solid #b8d8e8;
+  border-left: 4px solid #2d6a8a;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 14px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .83rem; line-height: 1.9;
+  color: #1a3a4a;
+}
+
+[data-theme="dark"] .calc-box {
+  background: rgba(45,106,138,.12);
+  border-color: rgba(45,106,138,.4);
+  color: #a8d8ea;
+}
+
+.calc-box .calc-label {
+  font-family: 'Jost', sans-serif;
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: #2d6a8a; margin-bottom: 8px;
+}
+
+[data-theme="dark"] .calc-box .calc-label { color: #7bbfd4; }
+
+/* Conclusion box */
+.concl-box {
+  background: linear-gradient(135deg, var(--gold-lt) 0%, #fefdf8 100%);
+  border: 1px solid var(--gold);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px; padding: 14px 18px; margin: 16px 0;
+}
+
+[data-theme="dark"] .concl-box { background: rgba(201,169,110,.1); }
+
+.concl-box p { margin: 0; font-size: .88rem; font-style: italic; }
+
+/* Gantt table for Q11 */
+.gantt-table { width: 100%; border-collapse: collapse; font-size: .78rem; margin: 14px 0; overflow-x: auto; }
+.gantt-table th, .gantt-table td { padding: 7px 10px; border: 1px solid var(--border); text-align: center; }
+.gantt-table th { background: var(--warm); color: var(--rose-dk); font-weight: 600; font-size: .68rem; text-transform: uppercase; letter-spacing: .06em; }
+.gantt-table td:first-child { text-align: left; font-weight: 500; min-width: 140px; }
+.gantt-table td:nth-child(2) { min-width: 80px; }
+.gantt-fill { background: linear-gradient(90deg, #2d6a8a, #7bbfd4); border-radius: 3px; color: transparent; font-size: .5rem; }
+
 /* Light/dark mermaid theming handled by JS */
 </style>
 </head>
@@ -859,6 +1033,27 @@ footer .footer-quote {
     <a href="#summary-formulas" class="nav-link">All Formulas</a>
     <a href="#exam-tips" class="nav-link">🔥 Exam Hot Topics</a>
     <a href="#memory-tricks" class="nav-link">💡 Memory Tricks</a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-unit">❓ Important Questions</span>
+    <a href="#iq1" class="nav-link">Q1. Mobile Banking App</a>
+    <a href="#iq2" class="nav-link">Q2. Online Learning Platform</a>
+    <a href="#iq3" class="nav-link">Q3. Need Identification</a>
+    <a href="#iq4" class="nav-link">Q4. Vision & Scope Importance</a>
+    <a href="#iq5" class="nav-link">Q5. PM Cycle with Examples</a>
+    <a href="#iq6" class="nav-link">Q6. SPM Objectives</a>
+    <a href="#iq7" class="nav-link">Q7. SPM Framework</a>
+    <a href="#iq8" class="nav-link">Q8. Types of Project Plans</a>
+    <a href="#iq9" class="nav-link">Q9. SPMP Structure</a>
+    <a href="#iq10" class="nav-link">Q10. COCOMO Problem</a>
+    <a href="#iq11" class="nav-link">Q11. Gantt Chart Problem</a>
+    <a href="#iq12" class="nav-link">Q12. PERT Chart Problem</a>
+    <a href="#iq13" class="nav-link">Q13. WBS Concept</a>
+    <a href="#iq14" class="nav-link">Q14. Types of WBS</a>
+    <a href="#iq15" class="nav-link">Q15. PLC vs PjLC</a>
+    <a href="#iq16" class="nav-link">Q16. Scheduling Techniques</a>
+    <a href="#iq17" class="nav-link">Q17. Building a Schedule</a>
+    <a href="#iq18" class="nav-link">Q18. Functions vs Activities vs Tasks</a>
   </div>
 </nav>
 
@@ -2247,6 +2442,865 @@ Cumulative Returns
 
 </div><!-- /summary -->
 
+<!-- ====== IMPORTANT QUESTIONS ====== -->
+<div class="iq-section" id="important-questions">
+  <div class="iq-header">
+    <h2>❓ Important Questions — Exam Practice</h2>
+    <p>18 Questions · Complete Answers · Diagrams Included · Click any question to expand</p>
+  </div>
+  <div class="iq-body">
+
+    <!-- Q1 -->
+    <div class="q-card" id="iq1">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q1</div>
+        <div class="q-title-wrap">
+          <div class="q-title">A startup company wants to develop a mobile banking application. Identify the need, prepare a Vision & Scope statement, and outline a basic Software Project Plan.</div>
+          <div class="q-subtitle">Need Identification · Vision & Scope · Project Plan</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+
+        <div class="part-label">(a) Identify the Need for the Project</div>
+        <p>The need for developing a mobile banking application is to provide banking services to users through smartphones in a fast, secure, and convenient manner. Customers today expect digital access to services such as checking account balance, transferring funds, paying bills, and viewing transaction history without visiting a branch.</p>
+        <p>This project is needed to <strong>improve customer satisfaction</strong>, reduce manual workload, expand market reach, and help the startup compete in the digital banking sector.</p>
+
+        <div class="part-label">(b) Vision and Scope Statement</div>
+        <div class="def-box"><strong>Vision Statement:</strong> To develop a secure, reliable, and user-friendly mobile banking application that enables customers to perform essential banking operations anytime and anywhere.</div>
+
+        <h4>Problem Statement</h4>
+        <p>Traditional banking methods are time-consuming and inconvenient. Users need a mobile-based system that provides quick and secure access to banking services.</p>
+
+        <div class="cards-grid">
+          <div class="info-card"><div class="card-title">👥 Stakeholders</div><p>Startup founders, Project manager, Developers, Banking partners, Customers, Security & compliance team</p></div>
+          <div class="info-card"><div class="card-title">🙋 Users</div><p>Bank customers, Account holders, New users registering for digital banking</p></div>
+          <div class="info-card"><div class="card-title">⚠️ Risks</div><p>Security breaches, API integration failure, Delay in development, Compliance issues, Low user adoption</p></div>
+          <div class="info-card"><div class="card-title">📋 Assumptions</div><p>Users have smartphones and internet access; backend banking services are available; budget and team are in place</p></div>
+        </div>
+
+        <h4>Main Features</h4>
+        <div class="tag-group">
+          <span class="badge rose">User Registration & Login</span><span class="badge rose">Secure Authentication</span><span class="badge sage">Balance Enquiry</span><span class="badge sage">Fund Transfer</span><span class="badge gold">Bill Payment</span><span class="badge gold">Transaction History</span><span class="badge rose">Alerts & Notifications</span><span class="badge sage">Profile Management</span>
+        </div>
+
+        <div class="compare-grid">
+          <div class="compare-card good"><div class="cc-title">✅ In Scope (Phase 1)</div><ul><li>Login &amp; account overview</li><li>Money transfer</li><li>Bill payment</li><li>Transaction history</li></ul></div>
+          <div class="compare-card bad"><div class="cc-title">❌ Out of Scope</div><ul><li>Insurance services</li><li>Loan processing</li><li>Investment dashboard</li><li>Cryptocurrency features</li></ul></div>
+        </div>
+
+        <div class="part-label">(c) Basic Software Project Plan</div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Plan Component</th><th>Key Contents</th></tr></thead>
+          <tbody>
+            <tr><td>Statement of Work</td><td>Login, balance enquiry, fund transfer, bill payment, transaction tracking</td></tr>
+            <tr><td>Resource Plan</td><td>PM, Business Analyst, UI/UX Designer, Mobile &amp; Backend Developers, Tester, Security Expert</td></tr>
+            <tr><td>Financial Plan</td><td>Salaries, development tools, cloud hosting, security &amp; testing, deployment &amp; maintenance</td></tr>
+            <tr><td>Quality Plan</td><td>Security, reliability, correct transaction processing, easy interface, good performance</td></tr>
+            <tr><td>Risk Plan</td><td>Cyber threats, delays, system failure — with mitigation actions</td></tr>
+            <tr><td>Schedule</td><td>Requirement Analysis → Design → Development → Testing → Deployment → Maintenance</td></tr>
+            <tr><td>Communication Plan</td><td>How updates are shared with founders, developers, stakeholders</td></tr>
+            <tr><td>Acceptance Plan</td><td>Secure login, successful transfer, correct records, stakeholder approval</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Mobile Banking Project Plan — Diagram</div>
+        <pre class="mermaid">flowchart TD
+    A[Need for Mobile Banking App] --> B[Vision and Scope Statement]
+    B --> C[Problem Statement]
+    B --> D[Stakeholders and Users]
+    B --> E[Features and Scope]
+    A --> F[Software Project Plan]
+    F --> G[Statement of Work]
+    F --> H[Resource Plan]
+    F --> I[Financial Plan]
+    F --> J[Quality Plan]
+    F --> K[Risk Plan]
+    F --> L[Schedule]
+    F --> M[Communication Plan]
+    F --> N[Acceptance Plan]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style B fill:#b55e69,color:#fff,stroke:none
+    style F fill:#4a7a6d,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="iq2">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q2</div>
+        <div class="q-title-wrap">
+          <div class="q-title">A software company plans to develop an online learning platform. Apply the Project Management Cycle, identify planning objectives, and propose the SPMP structure.</div>
+          <div class="q-subtitle">PCM Application · Planning Objectives · SPMP Structure</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+
+        <div class="part-label">(a) Project Management Cycle Applied</div>
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid var(--sage)"><div class="card-title">1. Identification</div><p>Increasing demand for digital education; students need remote access to lectures, assignments, quizzes</p></div>
+          <div class="info-card" style="border-top:3px solid var(--gold)"><div class="card-title">2. Formulation</div><p>Define features: student login, course content, video lectures, quizzes, assignment submission, instructor dashboard</p></div>
+          <div class="info-card" style="border-top:3px solid var(--rose)"><div class="card-title">3. Financing Decision</div><p>Management checks feasibility, budget, expected benefits; approves project if worthwhile</p></div>
+          <div class="info-card" style="border-top:3px solid #2d6a8a"><div class="card-title">4. Implementation</div><p>System designed, developed, tested, and deployed; resources assigned; progress monitored</p></div>
+          <div class="info-card" style="border-top:3px solid #8a5ab5"><div class="card-title">5. Evaluation</div><p>Check if objectives achieved, users satisfied; lessons learned</p></div>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">PCM Cycle</div>
+        <pre class="mermaid">flowchart LR
+    A[Identification] --> B[Formulation]
+    B --> C[Financing Decision]
+    C --> D[Implementation]
+    D --> E[Evaluation]
+    E -->|Feedback| A
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style B fill:#c9a96e,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style D fill:#2d6a8a,color:#fff,stroke:none
+    style E fill:#8a5ab5,color:#fff,stroke:none</pre></div>
+
+        <div class="part-label">(b) Planning Objectives</div>
+        <ol class="answer-steps">
+          <li>Estimate required resources — people, hardware, software</li>
+          <li>Estimate total project cost</li>
+          <li>Prepare a realistic schedule</li>
+          <li>Identify required manpower and skills</li>
+          <li>Identify possible risks</li>
+          <li>Define tasks clearly with scope</li>
+          <li>Ensure quality delivery within time and budget</li>
+        </ol>
+        <div class="tip-box"><div class="tip-head">🎯 Key Point — 4 Planning Questions</div><p>The planner must answer: <strong>How much will it cost? How long will it take? How many people? What might go wrong?</strong></p></div>
+
+        <div class="part-label">(c) Structure of the Project Management Plan</div>
+        <div class="diagram-wrap"><div class="diagram-label">SPMP Structure</div>
+        <pre class="mermaid">flowchart TD
+    A[Project Management Plan] --> B[Front Matter]
+    A --> C[Introduction]
+    A --> D[Project Organization]
+    A --> E[Managerial Process]
+    A --> F[Technical Process]
+    A --> G[Work Elements, Schedule & Budget]
+    A --> H[Supporting Plans]
+    H --> H1[Resource Plan] & H2[Financial Plan] & H3[Quality Plan]
+    H --> H4[Risk Plan] & H5[Acceptance Plan] & H6[Communication Plan] & H7[Procurement Plan]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style H fill:#b55e69,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="iq3">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q3</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Describe the process of Need Identification in a software project.</div>
+          <div class="q-subtitle">Definition · 7-Step Process · Vision & Scope Connection</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>Need Identification</strong> is the process of recognizing and defining the problem that a software project is expected to solve. It is one of the <em>earliest and most important</em> activities in SPM — a project should begin only when there is a clear understanding of why the software is needed and what value it will provide.</div>
+
+        <ol class="answer-steps">
+          <li><strong>Recognizing the problem:</strong> Identify a difficulty, limitation, or opportunity in the existing system — slow manual work, poor customer service, lack of automation, or inability to meet business goals.</li>
+          <li><strong>Understanding stakeholder needs:</strong> Communicate with stakeholders (customers, managers, users, developers, external partners) to understand their expectations, problems, and priorities.</li>
+          <li><strong>Studying the project background:</strong> Understand history of the problem, why it exists, previous attempts to solve it, and why the organization has now decided to start the project.</li>
+          <li><strong>Identifying users and their requirements:</strong> Identify user groups and study their needs carefully — this determines what services the proposed software should provide.</li>
+          <li><strong>Defining project objectives:</strong> Define SMART objectives — Specific, Measurable, Achievable, Relevant, Time-constrained.</li>
+          <li><strong>Considering risks and assumptions:</strong> Identify possible risks and assumptions to give a realistic picture of the need and feasibility of the project.</li>
+          <li><strong>Preparing the Vision and Scope basis:</strong> The identified need becomes the base for preparing the Vision and Scope Document.</li>
+        </ol>
+
+        <div class="diagram-wrap"><div class="diagram-label">Need Identification Process Flow</div>
+        <pre class="mermaid">flowchart TD
+    A[Recognize Problem or Opportunity] --> B[Identify Stakeholders]
+    B --> C[Understand User Needs]
+    C --> D[Study Project Background]
+    D --> E[Define Objectives]
+    E --> F[Identify Risks and Assumptions]
+    F --> G[Prepare Basis for Vision and Scope]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style G fill:#4a7a6d,color:#fff,stroke:none</pre></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> Need Identification is the foundation of a software project. It ensures the project starts with a clear purpose, solves a real problem, and aligns with stakeholder expectations and organizational goals.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="iq4">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q4</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Explain the importance of the Vision and Scope Document in software projects.</div>
+          <div class="q-subtitle">8 Importance Points · Contents · Diagram</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>Vision and Scope Document</strong> shows that stakeholder needs are properly understood and the project will address those needs in a structured way. It provides a clear picture of what the project is expected to achieve and what boundaries it will follow.</div>
+
+        <h4>Importance — 8 Key Points</h4>
+        <div class="cards-grid">
+          <div class="info-card"><div class="card-title">1. Clarifies Purpose</div><p>Explains the problem to be solved and why the software is being developed</p></div>
+          <div class="info-card"><div class="card-title">2. Identifies Stakeholders</div><p>Lists stakeholders and users with their needs — not just a technical view</p></div>
+          <div class="info-card"><div class="card-title">3. Defines Vision</div><p>Gives a compelling reason for spending time, money, and effort</p></div>
+          <div class="info-card"><div class="card-title">4. Defines Scope Clearly</div><p>Tells what features will and will NOT be developed — prevents scope creep</p></div>
+          <div class="info-card"><div class="card-title">5. Helps in Planning</div><p>Acts as input for estimation, scheduling, resource planning, and risk planning</p></div>
+          <div class="info-card"><div class="card-title">6. Risk Identification</div><p>Includes risks and assumptions to think ahead about possible problems</p></div>
+          <div class="info-card"><div class="card-title">7. Phased Release</div><p>Helps define which features come first and which are deferred</p></div>
+          <div class="info-card"><div class="card-title">8. Improves Communication</div><p>Acts as a common reference for all — managers, developers, stakeholders, users</p></div>
+        </div>
+
+        <h4>Contents of Vision and Scope Document</h4>
+        <div class="diagram-wrap"><div class="diagram-label">Document Structure</div>
+        <pre class="mermaid">flowchart TD
+    A[Vision and Scope Document] --> B[Problem Statement]
+    A --> C[Project Background]
+    A --> D[Stakeholders]
+    A --> E[Users]
+    A --> F[Risks and Assumptions]
+    A --> G[Vision Statement]
+    A --> H[List of Features]
+    A --> I[Scope and Out of Scope]
+    style A fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> The Vision and Scope Document gives direction, defines limits, improves communication, and creates the base for successful planning and execution.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="iq5">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q5</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Discuss the Project Management Cycle with suitable examples.</div>
+          <div class="q-subtitle">PCM · 5 Stages · Principles · College Example</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>PCM (Project Cycle Management)</strong> is a methodology for preparation, implementation, and evaluation of projects. It is based on the logical framework approach and describes management activities and decision-making procedures used during the life cycle of a project.</div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>Stage</th><th>Description</th><th>College LMS Example</th></tr></thead>
+          <tbody>
+            <tr><td>1. Identification</td><td>Recognize the need; identify problems, opportunities, user needs</td><td>College identifies need for online learning platform — students need remote access</td></tr>
+            <tr><td>2. Formulation</td><td>Detailed planning; define objectives, features, resources, risks, scope</td><td>Team lists features: student login, course videos, attendance, online tests, teacher dashboard</td></tr>
+            <tr><td>3. Financing Decision</td><td>Study cost, available resources, expected benefits; decide to fund the project</td><td>College management approves budget for development, hosting, and training</td></tr>
+            <tr><td>4. Implementation</td><td>Execute — design, code, test, deploy</td><td>Developers build platform, testers verify functions, system launched</td></tr>
+            <tr><td>5. Evaluation</td><td>Review whether objectives met and benefits achieved</td><td>Check if students successfully use the platform and if learning access improved</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>PCM Principles</h4>
+        <div class="tag-group">
+          <span class="badge rose">Progressive Phases</span><span class="badge sage">Results-Based</span><span class="badge gold">Stakeholder Participation</span><span class="badge rose">Local Ownership</span><span class="badge sage">Quality Documents Required</span><span class="badge gold">Structured Feedback Loop</span>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">PCM Cycle with Feedback</div>
+        <pre class="mermaid">flowchart LR
+    A[Identification] --> B[Formulation]
+    B --> C[Financing Decision]
+    C --> D[Implementation]
+    D --> E[Evaluation]
+    E -->|Feedback| A
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style E fill:#8a5ab5,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="iq6">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q6</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Explain the objectives of Software Project Management.</div>
+          <div class="q-subtitle">10 Objectives · Mindmap · Conclusion</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>SPM Objective:</strong> To plan, organize, monitor, and control software development activities effectively so that software is delivered on time, within budget, and according to the required quality.</div>
+
+        <div class="cards-grid">
+          <div class="info-card" style="border-left:3px solid var(--rose)"><div class="card-title">1. On-Time Delivery</div><p>Ensure software is developed and delivered within scheduled time</p></div>
+          <div class="info-card" style="border-left:3px solid var(--rose)"><div class="card-title">2. Within Budget</div><p>Remain within financial limits through proper cost estimation and control</p></div>
+          <div class="info-card" style="border-left:3px solid var(--sage)"><div class="card-title">3. Required Quality</div><p>Deliver reliable, efficient, user-friendly software meeting required standards</p></div>
+          <div class="info-card" style="border-left:3px solid var(--sage)"><div class="card-title">4. Resource Utilization</div><p>Best use of manpower, tools, time, equipment, and funds</p></div>
+          <div class="info-card" style="border-left:3px solid var(--gold)"><div class="card-title">5. Risk Reduction</div><p>Identify, analyze, and manage risks to avoid delays, defects, failures</p></div>
+          <div class="info-card" style="border-left:3px solid var(--gold)"><div class="card-title">6. Productivity</div><p>Increase team productivity through proper planning, coordination, tracking</p></div>
+          <div class="info-card" style="border-left:3px solid #2d6a8a"><div class="card-title">7. Stakeholder Management</div><p>Proper communication to keep expectations realistic and aligned</p></div>
+          <div class="info-card" style="border-left:3px solid #2d6a8a"><div class="card-title">8. Progress Control</div><p>Monitor work, check deviations, take corrective actions</p></div>
+          <div class="info-card" style="border-left:3px solid #8a5ab5"><div class="card-title">9. Scope Management</div><p>Define what work is to be done; use WBS and schedules</p></div>
+          <div class="info-card" style="border-left:3px solid #8a5ab5"><div class="card-title">10. Project Success</div><p>Maximize probability the project achieves time, cost, quality, and usefulness goals</p></div>
+        </div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> SPM objectives are centered on delivering high-quality software successfully through proper planning, coordination, control, and efficient use of resources.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="iq7">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q7</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Describe the SPM Framework and its key components.</div>
+          <div class="q-subtitle">10 Components · Management Activities · Monitoring & Control</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>SPM Framework</strong> is the overall structure used to manage a software project systematically. It provides the basis for planning, organizing, executing, monitoring, and controlling the project to ensure successful software delivery.</div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>#</th><th>Component</th><th>Key Elements</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Management Activities</td><td>Planning, Organizing, Staffing, Directing, Monitoring, Controlling, Innovating, Representing</td></tr>
+            <tr><td>2</td><td>Project Objectives</td><td>SMART objectives that define what the project should achieve</td></tr>
+            <tr><td>3</td><td>Vision and Scope</td><td>Problem, stakeholders, users, features, risks, assumptions, boundaries</td></tr>
+            <tr><td>4</td><td>Project Planning</td><td>Estimate resources, cost, schedule, team size, risks</td></tr>
+            <tr><td>5</td><td>Project Plans</td><td>Project, Resource, Financial, Quality, Risk, Acceptance, Communication, Procurement</td></tr>
+            <tr><td>6</td><td>WBS and PBS</td><td>PBS = WHAT will be delivered; WBS = WHAT WORK will be done</td></tr>
+            <tr><td>7</td><td>Organization & Responsibilities</td><td>Team roles, hierarchy, interfaces, responsibility assignment</td></tr>
+            <tr><td>8</td><td>Technical Process</td><td>Methods, tools, techniques, documentation, QA, configuration management</td></tr>
+            <tr><td>9</td><td>Monitoring & Control</td><td>Collect data → Process info → Compare with objectives → Model → Implement corrective action</td></tr>
+            <tr><td>10</td><td>Estimation & Scheduling Tools</td><td>Gantt Chart, PERT, Logic Network, COCOMO model</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="diagram-wrap"><div class="diagram-label">SPM Framework Overview</div>
+        <pre class="mermaid">flowchart TD
+    A[SPM Framework] --> B[Management Activities]
+    A --> C[Project Objectives]
+    A --> D[Vision and Scope]
+    A --> E[Project Planning]
+    A --> F[Project Plans]
+    A --> G[WBS and PBS]
+    A --> H[Organization & Responsibilities]
+    A --> I[Technical Process]
+    A --> J[Monitoring and Control]
+    A --> K[Estimation & Scheduling Tools]
+    style A fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="iq8">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q8</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Explain the types of project plans used in Software Project Management.</div>
+          <div class="q-subtitle">8 Plans — Purpose & Contents of Each</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box">After defining project scope, detailed planning is done through <strong>8 different project plans</strong> to control time, cost, quality, risk, and resources.</div>
+
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid #2d6a8a"><div class="card-title">📋 1. Project Plan</div><p>Main plan — what work, who does it, timeline, control. Includes tasks, schedule, estimates, risk info.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--sage)"><div class="card-title">👥 2. Resource Plan</div><p>People, hardware, software, rooms, tools — ensures resources available at right time.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--gold)"><div class="card-title">💰 3. Financial Plan</div><p>Labor, equipment, tools, materials cost — manages the project budget properly.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--rose)"><div class="card-title">✅ 4. Quality Plan</div><p>Quality targets, QA and QC activities — how quality will be maintained throughout.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--rose-dk)"><div class="card-title">⚠️ 5. Risk Plan</div><p>Identifies possible risks and mitigation actions — handles uncertainty in software projects.</p></div>
+          <div class="info-card" style="border-top:3px solid #8a5ab5"><div class="card-title">🤝 6. Acceptance Plan</div><p>Conditions/criteria that must be satisfied before the customer accepts the software.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--sage)"><div class="card-title">📢 7. Communication Plan</div><p>What info, with whom, when, and how — improves communication among all parties.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--gold)"><div class="card-title">🛒 8. Procurement Plan</div><p>What must be purchased from external suppliers — used when services/products are outsourced.</p></div>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">All 8 Plans under Project Scope</div>
+        <pre class="mermaid">flowchart TD
+    A[Project Plans in SPM] --> B[Project Plan]
+    A --> C[Resource Plan]
+    A --> D[Financial Plan]
+    A --> E[Quality Plan]
+    A --> F[Risk Plan]
+    A --> G[Acceptance Plan]
+    A --> H[Communication Plan]
+    A --> I[Procurement Plan]
+    style A fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="iq9">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q9</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Discuss the structure of a Software Project Management Plan (SPMP) with proper explanation of each component.</div>
+          <div class="q-subtitle">IEEE 1058 · 6 Sections · Full Contents</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>SPMP</strong> is a formal document describing how a software project will be managed — complete information about the project, team structure, planning, schedule, risks, technical work, and control methods.</div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>Section</th><th>What It Contains</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Front Matter</strong></td><td>Title Page, Revision Sheet, Preface, Table of Contents, List of Figures and Tables</td></tr>
+            <tr><td><strong>2. Introduction</strong></td><td>Project Overview, Executive Summary, Project Deliverables, Evolution of SPMP, Reference Materials, Definitions and Acronyms</td></tr>
+            <tr><td><strong>3. Project Organization</strong></td><td>Process Model, Organizational Structure, Organizational Interfaces, Project Responsibilities</td></tr>
+            <tr><td><strong>4. Managerial Process</strong></td><td>Management Objectives & Priorities, Assumptions/Dependencies/Constraints, Risk Management, Monitoring & Control Mechanisms, Staffing Plan</td></tr>
+            <tr><td><strong>5. Technical Process</strong></td><td>Methods, Tools and Techniques, Software Documentation, Project Support (QA & Configuration Management)</td></tr>
+            <tr><td><strong>6. Work Elements, Schedule, Budget</strong></td><td>Work Packages / WBS, Dependencies, Resource Requirements, Budget & Allocation, Schedule & Milestones</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="tip-box"><div class="tip-head">🎯 Exam Tip</div><p>Remember the 6 sections: <strong>F-I-P-M-T-W</strong> → Front Matter, Introduction, Project Organization, Managerial Process, Technical Process, Work Elements.</p></div>
+
+        <div class="diagram-wrap"><div class="diagram-label">SPMP Structure</div>
+        <pre class="mermaid">flowchart TD
+    A[SPMP] --> B[Front Matter]
+    A --> C[Introduction]
+    A --> D[Project Organization]
+    A --> E[Managerial Process]
+    A --> F[Technical Process]
+    A --> G[Work Elements, Schedule and Budget]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style E fill:#b55e69,color:#fff,stroke:none
+    style G fill:#4a7a6d,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="iq10">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q10</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Problem: Estimate effort and development time for a 32 KLOC project using Basic COCOMO Organic model.</div>
+          <div class="q-subtitle">Numerical · COCOMO · Effort · Duration · Team Size</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>COCOMO</strong> = Constructive Cost Model by Barry Boehm. Uses size in KLOC (thousands of lines of code) to estimate effort and duration.</div>
+
+        <div class="formula-box">
+          <div class="formula-label">Basic COCOMO — Organic Mode Formulas</div>
+Effort   (E) = 2.4 × (KLOC)^1.05   [Person-Months]
+Duration (D) = 2.5 × (E)^0.38      [Months]
+Team Size    = E / D                 [People]</div>
+
+        <div class="calc-box">
+          <div class="calc-label">Step-by-Step Solution — KLOC = 32, Organic Mode</div>
+Step 1: Calculate Effort
+  32^1.05 ≈ 38.09
+  E = 2.4 × 38.09
+  E ≈ 91.42 person-months
+
+Step 2: Calculate Development Time
+  D = 2.5 × (91.42)^0.38
+  D ≈ 2.5 × 5.56
+  D ≈ 13.9 months
+
+Step 3: Team Size
+  Team = 91.42 / 13.9
+  Team ≈ 6.6 ≈ 7 people</div>
+
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid #2d6a8a"><div class="card-title">📊 Estimated Effort</div><p><strong>91.42 person-months</strong></p></div>
+          <div class="info-card" style="border-top:3px solid var(--sage)"><div class="card-title">⏱️ Estimated Duration</div><p><strong>13.9 months (~14 months)</strong></p></div>
+          <div class="info-card" style="border-top:3px solid var(--gold)"><div class="card-title">👥 Team Size</div><p><strong>~7 people</strong></p></div>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">COCOMO Estimation Flow</div>
+        <pre class="mermaid">flowchart LR
+    A[Input: 32 KLOC\nOrganic Mode] --> B[Apply Formula\nE = 2.4 × KLOC^1.05]
+    B --> C[Effort ≈ 91.42\nPerson-Months]
+    C --> D[Apply Formula\nD = 2.5 × E^0.38]
+    D --> E[Duration ≈ 13.9\nMonths]
+    E --> F[Team Size\n≈ 7 People]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style F fill:#4a7a6d,color:#fff,stroke:none</pre></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> A 32 KLOC project in Organic mode needs approximately <strong>91 person-months of effort</strong> and <strong>14 months of development time</strong>, with a team of about <strong>7 people</strong>.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="q-card" id="iq11">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q11</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Problem: Prepare a Gantt chart for a software project — Requirement Analysis (2w), Design (2w), Coding (4w), Testing (2w), Deployment (1w).</div>
+          <div class="q-subtitle">Gantt Chart · Bar Chart · Timeline · Sequential Tasks</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>Gantt Chart</strong> is a bar chart showing project tasks against time. It shows when each task starts, how long it continues, and when it ends. Created by Henry Gantt (1910).</div>
+
+        <div style="overflow-x:auto;margin:14px 0">
+        <table class="gantt-table">
+          <thead><tr><th>Task</th><th>Duration</th><th>W1</th><th>W2</th><th>W3</th><th>W4</th><th>W5</th><th>W6</th><th>W7</th><th>W8</th><th>W9</th><th>W10</th><th>W11</th></tr></thead>
+          <tbody>
+            <tr><td>Requirement Analysis</td><td>2 weeks</td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Design</td><td>2 weeks</td><td></td><td></td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>Coding</td><td>4 weeks</td><td></td><td></td><td></td><td></td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td></td><td></td><td></td></tr>
+            <tr><td>Testing</td><td>2 weeks</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="gantt-fill">█</td><td class="gantt-fill">█</td><td></td></tr>
+            <tr><td>Deployment</td><td>1 week</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="gantt-fill">█</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Mermaid Gantt Chart</div>
+        <pre class="mermaid">gantt
+    title Software Project Gantt Chart
+    dateFormat  YYYY-MM-DD
+    section Project Tasks
+    Requirement Analysis :a1, 2026-01-01, 14d
+    Design               :a2, after a1, 14d
+    Coding               :a3, after a2, 28d
+    Testing              :a4, after a3, 14d
+    Deployment           :a5, after a4, 7d</pre></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> Total project duration = 11 weeks. A Gantt chart makes the schedule easy to understand and helps the manager track progress against plan.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card" id="iq12">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q12</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Problem: Draw a PERT network for activities A(2w), B(3w after A), C(2w after A), D(4w after B&C), E(2w after D). Find the critical path.</div>
+          <div class="q-subtitle">PERT · Network Diagram · Critical Path · Path Analysis</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>PERT</strong> = Program Evaluation and Review Technique. Shows activity sequence, dependencies, and helps find the critical path — the longest path which determines project duration.</div>
+
+        <div class="calc-box">
+          <div class="calc-label">Path Analysis</div>
+Activities:
+  A: Requirement Analysis = 2 weeks  (start)
+  B: Design = 3 weeks               (after A)
+  C: Database Setup = 2 weeks       (after A)
+  D: Coding = 4 weeks               (after B AND C both done)
+  E: Testing = 2 weeks              (after D)
+
+All Paths:
+  Path 1: A → B → D → E = 2 + 3 + 4 + 2 = 11 weeks  ← CRITICAL PATH ✅
+  Path 2: A → C → D → E = 2 + 2 + 4 + 2 = 10 weeks
+
+Critical Path = A → B → D → E
+Project Duration = 11 weeks</div>
+
+        <div class="diagram-wrap"><div class="diagram-label">PERT Network Diagram</div>
+        <pre class="mermaid">flowchart LR
+    A[A - Requirement Analysis\n2 weeks] --> B[B - Design\n3 weeks]
+    A --> C[C - Database Setup\n2 weeks]
+    B --> D[D - Coding\n4 weeks]
+    C --> D
+    D --> E[E - Testing\n2 weeks]
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style B fill:#b55e69,color:#fff,stroke:none
+    style D fill:#b55e69,color:#fff,stroke:none
+    style E fill:#b55e69,color:#fff,stroke:none
+    style C fill:#c9a96e,color:#fff,stroke:none</pre></div>
+
+        <div class="warn-box"><p>⚠️ <strong>Critical Path (red):</strong> A → B → D → E = <strong>11 weeks</strong>. Any delay in B will delay the whole project. Activity C has <strong>1 week of float</strong> (slack).</p></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> The critical path is A → B → D → E with total duration 11 weeks. The manager must ensure activities on this path are not delayed.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card" id="iq13">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q13</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Explain the concept of Work Breakdown Structure (WBS) and its importance in project management.</div>
+          <div class="q-subtitle">WBS Definition · 7 Importance Points · Example Diagram</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box"><strong>WBS (Work Breakdown Structure)</strong> is a hierarchical structure of project activities focusing on the <em>work that must be done</em> to complete the project. It breaks a large project into smaller, manageable tasks. It becomes the basis of the project plan.</div>
+
+        <h4>WBS Levels</h4>
+        <div class="cards-grid">
+          <div class="info-card"><div class="card-title">Level 1 — Project</div><p>The whole project as a single unit</p></div>
+          <div class="info-card"><div class="card-title">Level 2 — Major Phases</div><p>e.g., Requirements, Design, Coding, Testing, Deployment</p></div>
+          <div class="info-card"><div class="card-title">Level 3 — Control Packages</div><p>Sub-phases or components within each major phase</p></div>
+          <div class="info-card"><div class="card-title">Level 4 — Work Packages</div><p>Smallest units that can be assigned and monitored</p></div>
+        </div>
+
+        <h4>Importance — 7 Key Points</h4>
+        <ol class="answer-steps">
+          <li><strong>Makes work clear:</strong> Shows exactly what has to be done in the project — no ambiguity</li>
+          <li><strong>Helps in task division:</strong> Divides a big project into smaller tasks, easier to manage</li>
+          <li><strong>Assigns responsibility:</strong> Each work package can be assigned to a team or person</li>
+          <li><strong>Helps in estimation:</strong> Easier to estimate time, cost, and resources for smaller tasks</li>
+          <li><strong>Helps in scheduling:</strong> Once divided clearly, a proper schedule can be prepared</li>
+          <li><strong>Enables monitoring:</strong> Managers can track each small task more easily</li>
+          <li><strong>Reduces missed work:</strong> Gives confidence all important work has been identified</li>
+        </ol>
+
+        <div class="diagram-wrap"><div class="diagram-label">WBS Example — Software Project</div>
+        <pre class="mermaid">flowchart TD
+    A[Software Project] --> B[Requirement Analysis] & C[Design] & D[Development] & E[Testing] & F[Deployment]
+    B --> B1[Req. Gathering] & B2[Req. Documentation]
+    C --> C1[System Design] & C2[Database Design]
+    D --> D1[Frontend Coding] & D2[Backend Coding]
+    E --> E1[Unit Testing] & E2[Integration Testing]
+    F --> F1[Release] & F2[User Training]
+    style A fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card" id="iq14">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q14</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Describe the different types of WBS used in software projects.</div>
+          <div class="q-subtitle">5 Types · Phase-based · Deliverable · Function · Org · Hybrid</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid #2d6a8a">
+            <div class="card-title">1. Phase-based WBS</div>
+            <p>Divided by phases: Requirements → Design → Coding → Testing → Deployment. Useful for step-by-step development; most common.</p>
+          </div>
+          <div class="info-card" style="border-top:3px solid var(--sage)">
+            <div class="card-title">2. Deliverable-based WBS</div>
+            <p>Divided by outputs: Requirement Spec, Design Doc, Source Code, Test Report, Final Product. Useful when focus is on WHAT to deliver.</p>
+          </div>
+          <div class="info-card" style="border-top:3px solid var(--gold)">
+            <div class="card-title">3. Function-based WBS</div>
+            <p>Divided by software modules: User Management, Product Catalog, Payment Module. Useful for software with many independent modules.</p>
+          </div>
+          <div class="info-card" style="border-top:3px solid var(--rose-dk)">
+            <div class="card-title">4. Organizational WBS</div>
+            <p>Divided by teams: Business Analysis, Design, Development, Testing, Deployment Teams. Helps in clear responsibility assignment.</p>
+          </div>
+          <div class="info-card" style="border-top:3px solid #8a5ab5">
+            <div class="card-title">5. Hybrid WBS</div>
+            <p>Combination of above types — e.g., phase-wise first, then function-wise within each phase. Very practical for large projects.</p>
+          </div>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Types of WBS</div>
+        <pre class="mermaid">flowchart TD
+    A[Types of WBS] --> B[Phase-based WBS]
+    A --> C[Deliverable-based WBS]
+    A --> D[Function-based WBS]
+    A --> E[Organizational WBS]
+    A --> F[Hybrid WBS]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style B fill:#7a9e8e,color:#fff,stroke:none
+    style C fill:#c9a96e,color:#fff,stroke:none
+    style D fill:#d4808a,color:#fff,stroke:none
+    style E fill:#8a5ab5,color:#fff,stroke:none
+    style F fill:#b55e69,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="q-card" id="iq15">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q15</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Compare and contrast Project Life Cycle and Product Life Cycle with proper diagrams.</div>
+          <div class="q-subtitle">5-Point Comparison Table · Two Diagrams · Key Differences</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Basis</th><th>Project Life Cycle</th><th>Product Life Cycle</th></tr></thead>
+          <tbody>
+            <tr><td>Meaning</td><td>Stages of completing the project</td><td>Stages of the product in the market</td></tr>
+            <tr><td>Focus</td><td>Development and management of project</td><td>Use and market life of the product</td></tr>
+            <tr><td>Duration</td><td>Temporary — ends when project closes</td><td>Long-term — years or decades</td></tr>
+            <tr><td>Main concern</td><td>Planning, execution, control, delivery</td><td>Adoption, maintenance, growth, decline</td></tr>
+            <tr><td>Who manages</td><td>Project Manager</td><td>Product Manager</td></tr>
+            <tr><td>Outcome</td><td>Produces the software product</td><td>Shows how long the product survives</td></tr>
+            <tr><td>Phases</td><td>Initiation → Planning → Execution → Closure</td><td>Introduction → Growth → Maturity → Decline</td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="compare-grid">
+          <div>
+            <div class="diagram-wrap"><div class="diagram-label">Project Life Cycle</div>
+            <pre class="mermaid">flowchart LR
+    A[Identification] --> B[Planning]
+    B --> C[Implementation]
+    C --> D[Monitoring & Control]
+    D --> E[Evaluation / Closure]
+    style A fill:#7a9e8e,color:#fff,stroke:none
+    style E fill:#b55e69,color:#fff,stroke:none</pre></div>
+          </div>
+          <div>
+            <div class="diagram-wrap"><div class="diagram-label">Product Life Cycle</div>
+            <pre class="mermaid">flowchart LR
+    A[Introduction] --> B[Growth]
+    B --> C[Maturity]
+    C --> D[Decline]
+    style A fill:#c9a96e,color:#fff,stroke:none
+    style D fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+          </div>
+        </div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> The Project Life Cycle is concerned with <em>completing the project</em>, while the Product Life Cycle is concerned with the <em>life of the software product after development</em>. Both are necessary for successful software planning and management.</p></div>
+      </div></div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="q-card" id="iq16">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q16</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Discuss various project scheduling techniques used in Software Project Management.</div>
+          <div class="q-subtitle">5 Techniques — Gantt · PERT · Logic Network · Milestone · WBS-based</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid #2d6a8a"><div class="card-title">1. Gantt Chart</div><p>Bar chart showing tasks against time. Shows start, end, duration. Best for small to medium projects with clear task timing.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--rose-dk)"><div class="card-title">2. PERT Chart</div><p>Activities in sequence with dependencies. Used to find the critical path. Best when many activities depend on each other.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--sage)"><div class="card-title">3. Logic Network</div><p>Network diagram showing logical order of activities. Identifies which activity must precede another. Best for complex projects.</p></div>
+          <div class="info-card" style="border-top:3px solid var(--gold)"><div class="card-title">4. Milestone Chart</div><p>Shows important events/checkpoints only — e.g., "Requirements Complete", "Coding Complete". Best for management reporting.</p></div>
+          <div class="info-card" style="border-top:3px solid #8a5ab5"><div class="card-title">5. WBS-based Scheduling</div><p>Uses WBS as base; tasks from WBS are assigned time. Makes scheduling detailed and accurate.</p></div>
+        </div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Scheduling Techniques</div>
+        <pre class="mermaid">flowchart TD
+    A[Project Scheduling Techniques] --> B[Gantt Chart]
+    A --> C[PERT Chart]
+    A --> D[Logic Network]
+    A --> E[Milestone Chart]
+    A --> F[WBS-based Scheduling]
+    style A fill:#2d6a8a,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="q-card" id="iq17">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q17</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Explain the steps involved in building a project schedule with suitable examples.</div>
+          <div class="q-subtitle">8 Steps · Library System Example · Student Portal Example</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <ol class="answer-steps">
+          <li><strong>Define the project work:</strong> Identify clearly using WBS — e.g., for Library System: Requirement Gathering, Design, Coding, Testing, Deployment</li>
+          <li><strong>Divide work into tasks:</strong> Break each major item into smaller tasks — e.g., Coding → Login Module, Book Issue Module, Return Module, Report Module</li>
+          <li><strong>Identify dependencies:</strong> Which tasks depend on others — e.g., Testing cannot begin before Coding; Design cannot start before Requirements</li>
+          <li><strong>Estimate effort and duration:</strong> Time required for each task — Requirements: 1w, Design: 2w, Coding: 4w, Testing: 2w, Deployment: 1w</li>
+          <li><strong>Assign resources:</strong> People, tools, hardware — Analyst for requirements, Developers for coding, Testers for testing</li>
+          <li><strong>Arrange tasks in sequence:</strong> Place in correct order based on dependencies — Requirements → Design → Coding → Testing → Deployment</li>
+          <li><strong>Prepare the schedule chart:</strong> Show using Gantt chart or PERT chart for visual clarity</li>
+          <li><strong>Review and update:</strong> Check regularly and update if there is delay, change, or new risk</li>
+        </ol>
+
+        <h4>Student Portal Example Schedule</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Task</th><th>Duration</th><th>Sequence</th></tr></thead>
+          <tbody>
+            <tr><td>Requirement Analysis</td><td>1 week</td><td>First</td></tr>
+            <tr><td>Design</td><td>1 week</td><td>After Requirements</td></tr>
+            <tr><td>Coding</td><td>3 weeks</td><td>After Design</td></tr>
+            <tr><td>Testing</td><td>1 week</td><td>After Coding</td></tr>
+            <tr><td>Deployment</td><td>1 week</td><td>After Testing</td></tr>
+            <tr style="background:var(--sage-lt)"><td colspan="2"><strong>Total Duration</strong></td><td><strong>7 weeks</strong></td></tr>
+          </tbody>
+        </table></div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Steps in Building a Project Schedule</div>
+        <pre class="mermaid">flowchart TD
+    A[Define Project Work] --> B[Divide into Tasks]
+    B --> C[Identify Dependencies]
+    C --> D[Estimate Effort and Duration]
+    D --> E[Assign Resources]
+    E --> F[Arrange Tasks in Sequence]
+    F --> G[Prepare Schedule Chart]
+    G --> H[Review and Update Schedule]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style H fill:#4a7a6d,color:#fff,stroke:none</pre></div>
+      </div></div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="q-card" id="iq18">
+      <div class="q-head" onclick="toggleQ(this)">
+        <div class="q-num">Q18</div>
+        <div class="q-title-wrap">
+          <div class="q-title">Differentiate between Functions, Activities, and Tasks with examples.</div>
+          <div class="q-subtitle">3 Levels of Work · Comparison Table · E-Learning Platform Example</div>
+        </div>
+        <div class="q-chevron">▼</div>
+      </div>
+      <div class="q-body"><div class="q-body-inner">
+        <div class="def-box">Functions, Activities, and Tasks represent <em>three different levels of work</em> in a project — from broadest to most specific.</div>
+
+        <div class="cards-grid">
+          <div class="info-card" style="border-top:3px solid #2d6a8a">
+            <div class="card-title">🏢 Function (Broadest)</div>
+            <p>A major category of work or purpose. Contains many activities.<br><br><em>Examples: Requirements Engineering, Design, Development, Testing, Maintenance</em></p>
+          </div>
+          <div class="info-card" style="border-top:3px solid var(--rose)">
+            <div class="card-title">⚙️ Activity (Middle)</div>
+            <p>A major action performed under a function. More specific than a function, contains many tasks.<br><br><em>Example under Testing: Unit Testing, Integration Testing, System Testing</em></p>
+          </div>
+          <div class="info-card" style="border-top:3px solid var(--sage)">
+            <div class="card-title">📌 Task (Smallest)</div>
+            <p>The smallest specific, measurable unit. Assigned to one person or small team.<br><br><em>Example under Unit Testing: Write test cases, Execute test cases, Record defects</em></p>
+          </div>
+        </div>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>Basis</th><th>Function</th><th>Activity</th><th>Task</th></tr></thead>
+          <tbody>
+            <tr><td>Meaning</td><td>Broad area of work</td><td>Major action under a function</td><td>Small specific unit of work</td></tr>
+            <tr><td>Level</td><td>Highest</td><td>Middle</td><td>Lowest</td></tr>
+            <tr><td>Scope</td><td>Very broad</td><td>Moderate</td><td>Narrow</td></tr>
+            <tr><td>Example</td><td>Testing</td><td>Integration Testing</td><td>Test payment module</td></tr>
+            <tr><td>Assignment</td><td>Team or department</td><td>Group or sub-team</td><td>Person or small team</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>Example in E-Learning Platform</h4>
+        <div class="calc-box">
+          <div class="calc-label">Hierarchy Example</div>
+Function  → Development
+Activity  → Frontend Development
+Task      → Create login page UI
+
+Function  → Testing
+Activity  → System Testing
+Task      → Check course registration feature</div>
+
+        <div class="diagram-wrap"><div class="diagram-label">Relationship: Function → Activity → Task</div>
+        <pre class="mermaid">flowchart TD
+    A[Function] --> B[Activity 1] & C[Activity 2]
+    B --> D[Task 1] & E[Task 2]
+    C --> F[Task 3] & G[Task 4]
+    style A fill:#2d6a8a,color:#fff,stroke:none
+    style B fill:#d4808a,color:#fff,stroke:none
+    style C fill:#d4808a,color:#fff,stroke:none
+    style D fill:#7a9e8e,color:#fff,stroke:none
+    style E fill:#7a9e8e,color:#fff,stroke:none
+    style F fill:#7a9e8e,color:#fff,stroke:none
+    style G fill:#7a9e8e,color:#fff,stroke:none</pre></div>
+
+        <div class="concl-box"><p><strong>Conclusion:</strong> A function is broad, an activity is a major part of that function, and a task is a small piece of work done to complete the activity. Together they create a complete, manageable work breakdown.</p></div>
+      </div></div>
+    </div>
+
+  </div><!-- /iq-body -->
+</div><!-- /iq-section -->
+
 <div class="ornament">✦ ✦ ✦</div>
 
 </main>
@@ -2383,6 +3437,27 @@ async function renderAll() {
     await mermaid.run({ nodes: elems });
   } catch(e) {
     console.warn('Mermaid render error', e);
+  }
+}
+
+// ── Important Questions Accordion ──
+function toggleQ(headEl) {
+  const card = headEl.closest('.q-card');
+  const isOpen = card.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.q-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+  // Re-render mermaid inside the newly opened card
+  if (!isOpen) {
+    setTimeout(() => {
+      const diagrams = card.querySelectorAll('.mermaid');
+      diagrams.forEach(el => {
+        if (!el.getAttribute('data-processed')) {
+          el.setAttribute('data-original', el.textContent);
+        }
+      });
+      mermaid.run({ nodes: diagrams }).catch(() => {});
+    }, 100);
   }
 }
 
