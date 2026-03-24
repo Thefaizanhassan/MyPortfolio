@@ -1,0 +1,1889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment 2 — Software Project Management | Faizan Hassan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --ink: #0d0f14;
+    --paper: #f5f0e8;
+    --cream: #faf7f2;
+    --gold: #c9933a;
+    --gold-light: #e8b865;
+    --gold-dim: #8a6428;
+    --rust: #c0442c;
+    --teal: #2a6e6e;
+    --teal-light: #3d9999;
+    --slate: #1e2535;
+    --slate-mid: #2d3650;
+    --slate-light: #3d4d70;
+    --text-main: #1a1c24;
+    --text-muted: #5a5f70;
+    --text-accent: #c9933a;
+    --border: rgba(201,147,58,0.25);
+    --shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--text-main);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    background: var(--slate);
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(201,147,58,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 90% 80%, rgba(42,110,110,0.1) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(201,147,58,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,147,58,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 3rem 3.5rem;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201,147,58,0.15);
+    border: 1px solid rgba(201,147,58,0.3);
+    color: var(--gold-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.6rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,147,58,0.2);
+    border-radius: 16px;
+    padding: 1.8rem 2rem;
+    min-width: 220px;
+  }
+
+  .hero-card-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+
+  .hero-card-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--gold);
+  }
+
+  .hero-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,147,58,0.5), transparent);
+    margin: 0;
+  }
+
+  /* ── NAV TABS ──────────────────────────────────── */
+  .nav-strip {
+    background: var(--slate);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,147,58,0.15);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.3rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { color: rgba(255,255,255,0.8); border-bottom-color: rgba(201,147,58,0.4); }
+  .nav-tab.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+  .nav-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: rgba(201,147,58,0.15);
+    border-radius: 50%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+  }
+
+  /* ── MAIN LAYOUT ───────────────────────────────── */
+  .main-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 3rem;
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+
+  .content-col { flex: 1; min-width: 0; }
+
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
+  }
+
+  /* ── QUESTION SECTIONS ─────────────────────────── */
+  .q-section {
+    margin-bottom: 4rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .q-section:nth-child(1) { animation-delay: 0.05s; }
+  .q-section:nth-child(2) { animation-delay: 0.1s; }
+  .q-section:nth-child(3) { animation-delay: 0.15s; }
+  .q-section:nth-child(4) { animation-delay: 0.2s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .q-number {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: var(--slate);
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid rgba(201,147,58,0.25);
+    margin-top: 0.2rem;
+  }
+
+  .q-header-text {}
+
+  .q-tag-row {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .tag-unit { background: rgba(42,110,110,0.12); color: var(--teal); border: 1px solid rgba(42,110,110,0.2); }
+  .tag-co { background: rgba(201,147,58,0.1); color: var(--gold-dim); border: 1px solid rgba(201,147,58,0.2); }
+  .tag-k { background: rgba(192,68,44,0.1); color: var(--rust); border: 1px solid rgba(192,68,44,0.2); }
+
+  .q-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--slate);
+  }
+
+  /* ── CONTENT CARDS ─────────────────────────────── */
+  .card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 1.8rem 2rem;
+    margin-bottom: 1.2rem;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s;
+  }
+
+  .card:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+
+  .card-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ── DATA TABLE ─────────────────────────────────── */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 0.5rem 0;
+  }
+
+  .data-table th {
+    text-align: left;
+    padding: 0.55rem 0.9rem;
+    background: var(--slate);
+    color: rgba(255,255,255,0.7);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .data-table th:first-child { border-radius: 8px 0 0 8px; }
+  .data-table th:last-child { border-radius: 0 8px 8px 0; }
+
+  .data-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    vertical-align: middle;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(201,147,58,0.03); }
+
+  .val-highlight {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--slate);
+    font-size: 0.9rem;
+  }
+
+  /* ── FORMULA BOXES ──────────────────────────────── */
+  .formula-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .formula-box {
+    background: var(--slate);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .formula-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .formula-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+  }
+
+  .formula-eq {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0.3rem;
+  }
+
+  .formula-eq span { color: var(--gold-light); font-weight: 600; }
+
+  .formula-result {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .result-neg { color: #ff7b7b; }
+  .result-pos { color: #7bc47b; }
+
+  /* ── METRICS BADGES ─────────────────────────────── */
+  .metrics-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .metric-badge {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .metric-badge-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .metric-badge-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .metric-badge-status {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 100px;
+    font-weight: 500;
+  }
+
+  .bad { color: var(--rust); background: rgba(192,68,44,0.1); }
+  .warn { color: #b07020; background: rgba(201,147,58,0.1); }
+
+  /* ── INTERPRETATION TABLE ───────────────────────── */
+  .interp-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  .interp-table td {
+    padding: 0.7rem 0.9rem;
+    background: var(--cream);
+  }
+
+  .interp-table td:first-child { border-radius: 8px 0 0 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 500; color: var(--slate); white-space: nowrap; }
+  .interp-table td:last-child { border-radius: 0 8px 8px 0; }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+    background: var(--rust);
+  }
+
+  .status-dot.warn { background: #e0a020; }
+
+  /* ── MERMAID WRAPPER ────────────────────────────── */
+  .mermaid-wrap {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+
+  .mermaid-wrap .mermaid { max-width: 100%; }
+
+  /* ── CONCLUSION BOX ─────────────────────────────── */
+  .conclusion {
+    background: linear-gradient(135deg, var(--slate) 0%, var(--slate-mid) 100%);
+    border-radius: 12px;
+    padding: 1.3rem 1.6rem;
+    margin-top: 1.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .conclusion::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    color: rgba(201,147,58,0.12);
+    line-height: 1;
+  }
+
+  .conclusion p {
+    position: relative;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+
+  .conclusion strong { color: var(--gold-light); }
+
+  /* ── TREE VIEW ──────────────────────────────────── */
+  .tree {
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 1.4rem 1.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.9;
+    overflow-x: auto;
+  }
+
+  .tree .t-root { color: var(--gold-light); font-weight: 500; font-size: 0.85rem; }
+  .tree .t-1 { color: #7ec8a0; padding-left: 1.5rem; }
+  .tree .t-2 { color: rgba(255,255,255,0.55); padding-left: 3rem; }
+  .tree .t-3 { color: rgba(255,255,255,0.35); padding-left: 4.5rem; }
+  .tree .t-branch { color: rgba(201,147,58,0.5); }
+
+  /* ── TASKS LIST ──────────────────────────────────── */
+  .tasks-list { display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .task-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: var(--cream);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    transition: border-color 0.2s;
+  }
+
+  .task-item:hover { border-color: var(--border); }
+
+  .task-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--slate);
+    color: var(--gold);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    margin-top: 0.05rem;
+  }
+
+  .task-body h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 0.2rem;
+  }
+
+  .task-body p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── CONTRIBUTION TABLE ──────────────────────────── */
+  .contrib-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+  }
+
+  .contrib-table th {
+    padding: 0.6rem 0.9rem;
+    background: var(--slate);
+    color: rgba(255,255,255,0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: left;
+    font-weight: 400;
+  }
+
+  .contrib-table th:first-child { border-radius: 8px 0 0 8px; }
+  .contrib-table th:last-child { border-radius: 0 8px 8px 0; }
+
+  .contrib-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    vertical-align: top;
+  }
+
+  .contrib-table tr:last-child td { border-bottom: none; }
+
+  .contrib-key { font-weight: 600; color: var(--slate); font-size: 0.85rem; }
+
+  /* ── QUALITY METRICS ────────────────────────────── */
+  .metric-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .metric-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+
+  .metric-card-icon { font-size: 1.2rem; margin-bottom: 0.4rem; }
+
+  .metric-card-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--slate);
+    margin-bottom: 0.2rem;
+  }
+
+  .metric-card-desc { font-size: 0.75rem; color: var(--text-muted); line-height: 1.4; }
+
+  .formula-inline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    background: rgba(201,147,58,0.1);
+    color: var(--gold-dim);
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 0.3rem;
+  }
+
+  /* ── ISO ATTRIBUTES ─────────────────────────────── */
+  .attr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+
+  .attr-card {
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    background: #fff;
+  }
+
+  .attr-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .attr-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .attr-title { font-size: 0.85rem; font-weight: 600; color: var(--slate); }
+  .attr-impact { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+  .attr-impact strong { color: var(--rust); }
+
+  /* ── COPQ TREE ──────────────────────────────────── */
+  .copq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin: 0.8rem 0;
+  }
+
+  .copq-box {
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .copq-box h4 { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .copq-box ul { list-style: none; color: inherit; opacity: 0.75; }
+  .copq-box ul li::before { content: '›  '; opacity: 0.5; }
+
+  .copq-prevention { background: rgba(42,110,110,0.08); color: var(--teal); border: 1px solid rgba(42,110,110,0.15); }
+  .copq-appraisal { background: rgba(201,147,58,0.08); color: var(--gold-dim); border: 1px solid rgba(201,147,58,0.15); }
+  .copq-internal { background: rgba(90,90,160,0.07); color: #4040a0; border: 1px solid rgba(90,90,160,0.15); }
+  .copq-external { background: rgba(192,68,44,0.08); color: var(--rust); border: 1px solid rgba(192,68,44,0.15); }
+
+  .boehm-rule {
+    background: var(--slate);
+    border-radius: 10px;
+    padding: 1rem 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+
+  .boehm-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .boehm-text { font-size: 0.82rem; color: rgba(255,255,255,0.7); }
+  .boehm-text strong { color: var(--gold-light); }
+
+  /* ── SUMMARY CARD ───────────────────────────────── */
+  .summary-section {
+    background: var(--slate);
+    border-radius: 16px;
+    padding: 2rem 2.2rem;
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-section::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(201,147,58,0.15), transparent 70%);
+  }
+
+  .summary-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .summary-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,147,58,0.15);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+  }
+
+  .summary-item-q {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .summary-item-title { font-size: 0.85rem; color: rgba(255,255,255,0.85); font-weight: 500; margin-bottom: 0.3rem; }
+  .summary-item-key { font-size: 0.75rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  .summary-marks {
+    display: inline-block;
+    margin-top: 0.4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    background: rgba(201,147,58,0.15);
+    color: var(--gold-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────────── */
+  .sidebar-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .sidebar-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+  }
+
+  .sidebar-link {
+    display: block;
+    padding: 0.45rem 0;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .sidebar-link:last-child { border-bottom: none; }
+  .sidebar-link:hover { color: var(--gold); }
+
+  .sidebar-link-num {
+    width: 18px; height: 18px;
+    background: var(--cream);
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--cream);
+    border-radius: 2px;
+    overflow: hidden;
+    margin: 0.4rem 0;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.78rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  .info-row:last-child { border-bottom: none; }
+  .info-row-key { color: var(--text-muted); }
+  .info-row-val { font-weight: 500; color: var(--slate); font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; }
+
+  /* ── FOOTER ──────────────────────────────────────── */
+  footer {
+    background: var(--slate);
+    padding: 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(201,147,58,0.1);
+    margin-top: 2rem;
+  }
+
+  footer p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* ── RESPONSIVE ─────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-card { display: none; }
+    .main-wrap { flex-direction: column; padding: 2rem 1.5rem; }
+    .sidebar { width: 100%; position: static; }
+    .formula-grid, .metrics-row, .metric-cards, .attr-grid, .copq-grid { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .hero-inner { padding: 2.5rem 1.5rem 2rem; }
+    .nav-inner { padding: 0 1rem; }
+    .formula-grid, .metrics-row, .metric-cards, .attr-grid, .copq-grid { grid-template-columns: 1fr; }
+  }
+
+  /* highlight boxes */
+  .highlight-box {
+    border-left: 3px solid var(--gold);
+    background: rgba(201,147,58,0.05);
+    border-radius: 0 8px 8px 0;
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    margin: 0.8rem 0;
+  }
+
+  .highlight-box strong { color: var(--gold-dim); }
+
+  /* divider */
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+    margin: 2.5rem 0;
+  }
+
+  .inline-code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    background: rgba(201,147,58,0.1);
+    color: var(--gold-dim);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  /* ── EV CHART ────────────────────────────────────── */
+  .ev-chart-shell { padding: 0.5rem 0 0; }
+  .ev-chart-shell canvas { max-height: 300px; width: 100% !important; }
+
+  .ev-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 1.1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .ev-leg-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .ev-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  .ev-annotations {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .ev-ann {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .ev-ann-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .ev-ann-desc { font-size: 0.72rem; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Assignment 2 &nbsp;·&nbsp; CSCR 3211</div>
+      <h1 class="hero-title">Software<br><em>Project Management</em></h1>
+      <p class="hero-subtitle">Department of Computer Science &amp; Engineering · Sharda University</p>
+      <div class="hero-meta">
+        <div class="meta-row"><span class="meta-label">Faculty</span> Sandeep Gupta</div>
+        <div class="meta-row"><span class="meta-label">Session</span> 2025-26 / 2502</div>
+        <div class="meta-row"><span class="meta-label">Max Marks</span> 20 (5 per question)</div>
+        <div class="meta-row"><span class="meta-label">Units</span> Unit 3 · Unit 4 · Unit 5</div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-label">Submitted By</div>
+      <div class="hero-card-name">Faizan Hassan</div>
+      <div class="hero-card-id">2023486998</div>
+      <br>
+      <div class="hero-card-label" style="margin-top:0.8rem;">Section / Programme</div>
+      <div style="color:rgba(255,255,255,0.7);font-size:0.88rem;">CS-C (G2) · B.Tech CSE</div>
+    </div>
+  </div>
+  <div class="hero-divider"></div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-strip">
+  <div class="nav-inner">
+    <a href="#q1" class="nav-tab active"><span class="nav-num">1</span> Earned Value Analysis</a>
+    <a href="#q2" class="nav-tab"><span class="nav-num">2</span> Software Config Items</a>
+    <a href="#q3" class="nav-tab"><span class="nav-num">3</span> Quality Metrics</a>
+    <a href="#q4" class="nav-tab"><span class="nav-num">4</span> Quality Attributes</a>
+    <a href="#summary" class="nav-tab"><span class="nav-num">✦</span> Summary</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- CONTENT -->
+  <main class="content-col">
+
+    <!-- ── Q1 ─────────────────────────────────────── -->
+    <section class="q-section" id="q1">
+      <div class="q-header">
+        <div class="q-number">01</div>
+        <div class="q-header-text">
+          <div class="q-tag-row">
+            <span class="tag tag-unit">Unit 3</span>
+            <span class="tag tag-co">CO3</span>
+            <span class="tag tag-k">L3 — Application</span>
+          </div>
+          <h2 class="q-title">Earned Value Analysis — Cost Variance (CV) &amp; Schedule Variance (SV)</h2>
+        </div>
+      </div>
+
+      <!-- Given Data -->
+      <div class="card">
+        <div class="card-title">📋 Given Data</div>
+        <table class="data-table">
+          <thead><tr><th>Parameter</th><th>Full Form</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td><strong>BCWS</strong></td><td>Budgeted Cost of Work <em>Scheduled</em></td><td><span class="val-highlight">₹ 50,000</span></td></tr>
+            <tr><td><strong>BCWP</strong></td><td>Budgeted Cost of Work <em>Performed</em></td><td><span class="val-highlight">₹ 40,000</span></td></tr>
+            <tr><td><strong>ACWP</strong></td><td>Actual Cost of Work <em>Performed</em></td><td><span class="val-highlight">₹ 45,000</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Formulas -->
+      <div class="card">
+        <div class="card-title">🔷 Calculations</div>
+        <div class="formula-grid">
+          <div class="formula-box">
+            <div class="formula-label">Cost Variance (CV)</div>
+            <div class="formula-eq">CV = BCWP − ACWP</div>
+            <div class="formula-eq">CV = <span>₹40,000 − ₹45,000</span></div>
+            <div class="formula-result result-neg">CV = − ₹5,000</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula-label">Schedule Variance (SV)</div>
+            <div class="formula-eq">SV = BCWP − BCWS</div>
+            <div class="formula-eq">SV = <span>₹40,000 − ₹50,000</span></div>
+            <div class="formula-result result-neg">SV = − ₹10,000</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula-label">Cost Performance Index (CPI)</div>
+            <div class="formula-eq">CPI = BCWP ÷ ACWP</div>
+            <div class="formula-eq">CPI = <span>40,000 ÷ 45,000</span></div>
+            <div class="formula-result result-neg">CPI = 0.89</div>
+          </div>
+          <div class="formula-box">
+            <div class="formula-label">Schedule Performance Index (SPI)</div>
+            <div class="formula-eq">SPI = BCWP ÷ BCWS</div>
+            <div class="formula-eq">SPI = <span>40,000 ÷ 50,000</span></div>
+            <div class="formula-result result-neg">SPI = 0.80</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="card">
+        <div class="card-title">📊 Metric Dashboard</div>
+        <div class="metrics-row">
+          <div class="metric-badge">
+            <div class="metric-badge-name">CV</div>
+            <div class="metric-badge-val" style="color:var(--rust)">−₹5K</div>
+            <div class="metric-badge-status bad">Over Budget</div>
+          </div>
+          <div class="metric-badge">
+            <div class="metric-badge-name">SV</div>
+            <div class="metric-badge-val" style="color:var(--rust)">−₹10K</div>
+            <div class="metric-badge-status bad">Behind Schedule</div>
+          </div>
+          <div class="metric-badge">
+            <div class="metric-badge-name">CPI</div>
+            <div class="metric-badge-val" style="color:#b07020">0.89</div>
+            <div class="metric-badge-status warn">Cost Inefficient</div>
+          </div>
+          <div class="metric-badge">
+            <div class="metric-badge-name">SPI</div>
+            <div class="metric-badge-val" style="color:#b07020">0.80</div>
+            <div class="metric-badge-status warn">Schedule Slippage</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interpretation -->
+      <div class="card">
+        <div class="card-title">🔷 Interpretation</div>
+        <table class="interp-table">
+          <tbody>
+            <tr>
+              <td>CV = −₹5,000</td>
+              <td><span class="status-dot"></span>Spent <strong>more</strong> than budgeted for work done → Over Budget</td>
+            </tr>
+            <tr>
+              <td>SV = −₹10,000</td>
+              <td><span class="status-dot"></span>Completed <strong>less</strong> work than planned → Behind Schedule</td>
+            </tr>
+            <tr>
+              <td>CPI = 0.89</td>
+              <td><span class="status-dot warn"></span>Every ₹1 spent returns only ₹0.89 of value → Cost Inefficiency</td>
+            </tr>
+            <tr>
+              <td>SPI = 0.80</td>
+              <td><span class="status-dot warn"></span>Only 80% of planned work is completed → Schedule Slippage</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Chart.js Bar Chart -->
+      <div class="card">
+        <div class="card-title">📈 Earned Value Bar Chart</div>
+        <div class="ev-chart-shell">
+          <canvas id="evChart"></canvas>
+          <div class="ev-legend">
+            <div class="ev-leg-item"><span class="ev-dot" style="background:#c9933a"></span>BCWS — Budgeted Cost of Work Scheduled (Planned)</div>
+            <div class="ev-leg-item"><span class="ev-dot" style="background:#2a6e6e"></span>BCWP — Budgeted Cost of Work Performed (Earned)</div>
+            <div class="ev-leg-item"><span class="ev-dot" style="background:#c0442c"></span>ACWP — Actual Cost of Work Performed (Spent)</div>
+          </div>
+          <div class="ev-annotations">
+            <div class="ev-ann">
+              <span class="ev-ann-label" style="color:var(--rust)">SV = −₹10,000</span>
+              <span class="ev-ann-desc">Gap between BCWS & BCWP → Behind Schedule</span>
+            </div>
+            <div class="ev-ann">
+              <span class="ev-ann-label" style="color:var(--rust)">CV = −₹5,000</span>
+              <span class="ev-ann-desc">Gap between BCWP & ACWP → Over Budget</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conclusion">
+        <p>The project is <strong>over budget by ₹5,000</strong> (CV &lt; 0) and <strong>behind schedule by ₹10,000</strong> (SV &lt; 0). Immediate corrective actions such as resource reallocation, scope review, or schedule compression (crashing / fast-tracking) must be initiated to bring the project back on track.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Q2 ─────────────────────────────────────── -->
+    <section class="q-section" id="q2">
+      <div class="q-header">
+        <div class="q-number">02</div>
+        <div class="q-header-text">
+          <div class="q-tag-row">
+            <span class="tag tag-unit">Unit 4</span>
+            <span class="tag tag-co">CO4</span>
+            <span class="tag tag-k">L2 — Understanding</span>
+          </div>
+          <h2 class="q-title">Software Configuration Items (SCIs) &amp; Their Associated Tasks</h2>
+        </div>
+      </div>
+
+      <!-- Introduction -->
+      <div class="card">
+        <div class="card-title">📌 Introduction to SCM</div>
+        <p style="font-size:0.9rem;color:var(--text-main);margin-bottom:0.8rem;">Software Configuration Management (SCM) is the discipline of <strong>tracking and controlling changes</strong> in software. At its core lies the concept of Software Configuration Items (SCIs).</p>
+        <div class="highlight-box">
+          <strong>Definition:</strong> A Software Configuration Item (SCI) is any artifact, document, or component that is placed under configuration control throughout the software development lifecycle.
+        </div>
+      </div>
+
+      <!-- Types Tree -->
+      <div class="card">
+        <div class="card-title">🌲 Types of SCIs</div>
+        <div class="tree">
+          <div class="t-root">SCIs (Software Configuration Items)</div>
+          <div class="t-1"><span class="t-branch">├── </span>1. Software Code Items</div>
+          <div class="t-2"><span class="t-branch">├── </span>Source Code Files</div>
+          <div class="t-2"><span class="t-branch">├── </span>Object Code</div>
+          <div class="t-2"><span class="t-branch">└── </span>Executables</div>
+          <div class="t-1"><span class="t-branch">├── </span>2. Documentation Items</div>
+          <div class="t-2"><span class="t-branch">├── </span>Requirements Spec (SRS)</div>
+          <div class="t-2"><span class="t-branch">├── </span>Design Docs (HLD, LLD)</div>
+          <div class="t-2"><span class="t-branch">├── </span>Test Plans & Test Cases</div>
+          <div class="t-2"><span class="t-branch">└── </span>User Manuals</div>
+          <div class="t-1"><span class="t-branch">├── </span>3. Data Items</div>
+          <div class="t-2"><span class="t-branch">├── </span>Configuration Files</div>
+          <div class="t-2"><span class="t-branch">├── </span>Database Schemas</div>
+          <div class="t-2"><span class="t-branch">└── </span>Test Data</div>
+          <div class="t-1"><span class="t-branch">└── </span>4. Support Software</div>
+          <div class="t-2"><span class="t-branch">├── </span>Compilers</div>
+          <div class="t-2"><span class="t-branch">├── </span>Build Tools (Maven, Gradle)</div>
+          <div class="t-2"><span class="t-branch">└── </span>Libraries & Frameworks</div>
+        </div>
+      </div>
+
+      <!-- Associated Tasks -->
+      <div class="card">
+        <div class="card-title">⚙️ Associated Tasks</div>
+        <div class="tasks-list">
+          <div class="task-item">
+            <div class="task-num">T1</div>
+            <div class="task-body">
+              <h4>Identification</h4>
+              <p>Every SCI is given a unique identifier (ID, version number, baseline tag). Example: <span class="inline-code">SRS_v1.2</span>, <span class="inline-code">ModuleA_src_v3.0</span>. Establishes <em>what</em> is under control.</p>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-num">T2</div>
+            <div class="task-body">
+              <h4>Version Control</h4>
+              <p>Maintaining the complete history of changes to SCIs. Tools: Git, SVN, CVS. Ensures rollback capability to any previous stable state.</p>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-num">T3</div>
+            <div class="task-body">
+              <h4>Change Control</h4>
+              <p>Formal process for requesting, evaluating, and approving changes. Managed by the <strong>Change Control Board (CCB)</strong> to prevent unauthorized modifications.</p>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-num">T4</div>
+            <div class="task-body">
+              <h4>Configuration Status Accounting (CSA)</h4>
+              <p>Records and reports the status of SCIs. Answers: <em>What changed? When? By whom?</em> Provides a complete audit trail.</p>
+            </div>
+          </div>
+          <div class="task-item">
+            <div class="task-num">T5</div>
+            <div class="task-body">
+              <h4>Configuration Audit</h4>
+              <p>Verifies that SCIs conform to specifications. Two types: <strong>FCA</strong> (Functional Configuration Audit) and <strong>PCA</strong> (Physical Configuration Audit).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCI Lifecycle -->
+      <div class="card">
+        <div class="card-title">🔄 SCI Lifecycle Flowchart</div>
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+flowchart TD
+    A([SCI Created]) --> B[Identification and Labeling]
+    B --> C[Placed in Baseline]
+    C --> D{Change Requested?}
+    D -- Yes --> E[Change Request Raised]
+    E --> F[CCB Review and Approval]
+    F --> G[Change Implemented]
+    G --> H[New Version Created]
+    H --> C
+    D -- No --> I([SCI Stable in Repository])
+
+    style A fill:#2a6e6e,color:#fff,stroke:none
+    style I fill:#1e2535,color:#fff,stroke:none
+    style F fill:#c9933a,color:#fff,stroke:none
+    style C fill:#3d4d70,color:#fff,stroke:none
+    style D fill:#f5f0e8,color:#1a1c24,stroke:#c9933a
+          </div>
+        </div>
+      </div>
+
+      <!-- Contribution Table -->
+      <div class="card">
+        <div class="card-title">✅ Contribution to Project Control</div>
+        <table class="contrib-table">
+          <thead><tr><th>Contribution</th><th>How SCIs Help</th></tr></thead>
+          <tbody>
+            <tr><td><span class="contrib-key">Traceability</span></td><td>Every component traceable to its originating requirements</td></tr>
+            <tr><td><span class="contrib-key">Change Management</span></td><td>Prevents unauthorized modifications through formal CCB process</td></tr>
+            <tr><td><span class="contrib-key">Baseline Management</span></td><td>Stable reference point is established at each project phase</td></tr>
+            <tr><td><span class="contrib-key">Audit Trail</span></td><td>Complete history of who changed what and when</td></tr>
+            <tr><td><span class="contrib-key">Risk Reduction</span></td><td>Rollback to last stable version if a change causes failures</td></tr>
+            <tr><td><span class="contrib-key">Team Coordination</span></td><td>Multiple developers work in parallel without conflict</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="conclusion">
+        <p>SCIs are the <strong>building blocks of Software Configuration Management</strong>. By systematically identifying, versioning, and controlling all SCIs, project managers gain complete <strong>visibility and control</strong> over the software product — minimizing defects, managing risks, and ensuring product integrity throughout the SDLC.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Q3 ─────────────────────────────────────── -->
+    <section class="q-section" id="q3">
+      <div class="q-header">
+        <div class="q-number">03</div>
+        <div class="q-header-text">
+          <div class="q-tag-row">
+            <span class="tag tag-unit">Unit 5</span>
+            <span class="tag tag-co">CO5</span>
+            <span class="tag tag-k">L2 — Understanding</span>
+          </div>
+          <h2 class="q-title">Software Quality Metrics &amp; Indicators — Role in Quality Assessment</h2>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📌 Definition</div>
+        <div class="highlight-box">
+          <strong>Software Quality Metrics</strong> are quantitative measures used to evaluate the degree to which a software product satisfies its stated requirements and user expectations. They answer: <em>"How good is our software?"</em> and <em>"Are we building it right?"</em>
+        </div>
+      </div>
+
+      <!-- Metrics Mindmap -->
+      <div class="card">
+        <div class="card-title">🗺️ Classification of Quality Metrics</div>
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+mindmap
+  root((Software Quality Metrics))
+    Product Metrics
+      Size Metrics
+        LOC
+        Function Points
+      Complexity Metrics
+        Cyclomatic Complexity
+        Halstead Metrics
+      Reliability Metrics
+        MTBF
+        MTTF
+        Defect Density
+    Process Metrics
+      Defect Removal Efficiency
+      Review Coverage
+      Test Coverage
+    Project Metrics
+      Schedule Variance
+      Cost Variance
+      Productivity
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Metrics -->
+      <div class="card">
+        <div class="card-title">📐 Key Metrics — Explained</div>
+        <div class="metric-cards">
+          <div class="metric-card">
+            <div class="metric-card-icon">📏</div>
+            <div class="metric-card-name">Lines of Code (LOC)</div>
+            <div class="metric-card-desc">Measures raw software size. Simple and universal but language-dependent.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-icon">⚡</div>
+            <div class="metric-card-name">Function Points (FP)</div>
+            <div class="metric-card-desc">Weighted sum of inputs, outputs, queries, files, and interfaces. Language-independent.</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-icon">🐛</div>
+            <div class="metric-card-name">Defect Density</div>
+            <div class="metric-card-desc">Defects per KLOC. Measures defect concentration in the codebase.</div>
+            <div class="formula-inline">DD = Defects / KLOC</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-icon">🔀</div>
+            <div class="metric-card-name">Cyclomatic Complexity</div>
+            <div class="metric-card-desc">V(G) = E − N + 2P. Measures structural complexity. V(G) &gt; 20 → refactor.</div>
+            <div class="formula-inline">V(G) = E − N + 2P</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-icon">⏱️</div>
+            <div class="metric-card-name">MTBF / MTTF</div>
+            <div class="metric-card-desc">Mean Time Between Failures; Mean Time To Failure. Core reliability indicators.</div>
+            <div class="formula-inline">MTBF = MTTF + MTTR</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-card-icon">🎯</div>
+            <div class="metric-card-name">Defect Removal Efficiency</div>
+            <div class="metric-card-desc">% of defects caught before delivery. World-class DRE ≥ 95%.</div>
+            <div class="formula-inline">DRE = D_pre / D_total × 100</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Role in Assessment -->
+      <div class="card">
+        <div class="card-title">🔄 Role in Quality Assessment</div>
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+flowchart LR
+    A[Collect Raw Data\nLOC · Defects · Tests] --> B[Compute Metrics\nDensity · Complexity · DRE]
+    B --> C[Derive Indicators\nTrends · Thresholds]
+    C --> D{Quality\nAcceptable?}
+    D -- Yes --> E[Release / Proceed]
+    D -- No --> F[Identify Root Cause]
+    F --> G[Corrective Action\nRefactor · Retest]
+    G --> A
+
+    style E fill:#2a6e6e,color:#fff,stroke:none
+    style F fill:#c0442c,color:#fff,stroke:none
+    style D fill:#f5f0e8,color:#1a1c24,stroke:#c9933a
+    style A fill:#1e2535,color:#fff,stroke:none
+    style G fill:#3d4d70,color:#fff,stroke:none
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics vs Indicators -->
+      <div class="card">
+        <div class="card-title">⚖️ Metrics vs Indicators</div>
+        <table class="data-table">
+          <thead><tr><th>Aspect</th><th>Metrics</th><th>Indicators</th></tr></thead>
+          <tbody>
+            <tr><td>Nature</td><td>Quantitative measurement</td><td>Qualitative signal derived from metrics</td></tr>
+            <tr><td>Granularity</td><td>Fine-grained (per module)</td><td>High-level (overall project)</td></tr>
+            <tr><td>Usage</td><td>Input for analysis</td><td>Output for decision-making</td></tr>
+            <tr><td>Example</td><td>Defect Density = 2/KLOC</td><td>Quality is "Acceptable" / "At Risk"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="conclusion">
+        <p>Software Quality Metrics and Indicators form the <strong>backbone of software quality assurance</strong>. They provide objective, data-driven evidence to project managers for making informed decisions, identifying problem areas early, and ensuring the delivered software meets both <strong>functional and non-functional</strong> quality standards.</p>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- ── Q4 ─────────────────────────────────────── -->
+    <section class="q-section" id="q4">
+      <div class="q-header">
+        <div class="q-number">04</div>
+        <div class="q-header-text">
+          <div class="q-tag-row">
+            <span class="tag tag-unit">Unit 5</span>
+            <span class="tag tag-co">CO6</span>
+            <span class="tag tag-k">L4 — Analysis</span>
+          </div>
+          <h2 class="q-title">Impact of Software Quality Attributes on Overall Project Success</h2>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📌 Introduction</div>
+        <p style="font-size:0.9rem;margin-bottom:0.8rem;">Software Quality Attributes (also called <em>Non-Functional Requirements</em> or <em>"-ilities"</em>) define <strong>how well</strong> a system performs its functions, not just whether it performs them.</p>
+        <div class="highlight-box">
+          Project success is measured along three dimensions: <strong>On-Time Delivery</strong> (Schedule), <strong>Within Budget</strong> (Cost), and <strong>Meeting Requirements</strong> (Scope & Quality). Quality attributes directly impact all three.
+        </div>
+      </div>
+
+      <!-- ISO 25010 Mindmap -->
+      <div class="card">
+        <div class="card-title">🏛️ ISO/IEC 25010 Quality Model</div>
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+mindmap
+  root((ISO 25010 Quality Model))
+    Functional Suitability
+      Completeness
+      Correctness
+      Appropriateness
+    Performance Efficiency
+      Time Behaviour
+      Resource Utilization
+      Capacity
+    Reliability
+      Maturity
+      Fault Tolerance
+      Recoverability
+    Usability
+      Learnability
+      Operability
+      Accessibility
+    Security
+      Confidentiality
+      Integrity
+      Authenticity
+    Maintainability
+      Modularity
+      Analysability
+      Modifiability
+    Portability
+      Adaptability
+      Installability
+          </div>
+        </div>
+      </div>
+
+      <!-- Attribute Cards -->
+      <div class="card">
+        <div class="card-title">🔍 Analysis of Key Attributes</div>
+        <div class="attr-grid">
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(192,68,44,0.1);">🛡️</div>
+              <div class="attr-title">Reliability</div>
+            </div>
+            <div class="attr-impact">Unreliable software → frequent failures → emergency patches → <strong>cost overrun + schedule delay</strong>. A banking app crashing during transactions incurs SLA penalty costs.</div>
+          </div>
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(42,110,110,0.1);">🔧</div>
+              <div class="attr-title">Maintainability</div>
+            </div>
+            <div class="attr-impact">Poor maintainability → high technical debt → future changes take longer → <strong>schedule slippage</strong>. High Cyclomatic Complexity (&gt;20) signals low maintainability.</div>
+          </div>
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(201,147,58,0.1);">⚡</div>
+              <div class="attr-title">Performance Efficiency</div>
+            </div>
+            <div class="attr-impact">Poor performance → user dissatisfaction → rework → <strong>additional testing cycles</strong> → cost increase. A 5-second load time can lose 40% of users.</div>
+          </div>
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(90,90,160,0.1);">🔒</div>
+              <div class="attr-title">Security</div>
+            </div>
+            <div class="attr-impact">Security breaches → legal liability + reputational damage + emergency rework. Ignoring security in requirements → discovered in production → <strong>costs 100× more</strong> to fix.</div>
+          </div>
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(42,110,110,0.1);">👤</div>
+              <div class="attr-title">Usability</div>
+            </div>
+            <div class="attr-impact">Poor usability → increased training cost + user adoption failure → <strong>project perceived as unsuccessful</strong> even if technically complete.</div>
+          </div>
+          <div class="attr-card">
+            <div class="attr-card-header">
+              <div class="attr-icon" style="background:rgba(201,147,58,0.08);">🚀</div>
+              <div class="attr-title">Portability</div>
+            </div>
+            <div class="attr-impact">Low portability → system tied to specific platforms → <strong>re-architecture costs</strong> when infrastructure changes, extending project timelines significantly.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cause Effect -->
+      <div class="card">
+        <div class="card-title">⚡ Cause-Effect: Quality vs Project Success</div>
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+flowchart TD
+    Success([PROJECT SUCCESS\nOn Time and On Budget and Quality Met])
+    Failure([PROJECT FAILURE\nDelays and Overruns and Dissatisfied Stakeholders])
+
+    QA([Quality Attributes Defined Early]) --> R[Reliability Built-in]
+    QA --> S[Security by Design]
+    QA --> P[Performance Tested]
+    QA --> M[Maintainable Architecture]
+    QA --> U[Usable Interface]
+
+    R --> Success
+    S --> Success
+    P --> Success
+    M --> Success
+    U --> Success
+
+    NQA([Quality Attributes Ignored]) --> NR[Failures and Crashes]
+    NQA --> NS[Security Breaches]
+    NQA --> NP[Performance Issues]
+    NQA --> NM[Maintenance Nightmare]
+    NQA --> NU[User Rejection]
+
+    NR --> Failure
+    NS --> Failure
+    NP --> Failure
+    NM --> Failure
+    NU --> Failure
+
+    style Success fill:#2a6e6e,color:#fff,stroke:none
+    style Failure fill:#c0442c,color:#fff,stroke:none
+    style QA fill:#1e2535,color:#fff,stroke:none
+    style NQA fill:#8a2020,color:#fff,stroke:none
+          </div>
+        </div>
+      </div>
+
+      <!-- COPQ -->
+      <div class="card">
+        <div class="card-title">💸 Cost of Poor Quality (COPQ)</div>
+        <div class="copq-grid">
+          <div class="copq-box copq-prevention">
+            <h4>Prevention Costs</h4>
+            <ul><li>Training</li><li>Quality Planning</li><li>Process Design</li></ul>
+          </div>
+          <div class="copq-box copq-appraisal">
+            <h4>Appraisal Costs</h4>
+            <ul><li>Code Reviews</li><li>Testing</li><li>Audits</li></ul>
+          </div>
+          <div class="copq-box copq-internal">
+            <h4>Internal Failure Costs</h4>
+            <ul><li>Bug Fixing</li><li>Rework</li><li>Retesting</li></ul>
+          </div>
+          <div class="copq-box copq-external">
+            <h4>External Failure Costs ← Most Expensive</h4>
+            <ul><li>Warranty Claims</li><li>Legal Penalties</li><li>Customer Churn</li></ul>
+          </div>
+        </div>
+        <div class="boehm-rule">
+          <div class="boehm-icon">⚠️</div>
+          <div class="boehm-text"><strong>Boehm's Rule:</strong> A defect found in <strong>production</strong> costs <strong>100×</strong> more to fix than if found during the <strong>requirements phase</strong>. Early quality investment is always cheaper.</div>
+        </div>
+      </div>
+
+      <!-- Impact Summary Table -->
+      <div class="card">
+        <div class="card-title">📊 Quality Attributes vs Project Success Dimensions</div>
+        <table class="data-table">
+          <thead><tr><th>Quality Attribute</th><th>Schedule Impact</th><th>Cost Impact</th><th>Scope/Quality Impact</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Reliability</strong></td><td>Delays from rework</td><td style="color:var(--rust)">🔴 High bug-fix cost</td><td style="color:var(--rust)">🔴 Functionality incomplete</td></tr>
+            <tr><td><strong>Performance</strong></td><td>Delays from optimization</td><td style="color:#b07020">🟡 Moderate</td><td style="color:var(--rust)">🔴 NFR not met</td></tr>
+            <tr><td><strong>Security</strong></td><td>Delays from patching</td><td style="color:var(--rust)">🔴 Legal costs</td><td style="color:var(--rust)">🔴 Compliance failure</td></tr>
+            <tr><td><strong>Maintainability</strong></td><td style="color:var(--rust)">🔴 Future changes slow</td><td style="color:var(--rust)">🔴 Long-term cost high</td><td style="color:#b07020">🟡 Moderate impact</td></tr>
+            <tr><td><strong>Usability</strong></td><td style="color:#b07020">🟡 Moderate rework</td><td style="color:#b07020">🟡 Training cost</td><td style="color:var(--rust)">🔴 User adoption failure</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="conclusion">
+        <p>Software quality attributes are <strong>not optional add-ons</strong> — they are strategic project assets. When quality attributes are analyzed, prioritized, and built into the architecture from the start, they act as <strong>enablers of project success</strong>. A successful project manager must treat quality attributes as <strong>first-class requirements</strong> alongside functional specifications.</p>
+      </div>
+    </section>
+
+    <!-- ── SUMMARY ──────────────────────────────── -->
+    <div class="summary-section" id="summary">
+      <div class="summary-title">Quick Reference Summary</div>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-item-q">Question 01 · Unit 3</div>
+          <div class="summary-item-title">Earned Value Analysis</div>
+          <div class="summary-item-key">CV = BCWP − ACWP &nbsp;|&nbsp; SV = BCWP − BCWS<br>CPI = BCWP/ACWP &nbsp;|&nbsp; SPI = BCWP/BCWS</div>
+          <span class="summary-marks">5 Marks</span>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-q">Question 02 · Unit 4</div>
+          <div class="summary-item-title">SCIs &amp; Tasks</div>
+          <div class="summary-item-key">Identification → Version Control → Change Control → CSA → Audit</div>
+          <span class="summary-marks">5 Marks</span>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-q">Question 03 · Unit 5</div>
+          <div class="summary-item-title">Quality Metrics</div>
+          <div class="summary-item-key">Defect Density, Cyclomatic Complexity V(G)=E−N+2P, DRE, MTBF, Function Points</div>
+          <span class="summary-marks">5 Marks</span>
+        </div>
+        <div class="summary-item">
+          <div class="summary-item-q">Question 04 · Unit 5</div>
+          <div class="summary-item-title">Quality Attributes Impact</div>
+          <div class="summary-item-key">ISO 25010 · COPQ · Boehm's 100× Rule · Reliability, Security, Performance, Maintainability, Usability</div>
+          <span class="summary-marks">5 Marks</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">Contents</div>
+      <a href="#q1" class="sidebar-link"><span class="sidebar-link-num">1</span>Earned Value Analysis</a>
+      <a href="#q2" class="sidebar-link"><span class="sidebar-link-num">2</span>Software Config Items</a>
+      <a href="#q3" class="sidebar-link"><span class="sidebar-link-num">3</span>Quality Metrics</a>
+      <a href="#q4" class="sidebar-link"><span class="sidebar-link-num">4</span>Quality Attributes</a>
+      <a href="#summary" class="sidebar-link"><span class="sidebar-link-num">✦</span>Summary</a>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">Assignment Info</div>
+      <div class="info-row"><span class="info-row-key">Course</span><span class="info-row-val">CSCR 3211</span></div>
+      <div class="info-row"><span class="info-row-key">Max Marks</span><span class="info-row-val">20</span></div>
+      <div class="info-row"><span class="info-row-key">Questions</span><span class="info-row-val">4</span></div>
+      <div class="info-row"><span class="info-row-key">Units</span><span class="info-row-val">3 · 4 · 5</span></div>
+      <div class="info-row"><span class="info-row-key">Student</span><span class="info-row-val">FH-2023</span></div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">Key Formulas</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:0.72rem;line-height:2;color:var(--slate);">
+        <div><span style="color:var(--gold)">CV</span> = BCWP − ACWP</div>
+        <div><span style="color:var(--gold)">SV</span> = BCWP − BCWS</div>
+        <div><span style="color:var(--gold)">CPI</span> = BCWP / ACWP</div>
+        <div><span style="color:var(--gold)">SPI</span> = BCWP / BCWS</div>
+        <div><span style="color:var(--gold)">V(G)</span> = E − N + 2P</div>
+        <div><span style="color:var(--gold)">DRE</span> = D_pre/D_tot × 100</div>
+        <div><span style="color:var(--gold)">DD</span> = Defects / KLOC</div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <div class="sidebar-title">Coverage</div>
+      <div style="margin-bottom:0.5rem;">
+        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:0.3rem;"><span>Unit 3</span><span style="color:var(--gold)">CO3</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      </div>
+      <div style="margin-bottom:0.5rem;">
+        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:0.3rem;"><span>Unit 4</span><span style="color:var(--gold)">CO4</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      </div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:0.75rem;margin-bottom:0.3rem;"><span>Unit 5</span><span style="color:var(--gold)">CO5 · CO6</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Assignment 2 · <span>Software Project Management</span> · CSCR 3211<br>
+  Faizan Hassan · <span>2023486998</span> · CS-C (G2) · Sharda University, Greater Noida</p>
+</footer>
+
+<script>
+  // ── Mermaid (flowcharts & mindmaps only — no xychart) ──
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'base',
+    themeVariables: {
+      primaryColor: '#2d3650',
+      primaryTextColor: '#f5f0e8',
+      primaryBorderColor: '#c9933a',
+      lineColor: '#c9933a',
+      secondaryColor: '#1e2535',
+      tertiaryColor: '#faf7f2',
+      tertiaryTextColor: '#1a1c24',
+      edgeLabelBackground: '#faf7f2',
+      fontFamily: '"Outfit", sans-serif',
+      fontSize: '14px',
+      // mindmap
+      mindmapPadding: '16',
+      // flowchart node defaults (overridden by inline styles anyway)
+      clusterBkg: '#f5f0e8',
+    }
+  });
+
+  // ── Chart.js — Earned Value Bar Chart ──
+  window.addEventListener('load', () => {
+    const ctx = document.getElementById('evChart');
+    if (!ctx) return;
+
+    const gradient1 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 280);
+    gradient1.addColorStop(0, 'rgba(201,147,58,0.95)');
+    gradient1.addColorStop(1, 'rgba(201,147,58,0.5)');
+
+    const gradient2 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 280);
+    gradient2.addColorStop(0, 'rgba(42,110,110,0.95)');
+    gradient2.addColorStop(1, 'rgba(42,110,110,0.5)');
+
+    const gradient3 = ctx.getContext('2d').createLinearGradient(0, 0, 0, 280);
+    gradient3.addColorStop(0, 'rgba(192,68,44,0.95)');
+    gradient3.addColorStop(1, 'rgba(192,68,44,0.5)');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['BCWS\n(Planned)', 'BCWP\n(Earned)', 'ACWP\n(Actual Spent)'],
+        datasets: [{
+          data: [50000, 40000, 45000],
+          backgroundColor: [gradient1, gradient2, gradient3],
+          borderColor: ['#c9933a', '#2a6e6e', '#c0442c'],
+          borderWidth: 2,
+          borderRadius: 8,
+          borderSkipped: false,
+          barPercentage: 0.55,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#1e2535',
+            titleColor: '#c9933a',
+            bodyColor: '#f5f0e8',
+            borderColor: '#c9933a',
+            borderWidth: 1,
+            padding: 12,
+            cornerRadius: 8,
+            callbacks: {
+              label: ctx => `  ₹ ${ctx.parsed.y.toLocaleString('en-IN')}`
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            border: { color: 'rgba(0,0,0,0.08)' },
+            ticks: {
+              color: '#1a1c24',
+              font: { family: '"JetBrains Mono", monospace', size: 11, weight: '500' },
+              padding: 8,
+            }
+          },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.05)', drawBorder: false },
+            border: { dash: [4, 4], color: 'transparent' },
+            beginAtZero: true,
+            max: 60000,
+            ticks: {
+              color: '#5a5f70',
+              font: { family: '"JetBrains Mono", monospace', size: 10 },
+              callback: v => '₹' + (v/1000) + 'K',
+              stepSize: 10000,
+              padding: 8,
+            }
+          }
+        },
+        animation: {
+          duration: 900,
+          easing: 'easeOutQuart',
+          delay: ctx => ctx.dataIndex * 120,
+        }
+      }
+    });
+  });
+
+  // ── Active nav tab on scroll ──
+  const sections = document.querySelectorAll('.q-section, #summary');
+  const navTabs = document.querySelectorAll('.nav-tab');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navTabs.forEach(tab => {
+          tab.classList.toggle('active', tab.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
